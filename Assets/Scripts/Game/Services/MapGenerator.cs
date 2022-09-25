@@ -19,15 +19,47 @@ public class MapGenerator
         {
             for (int y = -h / 2; y <= h / 2; y++)
             {
-                model.TileMap[new Vector2Int(x, y)] = new TileModel()
-                {
-                    HasPath = false,
-                    Height = 1
-                };
+                
+                model.TileMap[new Vector2Int(x, y)] = CreateTile(x, y, model);
             }
         }
 
         model.Bounds = new BoundsInt(-w / 2, -h / 2, 0, w, h, 1);
+    }
+
+    TileModel CreateTile(int x, int y, MapModel map)
+    {
+        var tile = new TileModel()
+        {
+            Height = 1
+        };
+        
+        tile.NorthEdge = CreateEdge(tile);
+        tile.SouthEdge = CreateEdge(tile);
+        if(y > 0)
+        {
+            var neighbour = map.TileMap[new Vector2Int(x, y - 1)];
+            tile.SouthEdge.Pair = neighbour.NorthEdge;
+            neighbour.NorthEdge.Pair = tile.SouthEdge;
+        }
+        tile.EastEdge = CreateEdge(tile);
+        tile.WestEdge = CreateEdge(tile);
+        if (x > 0)
+        {
+            var neighbour = map.TileMap[new Vector2Int(x-1, y)];
+            tile.WestEdge.Pair = neighbour.EastEdge;
+            neighbour.EastEdge.Pair = tile.WestEdge;
+        }
+        return tile;
+    }
+
+    EdgeModel CreateEdge(TileModel tile)
+    {
+        return new EdgeModel()
+        {
+            Type = EMapTileEdgeType.Empty,
+            Tile = tile,
+        };
     }
 
     void GeneratePath(GameModel model)
