@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : MonoBehaviour
+public class ShipMap : MonoBehaviour
 {
     class DefaultEdgeTile : ITileModel
     {

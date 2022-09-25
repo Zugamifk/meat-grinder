@@ -22,7 +22,7 @@ public class MapGenerator
                 model.TileMap[new Vector2Int(x, y)] = new TileModel()
                 {
                     HasPath = false,
-                    Height = Random.Range(1, 3)
+                    Height = 1
                 };
             }
         }

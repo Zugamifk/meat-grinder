@@ -7,9 +7,9 @@ public class Test : MonoBehaviour
     [SerializeField]
     Transform _spawnedRoot;
     [SerializeField]
-    Map _map;
+    ShipMap _map;
 
-    public Map Map => _map;
+    public ShipMap Map => _map;
     public Transform SpawnRoot => _spawnedRoot;
 
     public static Test Instance { get; private set; }
