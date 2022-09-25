@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8614369608503419feb95d0e4d4866, type: 3}
+  m_Name: PortalDefenseMeshGenerators
+  m_EditorClassIdentifier: 
+  EndPortal: {fileID: 11400000, guid: d71500afb122150428fb5f8b24ed3138, type: 2}
+  Enemy: {fileID: 11400000, guid: e3c0f18feacbab14ebf4a3bfaace0399, type: 2}
+  ArrowTower: {fileID: 11400000, guid: a8cdc51f1808e0b4eab1ff9385ccd451, type: 2}
+  CardFrame: {fileID: 11400000, guid: 3007bc87beab87648b01f76db3937861, type: 2}

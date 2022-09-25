@@ -1,0 +1,19 @@
+{
+    "name": "MeshGeneratorEditor",
+    "rootNamespace": "MeshGenerator.Editor",
+    "references": [
+        "GUID:52167038694a37341923db5378a4126a",
+        "GUID:ba23252293352d442b806686b51f1e21"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
