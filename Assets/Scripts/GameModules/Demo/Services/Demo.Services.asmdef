@@ -1,0 +1,20 @@
+{
+   "name": "Demo.Services",
+   "rootNamespace": "Demo.Services",
+   "references": [
+       "GUID:f1eacd49830892c4e9c9d11bbf989cc6",
+       "GUID:d2dbe21ee0e45dd4d9458d4fe5bec48f",
+       "GUID:ac63bf0e5c2116f47b6b570ca20ca7e7",
+       "GUID:2ff2402bf4046c544984b3dd37bc2331",
+       "GUID:6fb4054b3d58b0245a062c6a697d6434"
+   ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

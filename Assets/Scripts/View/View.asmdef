@@ -1,0 +1,25 @@
+{
+    "name": "View",
+    "rootNamespace": "",
+    "references": [
+        "GUID:255f57cc76ea4ce4a8e074224a65831f",
+        "GUID:89a5e96a87dbd914a948be09bfb9d758",
+        "GUID:69560c3be3d56564da3ecb875d90f45b",
+        "GUID:19a716ef4e2e1dd4e803ab642a2a1b54",
+        "GUID:a72a0e70bb087d44d9fd8ca015a2b8fd",
+        "GUID:d2dbe21ee0e45dd4d9458d4fe5bec48f",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f1eacd49830892c4e9c9d11bbf989cc6",
+        "GUID:5de6134c1c064b04dabbf980177af609",
+        "GUID:49ca4e5e1f109b3468d9d624cb8369e2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
