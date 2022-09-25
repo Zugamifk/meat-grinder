@@ -9,4 +9,5 @@ public class TileMeshGeneratorData : ScriptableObject
     public Color WallColor;
     public float TileStepHeight;
     public float PathWidth;
+    public float WallInset;
 }

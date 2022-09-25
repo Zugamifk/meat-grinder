@@ -2,6 +2,7 @@ using MeshGenerator;
 using MeshGenerator.Wireframe;
 using System;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 [MeshGenerator("Tile")]
 public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorData>
@@ -28,6 +29,8 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
         {
             GeneratePaths();
         }
+
+        GenerateWallWireFrames(p0, p1, p2, p3);
     }
 
     void GeneratePaths()
@@ -45,7 +48,8 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
             var p1 = new DynamicPoint(() => new Vector3(r(), h(), .5f));
             Wireframe.Connect(p0, r1);
             Wireframe.Connect(p1, r2);
-        } else
+        }
+        else
         {
             Wireframe.Connect(r1, r2);
         }
@@ -85,6 +89,55 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
         {
             Wireframe.Connect(r1, r0);
         }
+    }
+
+    private void GenerateWallWireFrames(IPoint p0, IPoint p1, IPoint p2, IPoint p3)
+    {
+        if(_tile.NorthEdge.Type == EMapTileEdgeType.Wall)
+        {
+            DrawWall(p1, p2);
+        }
+
+        if (_tile.SouthEdge.Type == EMapTileEdgeType.Wall)
+        {
+            DrawWall(p3, p0);
+        }
+
+        if (_tile.WestEdge.Type == EMapTileEdgeType.Wall)
+        {
+            DrawWall(p0, p1);
+        }
+
+        if (_tile.EastEdge.Type == EMapTileEdgeType.Wall)
+        {
+            DrawWall(p2, p3);
+        }
+    }
+
+    void DrawWall(IPoint cornerA, IPoint cornerB)
+    {
+        Func<Vector3> wallInset = () => Vector3.Cross(cornerA.Position - cornerB.Position, Vector3.up).normalized * Data.WallInset;
+
+        var i0 = new DynamicPoint(() => cornerA.Position + wallInset());
+        var i1 = new DynamicPoint(() => cornerB.Position + wallInset());
+        var w0 = new DynamicPoint(() => cornerA.Position + .5f * wallInset() + Vector3.up * Data.WallInset);
+        var w1 = new DynamicPoint(() => cornerB.Position + .5f * wallInset() + Vector3.up * Data.WallInset);
+        var w2 = new DynamicPoint(() => cornerA.Position + .5f * wallInset() + Vector3.up * (1- Data.WallInset));
+        var w3 = new DynamicPoint(() => cornerB.Position + .5f * wallInset() + Vector3.up * (1- Data.WallInset));
+        var i2 = new DynamicPoint(() => cornerA.Position + wallInset() + Vector3.up);
+        var i3 = new DynamicPoint(() => cornerB.Position + wallInset() + Vector3.up);
+        Wireframe.Connect(i0, i1);
+        Wireframe.Connect(i0, w0);
+        Wireframe.Connect(i1, w1);
+        Wireframe.Connect(w0, w1);
+        Wireframe.Connect(w0, w2);
+        Wireframe.Connect(w1, w3);
+        Wireframe.Connect(w2, w3);
+        Wireframe.Connect(w2, i2);
+        Wireframe.Connect(w3, i3);
+        Wireframe.Connect(i2, i3);
+        Wireframe.Connect(i2, new DynamicPoint(() => cornerA.Position + Vector3.up));
+        Wireframe.Connect(i3, new DynamicPoint(() => cornerB.Position + Vector3.up));
     }
 
     public override void Generate(MeshBuilder builder)
@@ -147,6 +200,52 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
 
         builder.SetColor(GetEdgeColor(_tile.SouthEdge.Type));
         builder.AddQuad(p74r3, p74r0, r0, r3);
+
+        GenerateWallMeshes(builder, p4, p5, p6, p7);
+    }
+
+    void GenerateWallMeshes(MeshBuilder builder, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+    {
+        if (_tile.NorthEdge.Type == EMapTileEdgeType.Wall)
+        {
+            AddWallMesh(builder, p1, p2);
+        }
+
+        if (_tile.SouthEdge.Type == EMapTileEdgeType.Wall)
+        {
+            AddWallMesh(builder, p3, p0);
+        }
+
+        if (_tile.WestEdge.Type == EMapTileEdgeType.Wall)
+        {
+            AddWallMesh(builder, p0, p1);
+        }
+
+        if (_tile.EastEdge.Type == EMapTileEdgeType.Wall)
+        {
+            AddWallMesh(builder, p2, p3);
+        }
+    }
+
+    void AddWallMesh(MeshBuilder builder, Vector3 p0, Vector3 p1)
+    {
+        var wallInset = Vector3.Cross(p0 - p1, Vector3.up).normalized * Data.WallInset;
+
+        var i0 = p0 + wallInset;
+        var i1 = p1 + wallInset;
+        var w0 = p0 + .5f * wallInset + Vector3.up * Data.WallInset;
+        var w1 = p1 + .5f * wallInset + Vector3.up * Data.WallInset;
+        var w2 = p0 + .5f * wallInset + Vector3.up * (1 - Data.WallInset);
+        var w3 = p1 + .5f * wallInset + Vector3.up * (1 - Data.WallInset);
+        var i2 = p0 + wallInset + Vector3.up;
+        var i3 = p1 + wallInset + Vector3.up;
+        var p2 = p0 + Vector3.up;
+        var p3 = p1 + Vector3.up;
+
+        builder.AddQuad(i0, w0, w1, i1);
+        builder.AddQuad(w0, w2, w3, w1);
+        builder.AddQuad(i2, i3, w3, w2);
+        builder.AddQuad(i2, p2, p3, i3);
     }
 
     protected override TileMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Tile;
