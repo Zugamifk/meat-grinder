@@ -15,6 +15,8 @@ public class MapGenerator
         var data = DataService.GetData<GameData>();
         var w = data.Dimensions.x;
         var h = data.Dimensions.y;
+        model.Bounds = new BoundsInt(-w / 2, -h / 2, 0, w, h, 1);
+
         for (int x = -w / 2; x <= w / 2; x++)
         {
             for (int y = -h / 2; y <= h / 2; y++)
@@ -22,8 +24,6 @@ public class MapGenerator
                 model.TileMap[new Vector2Int(x, y)] = CreateTile(x, y, model);
             }
         }
-
-        model.Bounds = new BoundsInt(-w / 2, -h / 2, 0, w, h, 1);
     }
 
     TileModel CreateTile(int x, int y, MapModel map)
@@ -35,13 +35,13 @@ public class MapGenerator
         
         tile.NorthEdge = CreateEdge(tile);
         tile.SouthEdge = CreateEdge(tile);
-        if(y > 0)
+        if(y > map.Bounds.yMin)
         {
             ConfigureNeighbourEdges(tile.SouthEdge, map.TileMap[new Vector2Int(x, y - 1)].NorthEdge);
         }
         tile.EastEdge = CreateEdge(tile);
         tile.WestEdge = CreateEdge(tile);
-        if (x > 0)
+        if (x > map.Bounds.xMin)
         {
             ConfigureNeighbourEdges(tile.WestEdge, map.TileMap[new Vector2Int(x-1, y)].EastEdge);
         }
