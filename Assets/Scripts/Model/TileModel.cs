@@ -11,4 +11,9 @@ public class TileModel : ITileModel
     public EdgeModel SouthEdge { get; set; }
     public EdgeModel EastEdge { get; set; }
     public EdgeModel WestEdge { get; set; }
+
+    IEdgeModel ITileModel.NorthEdge => NorthEdge;
+    IEdgeModel ITileModel.SouthEdge => SouthEdge;
+    IEdgeModel ITileModel.EastEdge => EastEdge;
+    IEdgeModel ITileModel.WestEdge => WestEdge;
 }

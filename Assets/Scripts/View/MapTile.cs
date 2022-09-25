@@ -15,22 +15,22 @@ public class MapTile : MonoBehaviour
 
     public float SurfaceY { get; private set; }
 
-    public void SetTile(ITileModel tile, MapMeshGenerator.TileContext context)
+    public void SetTile(ITileModel tile)
     {
-        UpdateTileGeometry(tile, context);
+        UpdateTileGeometry(tile);
         if (tile.Structure != null)
         {
             UpdateTileStructure(tile);
         }
     }
 
-    void UpdateTileGeometry(ITileModel tile, MapMeshGenerator.TileContext context)
+    void UpdateTileGeometry(ITileModel tile)
     {
         var data = DataService.GetData<GameData>();
         SurfaceY = tile.Height * data.TileStepHeight;
 
         var meshGen = new MapMeshGenerator();
-        var mesh = meshGen.GenerateTileMesh(tile, context);
+        var mesh = meshGen.GenerateTileMesh(tile);
         _meshFilter.mesh = mesh;
 
         _collider.center = new Vector3(0, SurfaceY / 2f, 0);

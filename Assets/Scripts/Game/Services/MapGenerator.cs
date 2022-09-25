@@ -95,8 +95,20 @@ public class MapGenerator
         {
             for (int y = start.y; y != end.y + yd; y += yd)
             {
-                model.TileMap[new Vector2Int(x, y)].HasPath = true;
+                var tile = model.TileMap[new Vector2Int(x, y)];
+                tile.HasPath = true;
+                UpdateEdge(tile.NorthEdge);
+                UpdateEdge(tile.SouthEdge);
+                UpdateEdge(tile.EastEdge);
+                UpdateEdge(tile.WestEdge);
             }
+        }
+
+        void UpdateEdge(EdgeModel edge)
+        {
+            if (edge.Pair == null || !edge.Pair.Tile.HasPath) return;
+            edge.Type = EMapTileEdgeType.Path;
+            edge.Pair.Type = EMapTileEdgeType.Path;
         }
     }
 }
