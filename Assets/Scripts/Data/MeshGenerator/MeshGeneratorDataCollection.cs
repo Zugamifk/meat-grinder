@@ -7,4 +7,5 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
     public EndPortalMeshGeneratorData EndPortal;
     public EnemyMeshGeneratorData Enemy;
     public ArrowTowerMeshGeneratorData ArrowTower;
+    public TileMeshGeneratorData Tile;
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapTile : MonoBehaviour
+public class MapTile : MeshGeneratorUser
 {
     [SerializeField]
     MeshFilter _meshFilter;
@@ -29,9 +29,7 @@ public class MapTile : MonoBehaviour
         var data = DataService.GetData<GameData>();
         SurfaceY = tile.Height * data.TileStepHeight;
 
-        var meshGen = new MapMeshGenerator();
-        var mesh = meshGen.GenerateTileMesh(tile);
-        _meshFilter.mesh = mesh;
+        AssignMesh<TileMeshGenerator>(_meshFilter, gen => gen.SetTile(tile));
 
         _collider.center = new Vector3(0, SurfaceY / 2f, 0);
         _collider.size = new Vector3(1, SurfaceY, 1);
