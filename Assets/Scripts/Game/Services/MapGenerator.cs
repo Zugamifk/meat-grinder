@@ -19,7 +19,6 @@ public class MapGenerator
         {
             for (int y = -h / 2; y <= h / 2; y++)
             {
-                
                 model.TileMap[new Vector2Int(x, y)] = CreateTile(x, y, model);
             }
         }
@@ -38,17 +37,13 @@ public class MapGenerator
         tile.SouthEdge = CreateEdge(tile);
         if(y > 0)
         {
-            var neighbour = map.TileMap[new Vector2Int(x, y - 1)];
-            tile.SouthEdge.Pair = neighbour.NorthEdge;
-            neighbour.NorthEdge.Pair = tile.SouthEdge;
+            ConfigureNeighbourEdges(tile.SouthEdge, map.TileMap[new Vector2Int(x, y - 1)].NorthEdge);
         }
         tile.EastEdge = CreateEdge(tile);
         tile.WestEdge = CreateEdge(tile);
         if (x > 0)
         {
-            var neighbour = map.TileMap[new Vector2Int(x-1, y)];
-            tile.WestEdge.Pair = neighbour.EastEdge;
-            neighbour.EastEdge.Pair = tile.WestEdge;
+            ConfigureNeighbourEdges(tile.WestEdge, map.TileMap[new Vector2Int(x-1, y)].EastEdge);
         }
         return tile;
     }
@@ -57,9 +52,17 @@ public class MapGenerator
     {
         return new EdgeModel()
         {
-            Type = EMapTileEdgeType.Empty,
+            Type = EMapTileEdgeType.Wall,
             Tile = tile,
         };
+    }
+
+    void ConfigureNeighbourEdges(EdgeModel left, EdgeModel right)
+    {
+        left.Pair = right;
+        right.Pair = left;
+        left.Type = EMapTileEdgeType.Empty;
+        right.Type = EMapTileEdgeType.Empty;
     }
 
     void GeneratePath(GameModel model)
