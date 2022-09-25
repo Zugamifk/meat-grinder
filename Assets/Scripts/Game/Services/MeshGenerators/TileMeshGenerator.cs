@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using MeshGenerator;
+using MeshGenerator.Wireframe;
+using System;
+using UnityEngine;
 
+[MeshGenerator("Tile")]
 public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorData>
 {
     ITileModel _tile;
@@ -14,6 +15,76 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
 
     public override void BuildWireframe()
     {
+        Wireframe = new();
+        Func<float> h = () => _tile.Height * Data.TileStepHeight;
+
+        var p0 = new Point(-.5f, h(), -.5f);
+        var p1 = new Point(-.5f, h(), .5f);
+        var p2 = new Point(.5f, h(), .5f);
+        var p3 = new Point(.5f, h(), -.5f);
+        Wireframe.ConnectLoop(p0, p1, p2, p3);
+
+        if (_tile.HasPath)
+        {
+            GeneratePaths();
+        }
+    }
+
+    void GeneratePaths()
+    {
+        Func<float> r = () => Data.PathWidth * .5f;
+        Func<float> h = () => _tile.Height * Data.TileStepHeight;
+        var r0 = new DynamicPoint(() => new Vector3(-r(), h(), -r()));
+        var r1 = new DynamicPoint(() => new Vector3(-r(), h(), r()));
+        var r2 = new DynamicPoint(() => new Vector3(r(), h(), r()));
+        var r3 = new DynamicPoint(() => new Vector3(r(), h(), -r()));
+
+        if (_tile.NorthEdge.Type == EMapTileEdgeType.Path)
+        {
+            var p0 = new DynamicPoint(() => new Vector3(-r(), h(), .5f));
+            var p1 = new DynamicPoint(() => new Vector3(r(), h(), .5f));
+            Wireframe.Connect(p0, r1);
+            Wireframe.Connect(p1, r2);
+        } else
+        {
+            Wireframe.Connect(r1, r2);
+        }
+
+        if (_tile.SouthEdge.Type == EMapTileEdgeType.Path)
+        {
+            var p0 = new DynamicPoint(() => new Vector3(-r(), h(), -.5f));
+            var p1 = new DynamicPoint(() => new Vector3(r(), h(), -.5f));
+            Wireframe.Connect(p0, r0);
+            Wireframe.Connect(p1, r3);
+        }
+        else
+        {
+            Wireframe.Connect(r0, r3);
+        }
+
+        if (_tile.EastEdge.Type == EMapTileEdgeType.Path)
+        {
+            var p0 = new DynamicPoint(() => new Vector3(.5f, h(), -r()));
+            var p1 = new DynamicPoint(() => new Vector3(.5f, h(), r()));
+            Wireframe.Connect(p0, r3);
+            Wireframe.Connect(p1, r2);
+        }
+        else
+        {
+            Wireframe.Connect(r3, r2);
+        }
+
+        if (_tile.WestEdge.Type == EMapTileEdgeType.Path)
+        {
+            var p0 = new DynamicPoint(() => new Vector3(-.5f, h(), r()));
+            var p1 = new DynamicPoint(() => new Vector3(-.5f, h(), -r()));
+            Wireframe.Connect(p0, r1);
+            Wireframe.Connect(p1, r0);
+        }
+        else
+        {
+            Wireframe.Connect(r1, r0);
+        }
     }
 
     public override void Generate(MeshBuilder builder)

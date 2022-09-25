@@ -9,7 +9,7 @@ namespace MeshGenerator.Editor
         where TGenerator : MeshGeneratorWithWireFrame<TData>
         where TData : ScriptableObject
     {
-        TGenerator _generator;
+        protected TGenerator _generator;
 
         public void DrawInspectorGUI()
         {
@@ -34,6 +34,13 @@ namespace MeshGenerator.Editor
                 so.ApplyModifiedProperties();
                 EditorUtility.SetDirty(d);
             }
+
+            DrawInspectorFields();
+        }
+
+        protected virtual void DrawInspectorFields()
+        {
+
         }
 
         public void DrawSceneGUI(Transform rootTransform)
@@ -44,7 +51,13 @@ namespace MeshGenerator.Editor
         public void SetGenerator(IGeometryGenerator generator)
         {
             _generator = (TGenerator)generator;
+            OnSetGenerator();
             _generator.BuildWireframe();
+        }
+
+        protected virtual void OnSetGenerator()
+        {
+
         }
     }
 }
