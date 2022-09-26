@@ -210,6 +210,7 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
 
     void GenerateWallMeshes(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
+        _builder.SetColor(Data.WallColor);
         if (_tile.NorthEdge.Type == EMapTileEdgeType.Wall)
         {
             AddWallMesh(p1, p2);
@@ -258,7 +259,6 @@ public class TileMeshGenerator : MeshGeneratorWithWireFrame<TileMeshGeneratorDat
     {
         return edge switch
         {
-            EMapTileEdgeType.Wall => Data.WallColor,
             EMapTileEdgeType.Path => Data.PathColor,
             EMapTileEdgeType _ => Data.GrassColor,
         };
