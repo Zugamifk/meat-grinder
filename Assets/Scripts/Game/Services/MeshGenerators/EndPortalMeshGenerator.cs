@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("End Portal")]
 public class EndPortalMeshGenerator : MeshGeneratorWithWireFrame<EndPortalMeshGeneratorData>
 {
-    public override void Generate(MeshBuilder builder)
+    public override MeshGeneratorResult Generate()
     {
         void AddColumn(float x, float y)
         {
@@ -21,13 +21,13 @@ public class EndPortalMeshGenerator : MeshGeneratorWithWireFrame<EndPortalMeshGe
             var p6 = p2 + new Vector3(0, Data.Height, 0);
             var p7 = p3 + new Vector3(0, Data.Height, 0);
 
-            builder.AddQuad(p0, p1, p5, p4);
-            builder.AddQuad(p1, p2, p6, p5);
-            builder.AddQuad(p2, p3, p7, p6);
-            builder.AddQuad(p3, p0, p4, p7);
+            _builder.AddQuad(p0, p1, p5, p4);
+            _builder.AddQuad(p1, p2, p6, p5);
+            _builder.AddQuad(p2, p3, p7, p6);
+            _builder.AddQuad(p3, p0, p4, p7);
         }
 
-        builder.SetColor(new Color(.75f, .75f, .75f, 1));
+        _builder.SetColor(new Color(.75f, .75f, .75f, 1));
         AddColumn(-Data.ColumnSpacing, -Data.ColumnSpacing);
         AddColumn(Data.ColumnSpacing, -Data.ColumnSpacing);
         AddColumn(Data.ColumnSpacing, Data.ColumnSpacing);
@@ -45,16 +45,20 @@ public class EndPortalMeshGenerator : MeshGeneratorWithWireFrame<EndPortalMeshGe
             var p6 = p2 + new Vector3(0, Data.RoofThickness, 0);
             var p7 = p3 + new Vector3(0, Data.RoofThickness, 0);
 
-            builder.AddQuad(p3, p2, p1, p0);
-            builder.AddQuad(p0, p1, p5, p4);
-            builder.AddQuad(p1, p2, p6, p5);
-            builder.AddQuad(p2, p3, p7, p6);
-            builder.AddQuad(p3, p0, p4, p7);
-            builder.AddQuad(p4, p5, p6, p7);
+            _builder.AddQuad(p3, p2, p1, p0);
+            _builder.AddQuad(p0, p1, p5, p4);
+            _builder.AddQuad(p1, p2, p6, p5);
+            _builder.AddQuad(p2, p3, p7, p6);
+            _builder.AddQuad(p3, p0, p4, p7);
+            _builder.AddQuad(p4, p5, p6, p7);
         }
 
         AddRoofStep(.5f, 0);
         AddRoofStep(.4f, Data.RoofThickness);
+
+        var result = new MeshGeneratorResult();
+        result.Meshes.Add(_builder.BuildMesh());
+        return result;
     }
 
     public override void BuildWireframe()

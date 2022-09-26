@@ -78,6 +78,7 @@ namespace MeshGenerator
 
         static GeometryData _data => GeometryData.Instance;
 
+        MeshBuilder _builder = new();
         Frame _wireframe;
         IPoint[] _wallCorners;
 
@@ -90,20 +91,24 @@ namespace MeshGenerator
             }
         }
 
-        public void Generate(MeshBuilder builder)
+        public MeshGeneratorResult Generate()
         {
             //base
-            builder.AddQuad(_basePoints[0].Position, _basePoints[1].Position, _basePoints[2].Position, _basePoints[3].Position);
+            _builder.AddQuad(_basePoints[0].Position, _basePoints[1].Position, _basePoints[2].Position, _basePoints[3].Position);
 
             //walls
-            builder.AddTriangle(_atticWallPoints[0].Position, _atticWallPoints[1].Position, _atticWallPoints[2].Position);
-            builder.AddTriangle(_atticWallPoints[3].Position, _atticWallPoints[4].Position, _atticWallPoints[5].Position);
+            _builder.AddTriangle(_atticWallPoints[0].Position, _atticWallPoints[1].Position, _atticWallPoints[2].Position);
+            _builder.AddTriangle(_atticWallPoints[3].Position, _atticWallPoints[4].Position, _atticWallPoints[5].Position);
 
             //roof
-            builder.AddQuad(_roofPoints[0].Position, _roofPoints[1].Position, _roofPoints[4].Position, _roofPoints[5].Position);
-            builder.AddQuad(_roofPoints[2].Position, _roofPoints[1].Position, _roofPoints[4].Position, _roofPoints[3].Position);
-            builder.AddQuad(_roofPoints[0].Position, _roofPoints[5].Position, _roofPoints[4].Position, _roofPoints[1].Position);
-            builder.AddQuad(_roofPoints[2].Position, _roofPoints[3].Position, _roofPoints[4].Position, _roofPoints[1].Position);
+            _builder.AddQuad(_roofPoints[0].Position, _roofPoints[1].Position, _roofPoints[4].Position, _roofPoints[5].Position);
+            _builder.AddQuad(_roofPoints[2].Position, _roofPoints[1].Position, _roofPoints[4].Position, _roofPoints[3].Position);
+            _builder.AddQuad(_roofPoints[0].Position, _roofPoints[5].Position, _roofPoints[4].Position, _roofPoints[1].Position);
+            _builder.AddQuad(_roofPoints[2].Position, _roofPoints[3].Position, _roofPoints[4].Position, _roofPoints[1].Position);
+
+            var result = new MeshGeneratorResult();
+            result.Meshes.Add(_builder.BuildMesh());
+            return result;
         }
 
         public void BuildWireframe()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa05a836ef50044f9d08745f897ebd8, type: 3}
   m_Name: EndPortal
   m_EditorClassIdentifier: 
-  Height: 1.06
+  Height: 0.63
   ColumnSpacing: 0.32
   ColumnSize: 0.08
   RoofThickness: 0.14

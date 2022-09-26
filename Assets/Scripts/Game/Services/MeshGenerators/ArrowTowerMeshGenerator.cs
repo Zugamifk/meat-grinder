@@ -28,9 +28,9 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithWireFrame<ArrowTowerMesh
         AddRing(1);
     }
 
-    public override void Generate(MeshBuilder builder)
+    public override MeshGeneratorResult Generate()
     {
-        builder.SetColor(Color.white);
+        _builder.SetColor(Color.white);
         var top = new List<Vector3>();
         for (float a0 = 0; a0 < 360; a0 += Data.Angle)
         {
@@ -48,14 +48,18 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithWireFrame<ArrowTowerMesh
                 var p1 = new Vector3(0, t * Data.Height, 0) + d1 * r0;
                 var p2 = new Vector3(0, (t + layerStep) * Data.Height, 0) + d1 * r1;
                 var p3 = new Vector3(0, (t + layerStep) * Data.Height, 0) + d0 * r1;
-                builder.AddQuad(p0, p1, p2, p3);
+                _builder.AddQuad(p0, p1, p2, p3);
             }
             var tt = Data.TowerCurve.Evaluate(1);
             var r = Mathf.Lerp(Data.RadiusMinMax.x, Data.RadiusMinMax.y, tt);
             var p = new Vector3(0, Data.Height, 0) + d0 * r;
             top.Add(p);
         }
-        builder.AddPolygon(top);
+        _builder.AddPolygon(top);
+
+        var result = new MeshGeneratorResult();
+        result.Meshes.Add(_builder.BuildMesh());
+        return result;
     }
 
     protected override ArrowTowerMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().ArrowTower;

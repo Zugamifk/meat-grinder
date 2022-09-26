@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace MeshGenerator
 {
-    public interface IGeometryGenerator
+    public class MeshGeneratorResult
     {
-        MeshGeneratorResult Generate();
+        public List<Mesh> Meshes = new();
     }
 }

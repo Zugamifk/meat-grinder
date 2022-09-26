@@ -6,6 +6,6 @@ namespace MeshGenerator
 {
     public abstract class MeshGenerator : IGeometryGenerator
     {
-        public abstract void Generate(MeshBuilder builder);
+        public abstract MeshGeneratorResult Generate();
     }
 }

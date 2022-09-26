@@ -106,11 +106,6 @@ namespace MeshGenerator
             }
         }
 
-        public void Generate(IGeometryGenerator generator)
-        {
-            generator.Generate(this);
-        }
-
         public Mesh BuildMesh()
         {
             return new Mesh()

@@ -20,6 +20,7 @@ namespace MeshGenerator
                 return _data;
             }
         }
+        protected MeshBuilder _builder = new();
 
         protected abstract TData LoadData();
 

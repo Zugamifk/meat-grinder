@@ -9,6 +9,7 @@ namespace MeshGenerator
     public class SurfaceModelMeshGenerator : IGeometryGenerator
     {
         SurfaceModel _model;
+        MeshBuilder _builder = new();
 
         public SurfaceModel Model => Model;
 
@@ -22,12 +23,16 @@ namespace MeshGenerator
             //_model = smb.ConvertMesh(m);
         }
 
-        public void Generate(MeshBuilder builder)
+        public MeshGeneratorResult Generate()
         {
             foreach(var f in _model.Faces)
             {
-                builder.AddPolygon(f.HalfEdge.Loop().Select(he => he.Vertex.Position).ToArray());
+                _builder.AddPolygon(f.HalfEdge.Loop().Select(he => he.Vertex.Position).ToArray());
             }
+
+            var result = new MeshGeneratorResult();
+            result.Meshes.Add(_builder.BuildMesh());
+            return result;
         }
     }
 }

@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Enemy")]
 public class EnemyMeshGenerator : MeshGeneratorWithWireFrame<EnemyMeshGeneratorData>
 {
-    public override void Generate(MeshBuilder builder)
+    public override MeshGeneratorResult Generate()
     {
         var f = Data.Fatness;
         var p0 = new Vector3(-f, 0, -f);
@@ -20,13 +20,13 @@ public class EnemyMeshGenerator : MeshGeneratorWithWireFrame<EnemyMeshGeneratorD
         var p6 = p2 + new Vector3(0, h, 0);
         var p7 = p3 + new Vector3(0, h, 0);
 
-        builder.SetColor(Data.BodyColor);
-        builder.AddQuad(p3, p2, p1, p0);
-        builder.AddQuad(p0, p1, p5, p4);
-        builder.AddQuad(p1, p2, p6, p5);
-        builder.AddQuad(p2, p3, p7, p6);
-        builder.AddQuad(p3, p0, p4, p7);
-        builder.AddQuad(p4, p5, p6, p7);
+        _builder.SetColor(Data.BodyColor);
+        _builder.AddQuad(p3, p2, p1, p0);
+        _builder.AddQuad(p0, p1, p5, p4);
+        _builder.AddQuad(p1, p2, p6, p5);
+        _builder.AddQuad(p2, p3, p7, p6);
+        _builder.AddQuad(p3, p0, p4, p7);
+        _builder.AddQuad(p4, p5, p6, p7);
 
         var hs = Data.HeadSize;
         p0 = new Vector3(-hs, h, -hs);
@@ -39,13 +39,17 @@ public class EnemyMeshGenerator : MeshGeneratorWithWireFrame<EnemyMeshGeneratorD
         p6 = p2 + new Vector3(0, hh, 0);
         p7 = p3 + new Vector3(0, hh, 0);
 
-        builder.SetColor(Data.SkinColor);
-        builder.AddQuad(p3, p2, p1, p0);
-        builder.AddQuad(p0, p1, p5, p4);
-        builder.AddQuad(p1, p2, p6, p5);
-        builder.AddQuad(p2, p3, p7, p6);
-        builder.AddQuad(p3, p0, p4, p7);
-        builder.AddQuad(p4, p5, p6, p7);
+        _builder.SetColor(Data.SkinColor);
+        _builder.AddQuad(p3, p2, p1, p0);
+        _builder.AddQuad(p0, p1, p5, p4);
+        _builder.AddQuad(p1, p2, p6, p5);
+        _builder.AddQuad(p2, p3, p7, p6);
+        _builder.AddQuad(p3, p0, p4, p7);
+        _builder.AddQuad(p4, p5, p6, p7);
+
+        var result = new MeshGeneratorResult();
+        result.Meshes.Add(_builder.BuildMesh());
+        return result;
     }
 
     public override void BuildWireframe()

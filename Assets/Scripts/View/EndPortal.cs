@@ -11,10 +11,8 @@ public class EndPortal : MonoBehaviour
     private void Start()
     {
         var gen = new EndPortalMeshGenerator();
-        var builder = new MeshBuilder();
-        gen.Generate(builder);
-        var mesh = builder.BuildMesh();
-        _meshFilter.mesh = mesh;
+        var res  = gen.Generate();
+        _meshFilter.mesh = res.Meshes[0];
     }
 
     private void OnTriggerEnter(Collider other)

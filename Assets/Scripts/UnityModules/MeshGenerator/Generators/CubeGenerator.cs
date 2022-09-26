@@ -19,7 +19,9 @@ namespace MeshGenerator
             new Vector3(1,1,0)
         };
 
-        public void Generate(MeshBuilder builder)
+        MeshBuilder _builder = new();
+
+        public MeshGeneratorResult Generate()
         {
             var p0 = _points[0];
             var p1 = _points[1];
@@ -30,12 +32,16 @@ namespace MeshGenerator
             var p6 = _points[6];
             var p7 = _points[7];
 
-            builder.AddQuad(p0, p3, p2, p1);
-            builder.AddQuad(p0, p4, p7, p3);
-            builder.AddQuad(p0, p1, p5, p4);
-            builder.AddQuad(p1, p2, p6, p5);
-            builder.AddQuad(p3, p7, p6, p2);
-            builder.AddQuad(p4, p5, p6, p7);
+            _builder.AddQuad(p0, p3, p2, p1);
+            _builder.AddQuad(p0, p4, p7, p3);
+            _builder.AddQuad(p0, p1, p5, p4);
+            _builder.AddQuad(p1, p2, p6, p5);
+            _builder.AddQuad(p3, p7, p6, p2);
+            _builder.AddQuad(p4, p5, p6, p7);
+
+            var result = new MeshGeneratorResult();
+            result.Meshes.Add(_builder.BuildMesh());
+            return result;
         }
     }
 }
