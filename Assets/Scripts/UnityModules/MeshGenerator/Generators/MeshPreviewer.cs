@@ -11,20 +11,19 @@ namespace MeshGenerator
         [SerializeField]
         Transform _generatorTransform;
 
+        GeneratedSkinnedMeshRenderer _renderer;
+        GeneratedSkinnedMeshRenderer Renderer => _renderer ??= GetComponentInChildren<GeneratedSkinnedMeshRenderer>();
+
         public IGeometryGenerator CurrentGenerator { get; private set; }
 
         public void SetMesh(Mesh mesh)
         {
-            var mf = GetComponent<MeshFilter>();
-            mf.mesh = mesh;
-            _mesh = mesh;
+            Renderer.ApplyMesh(mesh);
         }
 
         public void Clear()
         {
-            _mesh = null;
-            var mf = GetComponent<MeshFilter>();
-            mf.mesh = null;
+            Renderer.Clear();
         }
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7449f4ca70fb83b43993fdb76b506995, type: 3}
   m_Name: EnemySpawn
   m_EditorClassIdentifier: 
-  Fatness: 0.11
-  Height: 0.4
+  Fatness: 0.2
+  Height: 0.5
   HeadSize: 0.06
   HeadHeight: 0.15
   BodyColor: {r: 0.9339623, g: 0.36565503, b: 0.36565503, a: 1}
