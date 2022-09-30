@@ -11,9 +11,9 @@ public class EnemyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<EnemyMe
 {
     public override void BuildWireframe()
     {
-        Wireframe = new();
+        _wireframe = new();
 
-        Wireframe.SquareColumn(new Point(), () => _data.Height, () => _data.Fatness);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, _data.Height, 0)), () => _data.HeadHeight, () => _data.HeadSize);
+        _wireframe.SquareColumn(new Point(), () => _data.Height, () => _data.Fatness);
+        _wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, _data.Height, 0)), () => _data.HeadHeight, () => _data.HeadSize);
     }
 }

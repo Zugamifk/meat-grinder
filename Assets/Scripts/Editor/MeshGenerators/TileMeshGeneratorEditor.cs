@@ -46,14 +46,14 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
 
     public override void BuildWireframe()
     {
-        Wireframe = new();
+        _wireframe = new();
         Func<float> h = () => _tile.Height * _data.TileStepHeight;
 
         var p0 = new Point(-.5f, h(), -.5f);
         var p1 = new Point(-.5f, h(), .5f);
         var p2 = new Point(.5f, h(), .5f);
         var p3 = new Point(.5f, h(), -.5f);
-        Wireframe.ConnectLoop(p0, p1, p2, p3);
+        _wireframe.ConnectLoop(p0, p1, p2, p3);
 
         if (_tile.HasPath)
         {
@@ -76,48 +76,48 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         {
             var p0 = new DynamicPoint(() => new Vector3(-r(), h(), .5f));
             var p1 = new DynamicPoint(() => new Vector3(r(), h(), .5f));
-            Wireframe.Connect(p0, r1);
-            Wireframe.Connect(p1, r2);
+            _wireframe.Connect(p0, r1);
+            _wireframe.Connect(p1, r2);
         }
         else
         {
-            Wireframe.Connect(r1, r2);
+            _wireframe.Connect(r1, r2);
         }
 
         if (_tile.SouthEdge.Type == EMapTileEdgeType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(-r(), h(), -.5f));
             var p1 = new DynamicPoint(() => new Vector3(r(), h(), -.5f));
-            Wireframe.Connect(p0, r0);
-            Wireframe.Connect(p1, r3);
+            _wireframe.Connect(p0, r0);
+            _wireframe.Connect(p1, r3);
         }
         else
         {
-            Wireframe.Connect(r0, r3);
+            _wireframe.Connect(r0, r3);
         }
 
         if (_tile.EastEdge.Type == EMapTileEdgeType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(.5f, h(), -r()));
             var p1 = new DynamicPoint(() => new Vector3(.5f, h(), r()));
-            Wireframe.Connect(p0, r3);
-            Wireframe.Connect(p1, r2);
+            _wireframe.Connect(p0, r3);
+            _wireframe.Connect(p1, r2);
         }
         else
         {
-            Wireframe.Connect(r3, r2);
+            _wireframe.Connect(r3, r2);
         }
 
         if (_tile.WestEdge.Type == EMapTileEdgeType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(-.5f, h(), r()));
             var p1 = new DynamicPoint(() => new Vector3(-.5f, h(), -r()));
-            Wireframe.Connect(p0, r1);
-            Wireframe.Connect(p1, r0);
+            _wireframe.Connect(p0, r1);
+            _wireframe.Connect(p1, r0);
         }
         else
         {
-            Wireframe.Connect(r1, r0);
+            _wireframe.Connect(r1, r0);
         }
     }
 
@@ -156,17 +156,17 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         var w3 = new DynamicPoint(() => cornerB.Position + .5f * wallInset() + Vector3.up * (1 - _data.WallInset));
         var i2 = new DynamicPoint(() => cornerA.Position + wallInset() + Vector3.up);
         var i3 = new DynamicPoint(() => cornerB.Position + wallInset() + Vector3.up);
-        Wireframe.Connect(i0, i1);
-        Wireframe.Connect(i0, w0);
-        Wireframe.Connect(i1, w1);
-        Wireframe.Connect(w0, w1);
-        Wireframe.Connect(w0, w2);
-        Wireframe.Connect(w1, w3);
-        Wireframe.Connect(w2, w3);
-        Wireframe.Connect(w2, i2);
-        Wireframe.Connect(w3, i3);
-        Wireframe.Connect(i2, i3);
-        Wireframe.Connect(i2, new DynamicPoint(() => cornerA.Position + Vector3.up));
-        Wireframe.Connect(i3, new DynamicPoint(() => cornerB.Position + Vector3.up));
+        _wireframe.Connect(i0, i1);
+        _wireframe.Connect(i0, w0);
+        _wireframe.Connect(i1, w1);
+        _wireframe.Connect(w0, w1);
+        _wireframe.Connect(w0, w2);
+        _wireframe.Connect(w1, w3);
+        _wireframe.Connect(w2, w3);
+        _wireframe.Connect(w2, i2);
+        _wireframe.Connect(w3, i3);
+        _wireframe.Connect(i2, i3);
+        _wireframe.Connect(i2, new DynamicPoint(() => cornerA.Position + Vector3.up));
+        _wireframe.Connect(i3, new DynamicPoint(() => cornerB.Position + Vector3.up));
     }
 }

@@ -10,7 +10,7 @@ namespace MeshGenerator.Editor
         where TGenerator : MeshGeneratorWithData<TData>
         where TData : ScriptableObject
     {
-        protected Frame Wireframe;
+        protected Frame _wireframe;
 
         protected TGenerator _generator;
         protected TData _data => _generator.Data;
@@ -49,7 +49,7 @@ namespace MeshGenerator.Editor
 
         public void DrawSceneGUI(Transform rootTransform)
         {
-            WireframeDrawer.Draw(Wireframe);
+            WireframeDrawer.Draw(_wireframe);
         }
 
         public abstract void BuildWireframe();

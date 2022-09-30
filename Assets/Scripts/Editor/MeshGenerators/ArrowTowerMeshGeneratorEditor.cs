@@ -10,10 +10,10 @@ public class ArrowTowerMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Ar
 {
     public override void BuildWireframe()
     {
-        Wireframe = new();
+        _wireframe = new();
         void AddRing(float t)
         {
-            Wireframe.Rings.Add(new Ring()
+            _wireframe.Rings.Add(new Ring()
             {
                 Center = new DynamicPoint(() => new Vector3(0, t * _data.Height, 0)),
                 Normal = () => Vector3.up,
