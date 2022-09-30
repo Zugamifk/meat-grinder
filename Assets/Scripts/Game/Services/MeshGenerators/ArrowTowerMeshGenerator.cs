@@ -5,28 +5,8 @@ using MeshGenerator;
 using MeshGenerator.Wireframe;
 
 [MeshGenerator("Arrow Tower")]
-public class ArrowTowerMeshGenerator : MeshGeneratorWithWireFrame<ArrowTowerMeshGeneratorData>
+public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGeneratorData>
 {
-    public override void BuildWireframe()
-    {
-        Wireframe = new();
-        void AddRing(float t)
-        {
-            Wireframe.Rings.Add(new Ring()
-            {
-                Center = new DynamicPoint(() => new Vector3(0, t * Data.Height, 0)),
-                Normal = ()=>Vector3.up,
-                Radius = ()=> Mathf.Lerp(Data.RadiusMinMax.x, Data.RadiusMinMax.y, Data.TowerCurve.Evaluate(t))
-            });
-        }
-
-        for (float t = 0; t < 1; t += 0.25f / Data.Height)
-        {
-            AddRing(t);
-        }
-        AddRing(1);
-    }
-
     public override MeshGeneratorResult Generate()
     {
         _builder.SetColor(Color.white);

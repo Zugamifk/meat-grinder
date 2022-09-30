@@ -5,7 +5,7 @@ using MeshGenerator.Wireframe;
 
 namespace MeshGenerator
 {
-    public abstract class MeshGeneratorWithWireFrame<TData> : MeshGenerator, IWireframeUser
+    public abstract class MeshGeneratorWithData<TData> : MeshGenerator
         where TData : ScriptableObject
     {
         static TData _data;
@@ -20,13 +20,7 @@ namespace MeshGenerator
                 return _data;
             }
         }
-        protected MeshBuilder _builder = new();
-
         protected abstract TData LoadData();
-
-        public Frame Wireframe { get; protected set; }
-
-        public abstract void BuildWireframe();
 
     }
 }

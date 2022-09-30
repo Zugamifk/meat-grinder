@@ -5,7 +5,7 @@ using MeshGenerator;
 using MeshGenerator.Wireframe;
 
 [MeshGenerator("Enemy")]
-public class EnemyMeshGenerator : MeshGeneratorWithWireFrame<EnemyMeshGeneratorData>
+public class EnemyMeshGenerator : MeshGeneratorWithData<EnemyMeshGeneratorData>
 {
     public override MeshGeneratorResult Generate()
     {
@@ -50,14 +50,6 @@ public class EnemyMeshGenerator : MeshGeneratorWithWireFrame<EnemyMeshGeneratorD
         var result = new MeshGeneratorResult();
         result.Meshes.Add(_builder.BuildMesh());
         return result;
-    }
-
-    public override void BuildWireframe()
-    {
-        Wireframe = new();
-
-        Wireframe.SquareColumn(new Point(), () => Data.Height, () => Data.Fatness);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, Data.Height, 0)), () => Data.HeadHeight, () => Data.HeadSize);
     }
 
     protected override EnemyMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Enemy;

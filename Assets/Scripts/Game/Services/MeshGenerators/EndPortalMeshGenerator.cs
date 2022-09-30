@@ -5,7 +5,7 @@ using MeshGenerator;
 using MeshGenerator.Wireframe;
 
 [MeshGenerator("End Portal")]
-public class EndPortalMeshGenerator : MeshGeneratorWithWireFrame<EndPortalMeshGeneratorData>
+public class EndPortalMeshGenerator : MeshGeneratorWithData<EndPortalMeshGeneratorData>
 {
     public override MeshGeneratorResult Generate()
     {
@@ -59,33 +59,6 @@ public class EndPortalMeshGenerator : MeshGeneratorWithWireFrame<EndPortalMeshGe
         var result = new MeshGeneratorResult();
         result.Meshes.Add(_builder.BuildMesh());
         return result;
-    }
-
-    public override void BuildWireframe()
-    {
-        Wireframe = new();
-
-        var b = .5f;
-        var b0 = new Point(-b, 0, -b);
-        var b1 = new Point(-b, 0, b);
-        var b2 = new Point(b, 0, b);
-        var b3 = new Point(b, 0, -b);
-
-        // base
-        Wireframe.Connect(b0, b1);
-        Wireframe.Connect(b1, b2);
-        Wireframe.Connect(b2, b3);
-        Wireframe.Connect(b3, b0);
-
-        // columns
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(-Data.ColumnSpacing, 0, -Data.ColumnSpacing)), () => Data.Height, () => Data.ColumnSize);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(-Data.ColumnSpacing, 0, Data.ColumnSpacing)), () => Data.Height, () => Data.ColumnSize);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(Data.ColumnSpacing, 0, Data.ColumnSpacing)), () => Data.Height, () => Data.ColumnSize);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(Data.ColumnSpacing, 0, -Data.ColumnSpacing)), () => Data.Height, () => Data.ColumnSize);
-
-        // roof
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, Data.Height, 0)), () => Data.RoofThickness, () => .5f);
-        Wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, Data.Height + Data.RoofThickness, 0)), () => Data.RoofThickness, () => .4f);
     }
 
     protected override EndPortalMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().EndPortal;

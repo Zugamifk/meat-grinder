@@ -16,4 +16,4 @@ MonoBehaviour:
   GunBounds: {x: 0.24, y: 0.11, z: 0.71}
   MountPosition: {x: 0, y: 0, z: 0}
   BarrelDimensions: {x: 0.03, y: 1.36}
-  MountedAngle: 19.8
+  MountedAngle: -64.3

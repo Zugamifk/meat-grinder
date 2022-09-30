@@ -1,3 +1,4 @@
+using MeshGenerator.Wireframe;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -5,11 +6,14 @@ using UnityEngine;
 
 namespace MeshGenerator.Editor
 {
-    public abstract class MeshGeneratorWithWireFrameEditor<TGenerator, TData> : IMeshGeneratorEditor
-        where TGenerator : MeshGeneratorWithWireFrame<TData>
+    public abstract class MeshGeneratorEditorWithWireFrame<TGenerator, TData> : IMeshGeneratorEditor
+        where TGenerator : MeshGeneratorWithData<TData>
         where TData : ScriptableObject
     {
+        protected Frame Wireframe;
+
         protected TGenerator _generator;
+        protected TData _data => _generator.Data;
 
         public void DrawInspectorGUI()
         {
@@ -45,14 +49,16 @@ namespace MeshGenerator.Editor
 
         public void DrawSceneGUI(Transform rootTransform)
         {
-            WireframeDrawer.Draw(_generator.Wireframe);
+            WireframeDrawer.Draw(Wireframe);
         }
+
+        public abstract void BuildWireframe();
 
         public void SetGenerator(IGeometryGenerator generator)
         {
             _generator = (TGenerator)generator;
             OnSetGenerator();
-            _generator.BuildWireframe();
+            BuildWireframe();
         }
 
         protected virtual void OnSetGenerator()
