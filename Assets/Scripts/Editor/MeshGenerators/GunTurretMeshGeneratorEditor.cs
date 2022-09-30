@@ -5,6 +5,7 @@ using MeshGenerator.Editor;
 using MeshGenerator;
 using MeshGenerator.Wireframe;
 using System;
+using UnityEditor;
 
 [MeshGeneratorEditor(typeof(GunTurretMeshGenerator))]
 public class GunTurretMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GunTurretMeshGenerator, GunTurretMeshGeneratorData>
@@ -36,6 +37,10 @@ public class GunTurretMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Gun
         _wireframe.Cuboid(gunMatrix, () => _data.GunBounds.x, () => _data.GunBounds.y, () => _data.GunBounds.z);
 
         Func<Vector3> barrel = () => gunMatrix().MultiplyPoint(new Vector3(0, 0, _data.GunBounds.z));
-        _wireframe.Cylinder(barrel, () => _data.BarrelDimensions.x, () => _data.BarrelDimensions.y, () => gunMatrix().MultiplyVector(Vector3.forward));
+        _wireframe.Cylinder(barrel, 
+            () => _data.BarrelDimensions.x, 
+            () => _data.BarrelDimensions.y, 
+            () => gunMatrix().MultiplyVector(Vector3.forward),
+            ()=>SceneView.currentDrawingSceneView.camera.transform.forward);
     }
 }

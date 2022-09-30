@@ -65,8 +65,6 @@ public class MeshGeneratorWindow : EditorWindow
     {
         CompilationPipeline.compilationFinished -= OnRecompiled;
 
-        Debug.Log("Compilation Finished.");
-
         AssetDatabase.Refresh();
 
         RegenerateMeshGeneratorDataCollectionScript();

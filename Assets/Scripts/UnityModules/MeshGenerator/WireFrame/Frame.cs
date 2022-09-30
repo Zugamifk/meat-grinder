@@ -18,7 +18,7 @@ namespace MeshGenerator.Wireframe
 
         public void Connect(params IPoint[] points)
         {
-            for(int i=1;i<points.Length;i++)
+            for (int i = 1; i < points.Length; i++)
             {
                 Connect(points[i - 1], points[i]);
             }
@@ -103,7 +103,7 @@ namespace MeshGenerator.Wireframe
             Connect(p7, p4);
         }
 
-        public void Cylinder(Func<Vector3> baseCentre, Func<float> radius, Func<float> length, Func<Vector3> normal)
+        public void Cylinder(Func<Vector3> baseCentre, Func<float> radius, Func<float> length, Func<Vector3> normal, Func<Vector3> edgeTangent)
         {
             Rings.Add(new Ring()
             {
@@ -114,16 +114,16 @@ namespace MeshGenerator.Wireframe
 
             Rings.Add(new Ring()
             {
-                Center = new DynamicPoint(()=>baseCentre() + normal() * length()),
+                Center = new DynamicPoint(() => baseCentre() + normal() * length()),
                 Radius = radius,
                 Normal = normal
             });
 
-            var cn = new Vector3(.4656753f,.786853f,.93245f).normalized;
-            var p0 = new DynamicPoint(() => baseCentre() + Vector3.Cross(cn, normal()) * radius());
-            var p1 = new DynamicPoint(() => baseCentre() + Vector3.Cross(-cn, normal()) * radius());
-            var p2 = new DynamicPoint(() => baseCentre() + Vector3.Cross(cn, normal()) * radius()  + normal() * length());
-            var p3 = new DynamicPoint(() => baseCentre() + Vector3.Cross(-cn, normal()) * radius() + normal() * length());
+            Func<Vector3> edge = () => Vector3.Cross(edgeTangent(), normal()).normalized;
+            var p0 = new DynamicPoint(() => baseCentre() + edge() * radius());
+            var p1 = new DynamicPoint(() => baseCentre() + -edge() * radius());
+            var p2 = new DynamicPoint(() => baseCentre() + edge() * radius() + normal() * length());
+            var p3 = new DynamicPoint(() => baseCentre() + -edge() * radius() + normal() * length());
             Connect(p0, p2);
             Connect(p1, p3);
         }
