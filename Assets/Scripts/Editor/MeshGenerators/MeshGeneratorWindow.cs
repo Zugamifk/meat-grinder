@@ -114,13 +114,8 @@ using System;
 using MeshGenerator.Wireframe;
 
 [MeshGenerator(""{_meshGeneratorName}"")]
-public class {name} : MeshGeneratorWithWireFrame<{_meshGeneratorName}MeshGeneratorData>
+public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorData>
 {{
-    public override void BuildWireframe()
-    {{
-
-    }}
-
     public override MeshGeneratorResult Generate()
     {{
         return new();
@@ -143,9 +138,12 @@ using MeshGenerator.Editor;
 using MeshGenerator;
 
 [MeshGeneratorEditor(typeof({_meshGeneratorName}MeshGenerator))]
-public class {name} : MeshGeneratorWithWireFrameEditor<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}MeshGeneratorData>
+public class {name} : MeshGeneratorEditorWithWireFrame<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}MeshGeneratorData>
 {{
-    
+        public override void BuildWireframe()
+    {{
+
+    }}
 }}
 ",
             name,
