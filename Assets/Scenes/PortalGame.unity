@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 0}
-  _meshType: Tile
+  _meshType: Gun Turret
   _generatorTransform: {fileID: 2055646320}
 --- !u!4 &2058267046
 Transform:

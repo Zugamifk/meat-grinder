@@ -17,7 +17,7 @@ namespace MeshGenerator.Editor
 
             foreach(var r in frame.Rings)
             {
-                Handles.DrawWireDisc(r.Center.Position, r.Normal, r.Radius);
+                Handles.DrawWireDisc(r.Center.Position, r.Normal(), r.Radius());
             }
         }
     }

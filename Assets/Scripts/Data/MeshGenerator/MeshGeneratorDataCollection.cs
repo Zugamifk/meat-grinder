@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 {
+    public ArrowTowerMeshGeneratorData ArrowTower;
     public EndPortalMeshGeneratorData EndPortal;
     public EnemyMeshGeneratorData Enemy;
-    public ArrowTowerMeshGeneratorData ArrowTower;
+    public GunTurretMeshGeneratorData GunTurret;
     public TileMeshGeneratorData Tile;
 }

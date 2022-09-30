@@ -129,7 +129,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _animationTime: 0.25
+  _animationTime: 0.29
   _animationHeight: 0.4
 --- !u!114 &3345549685138789158
 MonoBehaviour:

@@ -12,12 +12,11 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithWireFrame<ArrowTowerMesh
         Wireframe = new();
         void AddRing(float t)
         {
-            var r = Mathf.Lerp(Data.RadiusMinMax.x, Data.RadiusMinMax.y, Data.TowerCurve.Evaluate(t));
             Wireframe.Rings.Add(new Ring()
             {
                 Center = new DynamicPoint(() => new Vector3(0, t * Data.Height, 0)),
-                Normal = Vector3.up,
-                Radius = r
+                Normal = ()=>Vector3.up,
+                Radius = ()=> Mathf.Lerp(Data.RadiusMinMax.x, Data.RadiusMinMax.y, Data.TowerCurve.Evaluate(t))
             });
         }
 

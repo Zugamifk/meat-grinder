@@ -75,5 +75,57 @@ namespace MeshGenerator.Wireframe
             Connect(p6, p7);
             Connect(p7, p4);
         }
+
+        public void Cuboid(Func<Matrix4x4> transform, Func<float> width, Func<float> height, Func<float> depth)
+        {
+            var p0 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(-width(), -height(), -depth())));
+            var p1 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(-width(), -height(), depth())));
+            var p2 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(width(), -height(), depth())));
+            var p3 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(width(), -height(), -depth())));
+            var p4 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(-width(), height(), -depth())));
+            var p5 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(-width(), height(), depth())));
+            var p6 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(width(), height(), depth())));
+            var p7 = new DynamicPoint(() => transform().MultiplyPoint3x4(new Vector3(width(), height(), -depth())));
+
+            Connect(p0, p1);
+            Connect(p1, p2);
+            Connect(p2, p3);
+            Connect(p3, p0);
+
+            Connect(p0, p4);
+            Connect(p1, p5);
+            Connect(p2, p6);
+            Connect(p3, p7);
+
+            Connect(p4, p5);
+            Connect(p5, p6);
+            Connect(p6, p7);
+            Connect(p7, p4);
+        }
+
+        public void Cylinder(Func<Vector3> baseCentre, Func<float> radius, Func<float> length, Func<Vector3> normal)
+        {
+            Rings.Add(new Ring()
+            {
+                Center = new DynamicPoint(baseCentre),
+                Radius = radius,
+                Normal = normal
+            });
+
+            Rings.Add(new Ring()
+            {
+                Center = new DynamicPoint(()=>baseCentre() + normal() * length()),
+                Radius = radius,
+                Normal = normal
+            });
+
+            var cn = new Vector3(.4656753f,.786853f,.93245f).normalized;
+            var p0 = new DynamicPoint(() => baseCentre() + Vector3.Cross(cn, normal()) * radius());
+            var p1 = new DynamicPoint(() => baseCentre() + Vector3.Cross(-cn, normal()) * radius());
+            var p2 = new DynamicPoint(() => baseCentre() + Vector3.Cross(cn, normal()) * radius()  + normal() * length());
+            var p3 = new DynamicPoint(() => baseCentre() + Vector3.Cross(-cn, normal()) * radius() + normal() * length());
+            Connect(p0, p2);
+            Connect(p1, p3);
+        }
     }
 }
