@@ -10,5 +10,13 @@ namespace MeshGenerator
         public List<Vector3> Normals = new();
         public List<Color> Colors = new();
         public List<int> Triangles = new();
+
+        public void Clear()
+        {
+            Vertices.Clear();
+            Normals.Clear();
+            Colors.Clear();
+            Triangles.Clear();
+        }
     }
 }

@@ -15,6 +15,14 @@ namespace MeshGenerator
         public MeshBuilder()
         {
             _matrix = Matrix4x4.identity;
+            _currentColor = Color.white;
+        }
+
+        public void Clear()
+        {
+            _matrix = Matrix4x4.identity;
+            _matrixStack.Clear();
+            _data.Clear();
         }
 
         public void PushMatrix(Matrix4x4 matrix)
