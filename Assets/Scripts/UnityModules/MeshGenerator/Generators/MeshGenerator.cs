@@ -7,6 +7,17 @@ namespace MeshGenerator
     public abstract class MeshGenerator : IGeometryGenerator
     {
         protected MeshBuilder _builder = new();
-        public abstract MeshGeneratorResult Generate();
+
+        public MeshGeneratorResult Generate()
+        {
+            _builder.Clear();
+            return BuildMesh();
+        }
+
+        protected abstract MeshGeneratorResult BuildMesh();
+        public void Clear()
+        {
+            _builder.Clear();
+        }
     }
 }

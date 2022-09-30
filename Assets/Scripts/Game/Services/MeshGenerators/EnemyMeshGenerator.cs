@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Enemy")]
 public class EnemyMeshGenerator : MeshGeneratorWithData<EnemyMeshGeneratorData>
 {
-    public override MeshGeneratorResult Generate()
+    protected override MeshGeneratorResult BuildMesh()
     {
         var f = Data.Fatness;
         var p0 = new Vector3(-f, 0, -f);
