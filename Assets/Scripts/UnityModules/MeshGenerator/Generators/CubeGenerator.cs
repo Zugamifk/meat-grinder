@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MeshGenerator
 {
     [MeshGenerator("Cube")]
-    public class CubeGenerator : IGeometryGenerator
+    public class CubeGenerator : MeshGenerator
     {
         static readonly Vector3[] _points = new[]
         {
@@ -19,9 +19,7 @@ namespace MeshGenerator
             new Vector3(1,1,0)
         };
 
-        MeshBuilder _builder = new();
-
-        public MeshGeneratorResult Generate()
+        protected override MeshGeneratorResult BuildMesh()
         {
             var p0 = _points[0];
             var p1 = _points[1];

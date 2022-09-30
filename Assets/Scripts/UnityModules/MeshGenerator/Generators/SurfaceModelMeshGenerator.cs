@@ -6,10 +6,9 @@ using UnityEngine;
 namespace MeshGenerator
 {
     [MeshGenerator("Surface Model")]
-    public class SurfaceModelMeshGenerator : IGeometryGenerator
+    public class SurfaceModelMeshGenerator : MeshGenerator
     {
         SurfaceModel _model;
-        MeshBuilder _builder = new();
 
         public SurfaceModel Model => Model;
 
@@ -23,7 +22,7 @@ namespace MeshGenerator
             //_model = smb.ConvertMesh(m);
         }
 
-        public MeshGeneratorResult Generate()
+        protected override MeshGeneratorResult BuildMesh()
         {
             foreach(var f in _model.Faces)
             {

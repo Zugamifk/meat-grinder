@@ -14,7 +14,7 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         _tile = tile;
     }
 
-    public override MeshGeneratorResult Generate()
+    protected override MeshGeneratorResult BuildMesh()
     {
         var grassColor = Data.GrassColor;
         _builder.SetColor(grassColor);

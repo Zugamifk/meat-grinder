@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Arrow Tower")]
 public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGeneratorData>
 {
-    public override MeshGeneratorResult Generate()
+    protected override MeshGeneratorResult BuildMesh()
     {
         _builder.SetColor(Color.white);
         var top = new List<Vector3>();

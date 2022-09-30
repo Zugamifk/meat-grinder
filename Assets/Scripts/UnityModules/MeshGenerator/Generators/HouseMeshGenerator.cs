@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MeshGenerator
 {
     [MeshGenerator("House")]
-    public class HouseGenerator : IGeometryGenerator
+    public class HouseGenerator : MeshGenerator
     {
         public class GeometryData : ScriptableObject
         {
@@ -78,7 +78,6 @@ namespace MeshGenerator
 
         static GeometryData _data => GeometryData.Instance;
 
-        MeshBuilder _builder = new();
         Frame _wireframe;
         IPoint[] _wallCorners;
 
@@ -91,7 +90,7 @@ namespace MeshGenerator
             }
         }
 
-        public MeshGeneratorResult Generate()
+        protected override MeshGeneratorResult BuildMesh()
         {
             //base
             _builder.AddQuad(_basePoints[0].Position, _basePoints[1].Position, _basePoints[2].Position, _basePoints[3].Position);

@@ -4,7 +4,6 @@ namespace MeshGenerator
 {
     public class MeshPreviewer : MonoBehaviour
     {
-        [CallMethodButton("Generate", "Generate Mesh")]
         [SerializeField]
         Mesh _mesh;
         [SerializeField]

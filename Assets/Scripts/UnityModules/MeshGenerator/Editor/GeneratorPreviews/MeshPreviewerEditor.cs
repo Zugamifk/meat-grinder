@@ -18,6 +18,7 @@ namespace MeshGenerator.Editor
         string[] _generatorOptions;
         IMeshGeneratorEditor _currentEditor;
         IGeometryGenerator _currentGenerator;
+        bool _updateMeshOnChange = false;
         Transform _rootTransform;
 
         void GetPreviews()
@@ -103,15 +104,20 @@ namespace MeshGenerator.Editor
 
                     if (cc.changed)
                     {
+                        if(_updateMeshOnChange)
+                        {
+                            UpdateMesh(previewer);
+                        }
                         SceneView.RepaintAll();
                     }
                 }
             }
 
+            _updateMeshOnChange = EditorGUILayout.Toggle("Update Mesh", _updateMeshOnChange);
+
             if (GUILayout.Button("Generate Mesh"))
             {
-                var mesh = Generate();
-                previewer.SetMesh(mesh);
+                UpdateMesh(previewer);
             }
 
             if(GUILayout.Button("Clear"))
@@ -120,6 +126,12 @@ namespace MeshGenerator.Editor
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        void UpdateMesh(MeshPreviewer previewer)
+        {
+            var mesh = Generate();
+            previewer.SetMesh(mesh);
         }
 
         void UpdateEditor(string type)

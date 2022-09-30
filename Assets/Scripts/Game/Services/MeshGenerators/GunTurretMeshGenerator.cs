@@ -8,7 +8,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Gun Turret")]
 public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGeneratorData>
 {
-    public override MeshGeneratorResult Generate()
+    protected override MeshGeneratorResult BuildMesh()
     {
         var result = new MeshGeneratorResult();
 
