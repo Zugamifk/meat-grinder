@@ -141,7 +141,9 @@ namespace MeshGenerator
             var angleStep = 360f / (float)sideCount;
             var rotationStep = Quaternion.AngleAxis(angleStep, normal);
             var dir = Vector3.Cross(normal, new Vector3(.13564567f, .54757457f, .657f)).normalized;
-            for(int i = 0; i < sideCount; i++)
+            List<Vector3> top = new();
+            List<Vector3> bottom = new();
+            for (int i = 0; i < sideCount; i++)
             {
                 var next = rotationStep * dir;
 
@@ -150,9 +152,14 @@ namespace MeshGenerator
                 var p2 = basePoint + next * radius + normal * length;
                 var p3 = basePoint + dir * radius + normal * length;
                 AddQuad(p0,p1,p2,p3);
+                bottom.Add(p0);
+                top.Add(p3);
 
                 dir = next;
             }
+            AddPolygon(top);
+            bottom.Reverse();
+            AddPolygon(bottom);
         }
 
         public Mesh BuildMesh()
