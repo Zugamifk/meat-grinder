@@ -22,13 +22,21 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
 
         var mp = new Vector3(0, h, 0);
 
+        // base 
         _builder.AddTriangle(b0,b1,mp);
         _builder.AddTriangle(b1,b2,mp);
         _builder.AddTriangle(b2,b3,mp);
         _builder.AddTriangle(b3,b0,mp);
 
+        // receiver
+        _builder.SetBone(1);
+        _builder.PushMatrix(Matrix4x4.TRS(
+            Data.MountPosition + new Vector3(0, h + Data.GunBounds.y),
+            Quaternion.AngleAxis(Data.MountedAngle, Vector3.up),
+            Vector3.one));
+        _builder.AddAxisAlignedBox(Data.GunBounds);
+
         result.Meshes.Add(_builder.BuildMesh());
-        _builder.Clear();
 
         return result;
     }

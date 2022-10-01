@@ -10,6 +10,7 @@ namespace MeshGenerator
         public List<Vector3> Normals = new();
         public List<Color> Colors = new();
         public List<int> Triangles = new();
+        public List<BoneWeight1> BoneWeights = new();
 
         public void Clear()
         {
@@ -17,6 +18,7 @@ namespace MeshGenerator
             Normals.Clear();
             Colors.Clear();
             Triangles.Clear();
+            BoneWeights.Clear();
         }
     }
 }

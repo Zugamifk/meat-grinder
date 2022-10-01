@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace MeshGenerator
@@ -11,6 +12,7 @@ namespace MeshGenerator
 
         Stack<Matrix4x4> _matrixStack = new();
         Matrix4x4 _matrix;
+        int _currentBone;
 
         public MeshBuilder()
         {
@@ -42,6 +44,11 @@ namespace MeshGenerator
             _currentColor = color;
         }
 
+        public void SetBone(int boneIndex)
+        {
+            _currentBone = boneIndex;
+        }
+
         public void AddPoint(Vector3 position, Vector3 normal = default)
         {
             position = _matrix.MultiplyPoint3x4(position);
@@ -49,6 +56,7 @@ namespace MeshGenerator
             _data.Vertices.Add(position);
             _data.Normals.Add(normal);
             _data.Colors.Add(_currentColor);
+            _data.BoneWeights.Add(new BoneWeight1() { boneIndex = _currentBone, weight = 1 });
         }
 
         public void AddTriangle(int i0, int i1, int i2)
@@ -90,6 +98,20 @@ namespace MeshGenerator
             AddQuad(p010, p011, p111, p110);
         }
 
+        public void AddAxisAlignedBox(Vector3 dimensions)
+        {
+            AddCubic(
+                new Vector3(-dimensions.x, -dimensions.y, -dimensions.z),
+                new Vector3(-dimensions.x, -dimensions.y, dimensions.z),
+                new Vector3(dimensions.x, -dimensions.y, dimensions.z),
+                new Vector3(dimensions.x, -dimensions.y, -dimensions.z),
+                new Vector3(-dimensions.x, dimensions.y, -dimensions.z),
+                new Vector3(-dimensions.x, dimensions.y, dimensions.z),
+                new Vector3(dimensions.x, dimensions.y, dimensions.z),
+                new Vector3(dimensions.x, dimensions.y, -dimensions.z)
+            );
+        }
+
         public void AddPolygon(params Vector3[] points)
         {
             AddPolygon(points);
@@ -116,13 +138,23 @@ namespace MeshGenerator
 
         public Mesh BuildMesh()
         {
-            return new Mesh()
+            var mesh = new Mesh()
             {
                 vertices = _data.Vertices.ToArray(),
                 normals = _data.Normals.ToArray(),
                 colors = _data.Colors.ToArray(),
-                triangles = _data.Triangles.ToArray()
+                triangles = _data.Triangles.ToArray(),
             };
+
+            var bonesPerVertex = new NativeArray<byte>(_data.BoneWeights.Count, Allocator.Temp);
+            for(int i = 0; i < _data.BoneWeights.Count; i++)
+            {
+                bonesPerVertex[i] = 1;
+            }
+            var bones = new NativeArray<BoneWeight1>(_data.BoneWeights.ToArray(), Allocator.Temp);
+            mesh.SetBoneWeights(bonesPerVertex, bones);
+
+            return mesh;
         }
     }
 }
