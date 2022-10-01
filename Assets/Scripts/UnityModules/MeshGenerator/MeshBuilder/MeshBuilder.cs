@@ -136,6 +136,25 @@ namespace MeshGenerator
             }
         }
 
+        public void AddPrism(Vector3 basePoint, float radius, int sideCount, Vector3 normal, float length)
+        {
+            var angleStep = 360f / (float)sideCount;
+            var rotationStep = Quaternion.AngleAxis(angleStep, normal);
+            var dir = Vector3.Cross(normal, new Vector3(.13564567f, .54757457f, .657f)).normalized;
+            for(int i = 0; i < sideCount; i++)
+            {
+                var next = rotationStep * dir;
+
+                var p0 = basePoint + dir * radius;
+                var p1 = basePoint + next * radius;
+                var p2 = basePoint + next * radius + normal * length;
+                var p3 = basePoint + dir * radius + normal * length;
+                AddQuad(p0,p1,p2,p3);
+
+                dir = next;
+            }
+        }
+
         public Mesh BuildMesh()
         {
             var mesh = new Mesh()

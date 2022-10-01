@@ -36,6 +36,15 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
             Vector3.one));
         _builder.AddAxisAlignedBox(Data.GunBounds);
 
+        // barrel
+        _builder.SetBone(2);
+        _builder.AddPrism(
+            new Vector3(0,0,Data.GunBounds.z),
+            Data.BarrelDimensions.x,
+            12,
+            Vector3.forward,
+            Data.BarrelDimensions.y);
+
         result.Meshes.Add(_builder.BuildMesh());
 
         return result;
