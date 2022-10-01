@@ -14,11 +14,14 @@ namespace MeshGenerator
 
         public IEnumerator Play(Action<float> binding)
         {
-            for(float t=0; t<1;t+=Time.deltaTime/Duration)
+            while (true)
             {
-                var val = Curve.Evaluate(t) * Magnitude;
-                binding(val);
-                yield return null;
+                for (float t = 0; t < 1; t += Time.deltaTime / Duration)
+                {
+                    var val = Curve.Evaluate(t) * Magnitude;
+                    binding(val);
+                    yield return null;
+                }
             }
         }
     }

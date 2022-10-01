@@ -25,7 +25,8 @@ namespace MeshGenerator.Skeleton
         
         void CacheBones()
         {
-            foreach(var b in _bones)
+            _nameToBone = new();
+            foreach (var b in _bones)
             {
                 _nameToBone[b.name] = b;
             }
