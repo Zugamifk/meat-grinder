@@ -151,6 +151,7 @@ namespace MeshGenerator
                 var p1 = basePoint + next * radius;
                 var p2 = basePoint + next * radius + normal * length;
                 var p3 = basePoint + dir * radius + normal * length;
+
                 AddQuad(p0,p1,p2,p3);
                 bottom.Add(p0);
                 top.Add(p3);

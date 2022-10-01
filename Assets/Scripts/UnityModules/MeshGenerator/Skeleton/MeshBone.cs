@@ -7,7 +7,11 @@ namespace MeshGenerator
     public class MeshBone : MonoBehaviour
     {
         [SerializeField]
+        string _key;
+        [SerializeField]
         bool _isRoot;
+
+        public string Key => _key;
 
         public Matrix4x4 GetBindPose()
         {

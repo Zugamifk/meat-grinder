@@ -10,5 +10,25 @@ namespace MeshGenerator.Skeleton
         MeshBone[] _bones;
 
         public IReadOnlyList<MeshBone> Bones => _bones;
+
+        Dictionary<string, MeshBone> _nameToBone;
+        
+        public MeshBone GetBone(string key)
+        {
+            if(_nameToBone == null)
+            {
+                CacheBones();
+            }
+
+            return _nameToBone[key];
+        }
+        
+        void CacheBones()
+        {
+            foreach(var b in _bones)
+            {
+                _nameToBone[b.name] = b;
+            }
+        }
     }
 }
