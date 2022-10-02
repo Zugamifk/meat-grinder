@@ -9,7 +9,7 @@ public partial class GameModel : IGameModel
     public MapModel Map { get; set; } = new();
     public IdentifiableCollection<EnemyModel> SpawnedEnemies = new();
     public IdentifiableCollection<EnemySpawnModel> Spawns = new();
-    public IdentifiableCollection<IBuilding> Buildings = new();
+    public IdentifiableCollection<IBuildingModel> Buildings = new();
 
     public WaveModel CurrentWave { get; set; }
     public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
@@ -57,6 +57,7 @@ public partial class GameModel : IGameModel
     IWaveModel IGameModel.CurrentWave => CurrentWave;
     IIdentifiableLookup<IEnemySpawnModel> IGameModel.Spawns => Spawns;
     IIdentifiableLookup<IEnemyModel> IGameModel.SpawnedEnemies => SpawnedEnemies;
+    IIdentifiableLookup<IBuildingModel> IGameModel.Buildings => Buildings;
     ICameraModel IGameModel.Camera => Camera;
     #endregion
 

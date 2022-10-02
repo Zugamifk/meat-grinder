@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBuilding : IKeyHolder, IIdentifiable
+public interface IBuildingModel : IKeyHolder, IIdentifiable
 {
 
 }

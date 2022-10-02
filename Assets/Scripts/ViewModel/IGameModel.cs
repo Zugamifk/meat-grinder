@@ -10,5 +10,6 @@ public interface IGameModel
     IWaveModel CurrentWave { get; }
     IIdentifiableLookup<IEnemyModel> SpawnedEnemies { get; }
     IIdentifiableLookup<IEnemySpawnModel> Spawns { get; }
+    IIdentifiableLookup<IBuildingModel> Buildings { get; }
     ICameraModel Camera { get; }
 }
