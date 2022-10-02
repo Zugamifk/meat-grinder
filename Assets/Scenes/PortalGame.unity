@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa79fe3fc0077546bb0abcc7b907a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingSpawner: {fileID: 900268914}
   _tilePrefab: {fileID: 6427947823859344199, guid: 66da03a1253e9b246b138876550351b3, type: 3}
 --- !u!4 &2115505942
 Transform:

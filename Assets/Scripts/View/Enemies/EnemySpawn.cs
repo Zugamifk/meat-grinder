@@ -8,15 +8,28 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] Transform _spawnPosition;
 
     Identifiable _identifiable;
+    Guid _spawnId;
 
     private void Awake()
     {
         _identifiable = GetComponent<Identifiable>();
     }
 
+    private void Start()
+    {
+        foreach(var s in Game.Model.Spawns.AllItems)
+        {
+            if(s.BuildingId == _identifiable.Id)
+            {
+                _spawnId = s.Id;
+                break;
+            }
+        }   
+    }
+
     private void Update()
     {
-        foreach (var e in Game.Model.Spawns.GetItem(_identifiable.Id).SpawnQueue)
+        foreach (var e in Game.Model.Spawns.GetItem(_spawnId).SpawnQueue)
         {
             var enemy = Game.Model.SpawnedEnemies.GetItem(e);
             SpawnEnemy(enemy);

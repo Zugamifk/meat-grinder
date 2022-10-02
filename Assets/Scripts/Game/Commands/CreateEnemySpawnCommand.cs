@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class CreateEnemySpawnCommand : ICommand
     public void Execute(GameModel model)
     {
         var spawn = new EnemySpawnModel();
+        spawn.PathNode = model.Map.Paths.StartNode;
         model.Spawns.AddItem(spawn);
 
         Game.Do(new SpawnBuildingCommand(Buildings.ENEMY_SPAWN, _position, spawn.BuildingId));
