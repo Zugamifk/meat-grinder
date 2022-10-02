@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 8283955734449719269}
   - component: {fileID: 8283955734449719268}
   - component: {fileID: 5873406004346613319}
+  - component: {fileID: 1465455745947453095}
   m_Layer: 0
   m_Name: GunTurret
   m_TagString: Untagged
@@ -190,6 +191,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0a026304af239046a2c06c7bd7fed06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1465455745947453095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283955734449719271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f507b0df389ea6f4890249e1c3615d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8283955734841484886

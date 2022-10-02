@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunTurretModel : IBuildingModel
+public class BuildingModel : IBuildingModel
 {
-    public string Key => "GunTurret";
-
+    public string Key { get; set; }
     public Guid Id { get; } = Guid.NewGuid();
+    public Vector2Int TilePosition { get; set; }
 }

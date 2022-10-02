@@ -11,15 +11,20 @@ public class MapTile : MeshGeneratorUser
     [SerializeField]
     Transform _containedObjectsRoot;
 
+    BuildingView _currentBuildingView;
+
     public float SurfaceY { get; private set; }
 
     public void SetTile(ITileModel tile)
     {
-        //UpdateTileGeometry(tile);
-        //if (tile.Structure != null)
-        //{
-        //    UpdateTileStructure(tile);
-        //}
+        UpdateTileGeometry(tile);
+    }
+
+    public void AddBuilding(BuildingView building)
+    {
+        _currentBuildingView = building;
+        building.transform.parent = _containedObjectsRoot;
+        building.transform.localPosition = Vector3.zero;
     }
 
     void UpdateTileGeometry(ITileModel tile)
@@ -33,21 +38,4 @@ public class MapTile : MeshGeneratorUser
         _collider.size = new Vector3(1, SurfaceY, 1);
         _containedObjectsRoot.localPosition = new Vector3(0, SurfaceY, 0);
     }
-
-    //void UpdateTileStructure(ITileModel tile)
-    //{
-    //    if (_currentStructure != null)
-    //    {
-    //        Destroy(_currentStructure);
-    //    }
-
-    //    var structure = Prefabs.GetInstance(tile.Structure);
-    //    structure.transform.SetParent(_containedObjectsRoot);
-    //    structure.transform.localPosition = Vector3.zero;
-
-    //    var id = structure.GetComponent<Identifiable>();
-    //    id.Id = tile.Structure.Id;
-
-    //    _currentStructure = structure;
-    //}
 }

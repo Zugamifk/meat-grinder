@@ -7,9 +7,12 @@ public class UpdateWaveCommand : ICommand
 {
     public void Execute(GameModel model)
     {
+        if (model.Spawns.IsEmpty) return;
+
         var dt = model.TimeModel.LastDeltaTime;
         var wave = model.CurrentWave;
         var spawns = model.Spawns.AllItems;
+
         foreach (var s in spawns)
         {
             s.SpawnQueue.Clear();

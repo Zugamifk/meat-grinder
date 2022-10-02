@@ -8,5 +8,10 @@ public class GenerateMapCommand : ICommand
     {
         var generator = new MapGenerator();
         generator.GenerateMap(model);
+
+        var start = model.Map.Paths.StartNode.Position;
+        Game.Do(new CreateEnemySpawnCommand(start));
+        var end = model.Map.Paths.EndNode.Position;
+        Game.Do(new SpawnBuildingCommand("EndPortal", end));
     }
 }

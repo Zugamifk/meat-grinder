@@ -6,6 +6,8 @@ using UnityEngine;
 public class ShipMap : MonoBehaviour
 {
     [SerializeField]
+    BuildingViewSpawner _buildingSpawner;
+    [SerializeField]
     MapTile _tilePrefab;
 
     Guid _mapGuid;
@@ -13,6 +15,11 @@ public class ShipMap : MonoBehaviour
     Dictionary<Vector2Int, MapTile> _positionToTile = new();
 
     public MapTile GetTile(Vector2Int position) => _positionToTile[position];
+
+    private void Awake()
+    {
+        _buildingSpawner.OnSpawnedBuilding += OnSpawnedBuilding;
+    }
 
     private void Update()
     {
@@ -41,5 +48,11 @@ public class ShipMap : MonoBehaviour
         }
 
         _mapGuid = map.Id;
+    }
+
+    void OnSpawnedBuilding(IBuildingModel model, BuildingView view)
+    {
+        var tile = _positionToTile[model.TilePosition];
+        tile.AddBuilding(view);
     }
 }

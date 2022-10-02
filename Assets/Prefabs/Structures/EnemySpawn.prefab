@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9121797453326702781}
   - component: {fileID: 7395676669384444638}
+  - component: {fileID: -2494019939370323402}
   - component: {fileID: 5095951716655085068}
   m_Layer: 0
   m_Name: EnemySpawn
@@ -80,6 +81,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPosition: {fileID: 1832168850307330555}
+--- !u!114 &-2494019939370323402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121797453326702780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f507b0df389ea6f4890249e1c3615d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5095951716655085068
 MonoBehaviour:
   m_ObjectHideFlags: 0

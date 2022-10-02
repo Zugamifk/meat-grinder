@@ -14,11 +14,11 @@ public class SpawnBuildingCommand : ICommand
 
     public void Execute(GameModel model)
     {
-        var tile = model.Map.TileMap[_buildingPosition];
-        // todo: check if there's already a building
-        if(_buildingKey == "GunTurret")
+        var building = new BuildingModel()
         {
-            var building = new GunTurretModel();
-        }
+            Key = _buildingKey,
+            TilePosition = _buildingPosition
+        };
+        model.Buildings.AddItem(building);
     }
 }

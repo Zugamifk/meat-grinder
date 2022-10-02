@@ -14,6 +14,7 @@ public class IdentifiableCollection<TModel> : IIdentifiableLookup<TModel>
 
     public TModel this[string key] => GetItem(key);
     public TModel this[Guid id] => GetItem(id);
+    public bool IsEmpty => _identifiables.Count == 0;
 
     public void AddItem(TModel model)
     {

@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshFilter: {fileID: 6427947823448894951}
   _collider: {fileID: 6427947822992348215}
-  _structureRoot: {fileID: 6427947825016569762}
+  _containedObjectsRoot: {fileID: 6427947825016569762}
 --- !u!1 &6427947824101456047
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6427947825016569762}
   m_Layer: 0
-  m_Name: Structure
+  m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
