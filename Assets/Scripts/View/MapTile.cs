@@ -9,19 +9,17 @@ public class MapTile : MeshGeneratorUser
     [SerializeField]
     BoxCollider _collider;
     [SerializeField]
-    Transform _structureRoot;
-
-    GameObject _currentStructure;
+    Transform _containedObjectsRoot;
 
     public float SurfaceY { get; private set; }
 
     public void SetTile(ITileModel tile)
     {
-        UpdateTileGeometry(tile);
-        if (tile.Structure != null)
-        {
-            UpdateTileStructure(tile);
-        }
+        //UpdateTileGeometry(tile);
+        //if (tile.Structure != null)
+        //{
+        //    UpdateTileStructure(tile);
+        //}
     }
 
     void UpdateTileGeometry(ITileModel tile)
@@ -33,23 +31,23 @@ public class MapTile : MeshGeneratorUser
 
         _collider.center = new Vector3(0, SurfaceY / 2f, 0);
         _collider.size = new Vector3(1, SurfaceY, 1);
-        _structureRoot.localPosition = new Vector3(0, SurfaceY, 0);
+        _containedObjectsRoot.localPosition = new Vector3(0, SurfaceY, 0);
     }
 
-    void UpdateTileStructure(ITileModel tile)
-    {
-        if (_currentStructure != null)
-        {
-            Destroy(_currentStructure);
-        }
+    //void UpdateTileStructure(ITileModel tile)
+    //{
+    //    if (_currentStructure != null)
+    //    {
+    //        Destroy(_currentStructure);
+    //    }
 
-        var structure = Prefabs.GetInstance(tile.Structure);
-        structure.transform.SetParent(_structureRoot);
-        structure.transform.localPosition = Vector3.zero;
+    //    var structure = Prefabs.GetInstance(tile.Structure);
+    //    structure.transform.SetParent(_containedObjectsRoot);
+    //    structure.transform.localPosition = Vector3.zero;
 
-        var id = structure.GetComponent<Identifiable>();
-        id.Id = tile.Structure.Id;
+    //    var id = structure.GetComponent<Identifiable>();
+    //    id.Id = tile.Structure.Id;
 
-        _currentStructure = structure;
-    }
+    //    _currentStructure = structure;
+    //}
 }

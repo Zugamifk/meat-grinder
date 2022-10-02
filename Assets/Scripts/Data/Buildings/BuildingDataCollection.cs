@@ -18,6 +18,6 @@ public class BuildingDataCollection : ScriptableObject, IPrefabLookup
         {
             _prefabNametoPrefab.Add(building.name, building);
         }
-        Prefabs.Register<ITileStructure>(this);
+        Prefabs.Register<IBuilding>(this);
     }
 }

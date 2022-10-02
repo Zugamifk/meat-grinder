@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EndPortalModel : ITileStructure
+public class EndPortalModel : IBuilding
 {
     public string Key => "EndPortal";
 

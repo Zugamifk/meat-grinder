@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface ITileModel
 {
-    ITileStructure Structure { get; }
     int Height { get; }
     bool HasPath { get; }
     IEdgeModel NorthEdge { get; }

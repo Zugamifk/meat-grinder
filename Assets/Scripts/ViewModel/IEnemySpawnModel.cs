@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemySpawnModel : ITileStructure, IIdentifiable
+public interface IEnemySpawnModel : IBuilding, IIdentifiable
 {
     IEnumerable<Guid> SpawnQueue { get; }
 }

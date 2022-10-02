@@ -9,6 +9,8 @@ public partial class GameModel : IGameModel
     public MapModel Map { get; set; } = new();
     public IdentifiableCollection<EnemyModel> SpawnedEnemies = new();
     public IdentifiableCollection<EnemySpawnModel> Spawns = new();
+    public IdentifiableCollection<IBuilding> Buildings = new();
+
     public WaveModel CurrentWave { get; set; }
     public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
 

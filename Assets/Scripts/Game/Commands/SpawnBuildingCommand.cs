@@ -18,8 +18,7 @@ public class SpawnBuildingCommand : ICommand
         // todo: check if there's already a building
         if(_buildingKey == "GunTurret")
         {
-            tile.Structure = new GunTurretModel();
+            var building = new GunTurretModel();
         }
-        model.Map.DirtyTiles.Add(_buildingPosition);
     }
 }
