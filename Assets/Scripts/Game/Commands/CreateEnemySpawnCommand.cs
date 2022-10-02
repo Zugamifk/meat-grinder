@@ -15,6 +15,6 @@ public class CreateEnemySpawnCommand : ICommand
         var spawn = new EnemySpawnModel();
         model.Spawns.AddItem(spawn);
 
-        Game.Do(new SpawnBuildingCommand(Buildings.ENEMY_SPAWN, _position));
+        Game.Do(new SpawnBuildingCommand(Buildings.ENEMY_SPAWN, _position, spawn.BuildingId));
     }
 }

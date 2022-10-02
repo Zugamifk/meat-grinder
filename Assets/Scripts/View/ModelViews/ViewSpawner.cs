@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ViewSpawner<TIdentifiable, TView> : MonoBehaviour
     where TIdentifiable : IIdentifiable
-    where TView : MonoBehaviour, IView<TIdentifiable>
+    where TView : MonoBehaviour, IModelView<TIdentifiable>
 {
     [SerializeField]
     protected Transform _viewParent;
