@@ -20,7 +20,16 @@ public class ShipMap : MonoBehaviour
         if (_mapGuid != map.Id)
         {
             UpdateMap(map);
+        } else
+        {
+            foreach(var pos in map.DirtyTiles)
+            {
+                var tile = _positionToTile[pos];
+                var model = map.GetTile(pos);
+                tile.SetTile(model);
+            }
         }
+        Game.Do(new UpdateMapCommand());
     }
 
     void UpdateMap(IMapModel map)

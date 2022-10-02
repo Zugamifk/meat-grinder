@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306bdde70bebb9e4884d35e4a6c02a07, type: 3}
-  m_Name: Structures
+  m_Script: {fileID: 11500000, guid: e2381bfa89708264a9b070177b30a6db, type: 3}
+  m_Name: EndPortal
   m_EditorClassIdentifier: 
-  _prefabs:
-  - {fileID: 9121797453326702780, guid: 0c791c988fa62c64fbfef77019b5962b, type: 3}
-  - {fileID: 9121797453326702780, guid: 8f08e9f00d793404a9ae9ebf787179aa, type: 3}
+  Prefab: {fileID: 9121797453326702780, guid: 0c791c988fa62c64fbfef77019b5962b, type: 3}

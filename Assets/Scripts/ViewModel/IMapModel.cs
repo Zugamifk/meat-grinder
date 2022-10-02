@@ -6,4 +6,5 @@ public interface IMapModel : IIdentifiable
 {
     BoundsInt Bounds { get; }
     ITileModel GetTile(Vector2Int position);
+    IEnumerable<Vector2Int> DirtyTiles { get; }
 }

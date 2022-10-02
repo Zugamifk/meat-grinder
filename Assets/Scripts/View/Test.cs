@@ -22,6 +22,7 @@ public class Test : MonoBehaviour
     private void Start()
     {
         Game.Do(new GenerateMapCommand());
+        Game.Do(new SpawnBuildingCommand("GunTurret", new Vector2Int(5, 5)));
         Game.Do(new StartWaveCommand());
     }
 

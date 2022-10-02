@@ -20,5 +20,6 @@ public class SpawnBuildingCommand : ICommand
         {
             tile.Structure = new GunTurretModel();
         }
+        model.Map.DirtyTiles.Add(_buildingPosition);
     }
 }
