@@ -33,7 +33,6 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         var enemy = Game.Model.SpawnedEnemies.GetItem(_identifiable.Id);
         if (enemy == null)
         {
-            Destroy(gameObject);
             return;
         }
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MeshGenerator;
 
-public class EndPortal : MonoBehaviour
+public class EndPortal
+    : MonoBehaviour
 {
     [SerializeField]
     MeshFilter _meshFilter;
