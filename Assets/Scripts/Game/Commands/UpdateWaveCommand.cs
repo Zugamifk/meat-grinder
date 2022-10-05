@@ -21,11 +21,7 @@ public class UpdateWaveCommand : ICommand
         for (wave.WaveCounter += dt * (wave.SpawnsPerMinute / 60); wave.WaveCounter > 1 && wave.EnemiesRemaining > 0; wave.WaveCounter--, wave.EnemiesRemaining--)
         {
             var spawn = spawns.ElementAt(Random.Range(0, spawns.Count()));
-            var enemy = new EnemyModel();
-            enemy.Movement.CurrentNode = spawn.PathNode.Next;
-            enemy.Movement.CurrentPosition = spawn.PathNode.WorldPosition;
-            model.SpawnedEnemies.AddItem(enemy);
-            spawn.SpawnQueue.Add(enemy.Id);
+            Game.Do(new SpawnEnemyCommand(spawn.Id));    
         }
     }
 }

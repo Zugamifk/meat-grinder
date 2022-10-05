@@ -20,7 +20,8 @@ public class SpawnBuildingCommand : ICommand
         var building = new BuildingModel()
         {
             Key = _buildingKey,
-            TilePosition = _buildingPosition
+            TilePosition = _buildingPosition,
+            WorldPosition = new Vector3(_buildingPosition.x, 0, _buildingPosition.y)
         };
         if (_customGuid.HasValue)
         {

@@ -13,6 +13,12 @@ public class BuildingViewSpawner : RegisteredPrefabViewSpawner<IBuildingModel, B
 
     protected override void SpawnedView(IBuildingModel model, BuildingView view)
     {
+        ViewLookup.Register(model.Id, view.gameObject);
         OnSpawnedBuilding?.Invoke(model, view);
+    }
+
+    protected override void DestroyedView(BuildingView view)
+    {
+        ViewLookup.Remove(view.Id);
     }
 }

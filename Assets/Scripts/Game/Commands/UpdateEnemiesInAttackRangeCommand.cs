@@ -16,6 +16,7 @@ public class UpdateEnemiesInRangeCommand : ICommand
 
     public void Execute(GameModel model)
     {
-        throw new NotImplementedException();
+        var building = model.Buildings.GetItem(_buildingId);
+        building.TargetsInRange = _ids;
     }
 }

@@ -8,4 +8,7 @@ public class BuildingModel : IBuildingModel
     public string Key { get; set; }
     public Guid Id { get; set; } = Guid.NewGuid();
     public Vector2Int TilePosition { get; set; }
+    public Vector3 WorldPosition { get; set; }
+    public HashSet<Guid> TargetsInRange { get; set; } = new();
+    public Guid CurrentTarget { get; set; }
 }

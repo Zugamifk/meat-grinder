@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MeshGeneratorUser
+public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
 {
     [SerializeField]
     MeshFilter _meshFilter;
@@ -12,6 +12,11 @@ public class Enemy : MeshGeneratorUser
     Identifiable _identifiable;
 
     public Guid Id => _identifiable.Id;
+
+    public void InitializeFromModel(IEnemyModel model)
+    {
+        _identifiable.Id = model.Id;
+    }
 
     private void Awake()
     {
