@@ -32,14 +32,14 @@ public class UpdateBuildingTargetCommand : ICommand
         float closestDistance = float.MaxValue;
         foreach(var id in weapon.TargetsInRange)
         {
-            if(closest == Guid.Empty)
+            var enemy = model.SpawnedEnemies.GetItem(id);
+            if (enemy == null) continue;
+
+            if (closest == Guid.Empty)
             {
                 closest = id;
                 continue;
             }
-
-            var enemy = model.SpawnedEnemies.GetItem(id);
-            if (enemy == null) continue;
 
             var distance = (enemy.Position - pos).magnitude;
             if(closestDistance > distance)

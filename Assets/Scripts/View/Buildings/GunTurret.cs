@@ -49,7 +49,7 @@ public class GunTurret : MeshGeneratorUser
         {
             UpdateTarget(weapon.CurrentTarget);
 
-            if (weapon.ShotTimer <= 0)
+            if (weapon.ShotTimer <= 0 && weapon.CurrentTarget != Guid.Empty)
             {
                 Fire();
             }

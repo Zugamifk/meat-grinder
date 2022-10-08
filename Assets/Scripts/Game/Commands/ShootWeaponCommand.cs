@@ -19,6 +19,9 @@ public class ShootWeaponCommand : ICommand
 
         // create projectile
         var enemy = model.SpawnedEnemies.GetItem(weapon.CurrentTarget);
+        weapon.CurrentTarget = Guid.Empty;
+        weapon.ShotTimer += weaponData.ShotCooldown;
+
         if (enemy == null) return;
 
         var projectile = new ProjectileModel()
@@ -30,6 +33,5 @@ public class ShootWeaponCommand : ICommand
         };
         model.Projectiles.AddItem(projectile);
 
-        weapon.ShotTimer += weaponData.ShotCooldown;
     }
 }

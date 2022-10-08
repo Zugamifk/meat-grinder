@@ -8,7 +8,7 @@ public class StartWaveCommand : ICommand
     {
         model.CurrentWave = new()
         {
-            EnemiesRemaining = 100,
+            EnemiesRemaining = 10,
             SpawnsPerMinute = 120,
             WaveCounter = 0
         };
