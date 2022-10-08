@@ -6,4 +6,5 @@ using UnityEngine;
 public interface IWeaponModel : IIdentifiable, IKeyHolder
 {
     Guid CurrentTarget { get; }
+    float ShotTimer { get; }
 }

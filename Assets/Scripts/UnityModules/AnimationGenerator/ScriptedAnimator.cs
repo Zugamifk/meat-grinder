@@ -12,6 +12,8 @@ namespace AnimationGenerator
 
         ScriptedAnimationPlayer _player;
 
+        Coroutine _currentAnimation;
+
         public void SetAnimation(string boneKey, ScriptedAnimationData data)
         {
             var bone = _skeleton.GetBone(boneKey);
@@ -20,7 +22,11 @@ namespace AnimationGenerator
 
         public void PlayAnimation()
         {
-            _player.Play();
+            if(_currentAnimation!=null)
+            {
+                StopCoroutine(_currentAnimation);
+            }
+            _currentAnimation = StartCoroutine(_player.Play());
         }
 
         protected abstract void UpdateAnimation(Transform bone, float x);

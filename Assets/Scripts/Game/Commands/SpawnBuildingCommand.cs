@@ -37,7 +37,7 @@ public class SpawnBuildingCommand : ICommand
             {
                 Id = building.Id,
                 Key = _buildingKey,
-                ShotCooldown = weaponData.ShotCooldown
+                ShotTimer = weaponData.ShotCooldown
             };
             model.Weapons.AddItem(weapon);
         }

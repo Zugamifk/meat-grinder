@@ -42,10 +42,16 @@ public class GunTurret : MeshGeneratorUser
             throw new InvalidOperationException($"No building with id {_identifiable.Id}");
         }
 
+        Game.Do(new UpdateWeaponShotCooldownCommand(_identifiable.Id));
         Game.Do(new UpdateBuildingTargetCommand(_identifiable.Id));
         if(weapon?.CurrentTarget!=Guid.Empty)
         {
             UpdateTarget(weapon.CurrentTarget);
+
+            if (weapon.ShotTimer <= 0)
+            {
+                Fire();
+            }
         }
     }
 
@@ -56,5 +62,12 @@ public class GunTurret : MeshGeneratorUser
         {
             transform.LookAt(target.transform);
         }
+    }
+
+    void Fire()
+    {
+        Debug.Log("Fire!");
+        Game.Do(new ShootWeaponCommand(_identifiable.Id));
+        _animator.PlayAnimation();
     }
 }

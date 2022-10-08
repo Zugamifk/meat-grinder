@@ -34,7 +34,6 @@ public class WeaponAttackRadius : MonoBehaviour
         var enemy = collision.GetComponent<Enemy>();
         if (enemy != null)
         {
-            Debug.Log($"Enemy {enemy.Id} exited");
             _targets.Remove(enemy.Id);
             _targetsChanged = true;
         }

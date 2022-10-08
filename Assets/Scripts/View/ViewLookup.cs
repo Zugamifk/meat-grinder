@@ -9,7 +9,6 @@ public static class ViewLookup
 
     public static void Register(Guid id, GameObject root)
     {
-        Debug.Log($"Register {root} => {id}");
         _idToView.Add(id, root);
     }
 
