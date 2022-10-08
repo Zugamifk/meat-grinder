@@ -78,7 +78,7 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         GenerateWallMeshes(p4, p5, p6, p7);
 
         var result = new MeshGeneratorResult();
-        result.Meshes.Add(_builder.BuildMesh());
+        result.Meshes.Add("Main", _builder.BuildMesh());
         return result;
     }
 

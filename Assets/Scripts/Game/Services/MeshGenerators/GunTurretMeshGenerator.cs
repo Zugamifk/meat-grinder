@@ -45,7 +45,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
             Vector3.forward,
             Data.BarrelDimensions.y);
 
-        result.Meshes.Add(_builder.BuildMesh());
+        result.Meshes.Add("Main", _builder.BuildMesh());
 
         return result;
     }

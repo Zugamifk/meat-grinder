@@ -57,7 +57,7 @@ public class EndPortalMeshGenerator : MeshGeneratorWithData<EndPortalMeshGenerat
         AddRoofStep(.4f, Data.RoofThickness);
 
         var result = new MeshGeneratorResult();
-        result.Meshes.Add(_builder.BuildMesh());
+        result.Meshes.Add("Main", _builder.BuildMesh());
         return result;
     }
 

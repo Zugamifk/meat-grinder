@@ -106,7 +106,7 @@ namespace MeshGenerator
             _builder.AddQuad(_roofPoints[2].Position, _roofPoints[3].Position, _roofPoints[4].Position, _roofPoints[1].Position);
 
             var result = new MeshGeneratorResult();
-            result.Meshes.Add(_builder.BuildMesh());
+            result.Meshes.Add("Main", _builder.BuildMesh());
             return result;
         }
 

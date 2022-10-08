@@ -150,7 +150,7 @@ namespace MeshGenerator.Editor
 
         public Mesh Generate()
         {
-            return _currentGenerator.Generate().Meshes[0];
+            return _currentGenerator.Generate().MainMesh;
         }
 
         private void OnSceneGUI()

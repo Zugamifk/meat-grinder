@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GunTurret
   m_EditorClassIdentifier: 
   BaseDimensions: {x: 0.3, y: 0.56}
-  GunBounds: {x: 0.2, y: 0.2, z: 1}
+  GunBounds: {x: 0.11, y: 0.05, z: 0.19}
   MountPosition: {x: 0, y: 0, z: 0}
-  BarrelDimensions: {x: 0.06, y: 0.92}
+  BarrelDimensions: {x: 0.03, y: 0.32}
   MountedAngle: 0
   ShootBarrelRecoilCurve:
     Curve:

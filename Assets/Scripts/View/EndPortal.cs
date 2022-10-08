@@ -13,7 +13,7 @@ public class EndPortal
     {
         var gen = new EndPortalMeshGenerator();
         var res  = gen.Generate();
-        _meshFilter.mesh = res.Meshes[0];
+        _meshFilter.mesh = res.MainMesh;
     }
 
     private void OnTriggerEnter(Collider other)

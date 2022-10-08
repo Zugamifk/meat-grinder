@@ -37,7 +37,7 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGener
         _builder.AddPolygon(top);
 
         var result = new MeshGeneratorResult();
-        result.Meshes.Add(_builder.BuildMesh());
+        result.Meshes.Add("Main", _builder.BuildMesh());
         return result;
     }
 
