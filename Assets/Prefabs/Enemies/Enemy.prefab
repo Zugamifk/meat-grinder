@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetOffset: {fileID: 4465641931590144766}
   _meshFilter: {fileID: 9121797453914887753}
+  _viewRoot: {fileID: 9121797452386952281}
 --- !u!114 &1611856770771959753
 MonoBehaviour:
   m_ObjectHideFlags: 0

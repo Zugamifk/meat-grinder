@@ -10,6 +10,8 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
     Transform _targetOffset;
     [SerializeField]
     MeshFilter _meshFilter;
+    [SerializeField]
+    Transform _viewRoot;
 
     Identifiable _identifiable;
 
@@ -44,5 +46,18 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         var newOffset = _targetOffset.localPosition;
         newOffset.y += position.y;
         Game.Do(new UpdateEnemyMovementCommand(_identifiable.Id, newOffset));
+    }
+
+    public void OnKilled()
+    {
+        var go = new GameObject("Corpse");
+        var collider = go.AddComponent<BoxCollider>();
+        var b = _meshFilter.mesh.bounds;
+        collider.size = b.size;
+        collider.center = b.center;
+        var rb = go.AddComponent<Rigidbody>();
+        go.transform.position = _viewRoot.parent.position;
+        _viewRoot.SetParent(go.transform);
+        rb.AddForce(UnityEngine.Random.onUnitSphere * 10, ForceMode.VelocityChange);
     }
 }

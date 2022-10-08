@@ -18,5 +18,7 @@ public class EnemyViewSpawner : RegisteredPrefabViewSpawner<IEnemyModel, Enemy>
     protected override void DestroyedView(Enemy view)
     {
         ViewLookup.Remove(view.Id);
+
+        view.OnKilled();
     }
 }
