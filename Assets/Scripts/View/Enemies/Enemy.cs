@@ -12,6 +12,8 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
     MeshFilter _meshFilter;
     [SerializeField]
     Transform _viewRoot;
+    [SerializeField]
+    ParticleSystem _bloodSplatter;
 
     Identifiable _identifiable;
 
@@ -59,5 +61,7 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         go.transform.position = _viewRoot.parent.position;
         _viewRoot.SetParent(go.transform);
         rb.AddForce(UnityEngine.Random.onUnitSphere * 10, ForceMode.VelocityChange);
+        _bloodSplatter.Play();
+        _bloodSplatter.transform.localRotation = UnityEngine.Random.rotationUniform;
     }
 }
