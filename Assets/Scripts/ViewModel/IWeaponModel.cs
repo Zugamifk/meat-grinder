@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBuildingModel : IKeyHolder, IIdentifiable
+public interface IWeaponModel : IIdentifiable, IKeyHolder
 {
-    Vector2Int TilePosition { get; }
+    Guid CurrentTarget { get; }
 }

@@ -36,16 +36,16 @@ public class GunTurret : MeshGeneratorUser
             return;
         }
 
-        var model = Game.Model.Buildings.GetItem(_identifiable.Id);
-        if (model == null)
+        var weapon = Game.Model.Weapons.GetItem(_identifiable.Id);
+        if (weapon == null)
         {
             throw new InvalidOperationException($"No building with id {_identifiable.Id}");
         }
 
         Game.Do(new UpdateBuildingTargetCommand(_identifiable.Id));
-        if(model?.CurrentTarget!=Guid.Empty)
+        if(weapon?.CurrentTarget!=Guid.Empty)
         {
-            UpdateTarget(model.CurrentTarget);
+            UpdateTarget(weapon.CurrentTarget);
         }
     }
 

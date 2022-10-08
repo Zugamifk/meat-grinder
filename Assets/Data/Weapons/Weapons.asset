@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2381bfa89708264a9b070177b30a6db, type: 3}
-  m_Name: GunTurret
+  m_Script: {fileID: 11500000, guid: 076cf0168f34df44eb9c83f60fa833ca, type: 3}
+  m_Name: Weapons
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 8283955734449719271, guid: 096074d0b1ebdc34cb4c94e6ddb545d5, type: 3}
-  IsWeapon: 1
+  _buildingData:
+  - {fileID: 11400000, guid: 8bcba167904ff3d4d8e9691a3a9cfbbb, type: 2}

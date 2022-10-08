@@ -5,4 +5,5 @@ using UnityEngine;
 public class BuildingData : ScriptableObject
 {
     public GameObject Prefab;
+    public bool IsWeapon;
 }

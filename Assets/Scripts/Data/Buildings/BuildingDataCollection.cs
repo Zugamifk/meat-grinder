@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingDataCollection : ScriptableObject, IPrefabLookup
+public class BuildingDataCollection : ScriptableObject, IPrefabLookup, IRegisteredData
 {
     [SerializeField]
     private List<BuildingData> _buildingData;

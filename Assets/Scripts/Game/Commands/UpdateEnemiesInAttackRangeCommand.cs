@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class UpdateEnemiesInRangeCommand : ICommand
 {
-    Guid _buildingId;
+    Guid _weaponId;
     HashSet<Guid> _ids;
 
-    public UpdateEnemiesInRangeCommand(Guid buildingId, HashSet<Guid> ids)
+    public UpdateEnemiesInRangeCommand(Guid weaponId, HashSet<Guid> ids)
     {
-        _buildingId = buildingId;
+        _weaponId = weaponId;
         _ids = ids;
     }
 
     public void Execute(GameModel model)
     {
-        var building = model.Buildings.GetItem(_buildingId);
+        var building = model.Weapons.GetItem(_weaponId);
         building.TargetsInRange = _ids;
     }
 }

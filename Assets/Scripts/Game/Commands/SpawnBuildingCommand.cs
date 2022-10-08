@@ -17,6 +17,7 @@ public class SpawnBuildingCommand : ICommand
 
     public void Execute(GameModel model)
     {
+        var buildingData = DataService.GetData<BuildingDataCollection>().GetBuilding(_buildingKey);
         var building = new BuildingModel()
         {
             Key = _buildingKey,
@@ -28,5 +29,17 @@ public class SpawnBuildingCommand : ICommand
             building.Id = _customGuid.Value;
         }
         model.Buildings.AddItem(building);
+
+        if(buildingData.IsWeapon)
+        {
+            var weaponData = DataService.GetData<WeaponDataCollection>().GetWeapon(_buildingKey);
+            var weapon = new WeaponModel()
+            {
+                Id = building.Id,
+                Key = _buildingKey,
+                ShotCooldown = weaponData.ShotCooldown
+            };
+            model.Weapons.AddItem(weapon);
+        }
     }
 }

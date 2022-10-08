@@ -8,6 +8,11 @@ public static class DataService
 
     internal static void Register<T>(T collection) where T : ScriptableObject
     {
+        if(collection is not IRegisteredData)
+        {
+            throw new System.InvalidOperationException($"Can't register {collection} of type {typeof(T)}! Must inherit from IRegisteredData.");
+        }
+
         _dataTypeToCollection[collection.GetType()] = collection;
     }
 

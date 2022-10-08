@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunTurretData : BuildingData
+public class WeaponData : ScriptableObject
 {
-    
+    public float ShotCooldown;
 }

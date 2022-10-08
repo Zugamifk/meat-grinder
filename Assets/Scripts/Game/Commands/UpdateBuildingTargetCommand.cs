@@ -21,10 +21,16 @@ public class UpdateBuildingTargetCommand : ICommand
             throw new InvalidOperationException($"No building with id {_id}");
         }
 
+        var weapon = model.Weapons.GetItem(_id);
+        if (weapon == null)
+        {
+            throw new InvalidOperationException($"No weapon with id {_id}");
+        }
+
         var pos = building.WorldPosition;
         Guid closest = Guid.Empty;
         float closestDistance = float.MaxValue;
-        foreach(var id in building.TargetsInRange)
+        foreach(var id in weapon.TargetsInRange)
         {
             if(closest == Guid.Empty)
             {
@@ -41,6 +47,6 @@ public class UpdateBuildingTargetCommand : ICommand
             }
         }
 
-        building.CurrentTarget = closest;
+        weapon.CurrentTarget = closest;
     }
 }
