@@ -7,7 +7,17 @@ public class MapGenerator
     public void GenerateMap(GameModel model)
     {
         FillEmptyMap(model.Map);
-        GeneratePath(model);
+        GeneratePath(model,
+            new Vector2Int(10,0),
+            new Vector2Int(7, 0),
+            new Vector2Int(7, 5),
+            new Vector2Int(3, 5),
+            new Vector2Int(3, -8),
+            new Vector2Int(-3, -8),
+            new Vector2Int(-3, 5),
+            new Vector2Int(-7, 5),
+            new Vector2Int(-7, 0),
+            new Vector2Int(-10, 0));
     }
 
     void FillEmptyMap(MapModel model)
@@ -32,10 +42,10 @@ public class MapGenerator
         {
             Height = 1
         };
-        
+
         tile.NorthEdge = CreateEdge(tile);
         tile.SouthEdge = CreateEdge(tile);
-        if(y > map.Bounds.yMin)
+        if (y > map.Bounds.yMin)
         {
             ConfigureNeighbourEdges(tile.SouthEdge, map.TileMap[new Vector2Int(x, y - 1)].NorthEdge);
         }
@@ -43,7 +53,7 @@ public class MapGenerator
         tile.WestEdge = CreateEdge(tile);
         if (x > map.Bounds.xMin)
         {
-            ConfigureNeighbourEdges(tile.WestEdge, map.TileMap[new Vector2Int(x-1, y)].EastEdge);
+            ConfigureNeighbourEdges(tile.WestEdge, map.TileMap[new Vector2Int(x - 1, y)].EastEdge);
         }
         return tile;
     }
@@ -65,21 +75,24 @@ public class MapGenerator
         right.Type = EMapTileEdgeType.Empty;
     }
 
-    void GeneratePath(GameModel model)
+    void GeneratePath(GameModel model, params Vector2Int[] waypoints)
     {
-        var end = new PathNodeModel() { Position = new Vector2Int() };
-        var start = new PathNodeModel() { Position = new Vector2Int(0, 10), Next = end };
         var map = model.Map;
-        map.Paths.StartNode = start;
-        map.Paths.EndNode = end;
+        PathNodeModel last = null;
+        for (int i = waypoints.Length - 1; i >= 0; i--)
+        {
+            var node = new PathNodeModel() { Position = waypoints[i], Next = last };
+            if(last == null)
+            {
+                map.Paths.EndNode = node;
+            } else if(i ==0)
+            {
+                map.Paths.StartNode = node;
+            }
+            last = node;
+        }
 
         GenerateTilePaths(map);
-
-        //map.TileMap[end.Position].Structure = new EndPortalModel();
-        //var spawn = new EnemySpawnModel();
-        //spawn.PathNode = start;
-        //model.Spawns.AddItem(spawn);
-        //map.TileMap[start.Position].Structure = spawn;
     }
 
     void GenerateTilePaths(MapModel model)
