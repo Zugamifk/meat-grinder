@@ -11,6 +11,7 @@ public class GunTurret : MeshGeneratorUser
 {
     [SerializeField] GeneratedSkinnedMeshRenderer _renderer;
     [SerializeField] Transform _barrelEnd;
+    [SerializeField] ParticleSystem _shootParticles;
 
     ScriptedAnimation _animator;
 
@@ -68,5 +69,6 @@ public class GunTurret : MeshGeneratorUser
     {
         Game.Do(new ShootWeaponCommand(_identifiable.Id, _barrelEnd.position));
         _animator.PlayAnimation();
+        _shootParticles.Play();
     }
 }
