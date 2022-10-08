@@ -12,13 +12,6 @@ public class EnemyViewSpawner : RegisteredPrefabViewSpawner<IEnemyModel, Enemy>
 
     protected override void SpawnedView(IEnemyModel model, Enemy view)
     {
-        //var enemyPrefab = Prefabs.GetInstance(model);
-        //enemyPrefab.transform.SetParent(Test.Instance.SpawnRoot);
-        //enemyPrefab.transform.position = _spawnPosition.position;
-
-        //var identifiable = enemyPrefab.GetComponent<Identifiable>();
-        //identifiable.Id = enemy.Id;
-
         ViewLookup.Register(model.Id, view.gameObject);
     }
 

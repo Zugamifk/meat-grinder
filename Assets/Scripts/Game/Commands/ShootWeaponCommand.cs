@@ -13,7 +13,15 @@ public class ShootWeaponCommand : ICommand
         var weapon = model.Weapons.GetItem(_id);
         var weaponData = DataService.GetData<WeaponDataCollection>().GetWeapon(weapon.Key);
 
+        var building = model.Buildings.GetItem(_id);
+
         // create projectile
+        var projectile = new ProjectileModel()
+        {
+            Key = "Projectile",
+            Position = building.WorldPosition
+        };
+        model.Projectiles.AddItem(projectile);
 
         weapon.ShotTimer += weaponData.ShotCooldown;
     }
