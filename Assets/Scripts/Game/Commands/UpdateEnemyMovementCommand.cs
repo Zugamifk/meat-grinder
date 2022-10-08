@@ -6,12 +6,15 @@ using UnityEngine;
     public class UpdateEnemyMovementCommand : ICommand
     {
         Guid _id;
+        Vector3 _targetOffset;
 
-        public UpdateEnemyMovementCommand(Guid id) => _id = id;
+        public UpdateEnemyMovementCommand(Guid id, Vector3 targetOffset) { _id = id; _targetOffset = targetOffset; }
 
         public void Execute(GameModel model)
         {
             var enemy = model.SpawnedEnemies.GetItem(_id);
+            enemy.TargetOffset = _targetOffset;
+
             if (enemy.Movement.CurrentNode == null) return;
 
             var data = DataService.GetData<EnemyPrefabs>().GetData(enemy.Key);

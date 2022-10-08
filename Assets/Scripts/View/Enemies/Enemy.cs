@@ -7,6 +7,8 @@ using UnityEngine;
 public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
 {
     [SerializeField]
+    Transform _targetOffset;
+    [SerializeField]
     MeshFilter _meshFilter;
 
     Identifiable _identifiable;
@@ -39,6 +41,13 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         var position = enemy.Position;
         position.y = Test.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
         transform.position = position;
-        Game.Do(new UpdateEnemyMovementCommand(_identifiable.Id));
+        var newOffset = _targetOffset.localPosition;
+        newOffset.y += position.y;
+        Game.Do(new UpdateEnemyMovementCommand(_identifiable.Id, newOffset));
     }
+
+    //Vector3 GetAttackTargetPosition()
+    //{
+
+    //}
 }

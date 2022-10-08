@@ -12,7 +12,8 @@ public class UpdateProjectileCommand : ICommand
     {
         var projectile = model.Projectiles.GetItem(_id);
         var enemy = model.SpawnedEnemies.GetItem(projectile.TargetEnemyId);
-        var toEnemy = enemy.Position - projectile.Position;
+        var enemyPosition = enemy.Position + enemy.TargetOffset;
+        var toEnemy = enemyPosition - projectile.Position;
         var stepDistance = projectile.Velocity * model.TimeModel.LastDeltaTime;
         if(toEnemy.magnitude < stepDistance)
         {

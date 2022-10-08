@@ -19,6 +19,8 @@ public class ShootWeaponCommand : ICommand
 
         // create projectile
         var enemy = model.SpawnedEnemies.GetItem(weapon.CurrentTarget);
+        if (enemy == null) return;
+
         var projectile = new ProjectileModel()
         {
             Key = "Projectile",

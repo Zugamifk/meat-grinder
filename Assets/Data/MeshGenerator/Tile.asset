@@ -15,6 +15,6 @@ MonoBehaviour:
   GrassColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   PathColor: {r: 0.735849, g: 0.53800285, b: 0.53800285, a: 1}
   WallColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
-  TileStepHeight: 0.5
+  TileStepHeight: 0.4
   PathWidth: 0.45
   WallInset: 0.19

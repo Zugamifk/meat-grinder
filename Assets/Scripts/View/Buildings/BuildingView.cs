@@ -19,8 +19,6 @@ public class BuildingView : MonoBehaviour, IModelView<IBuildingModel>
 
     public void InitializeFromModel(IBuildingModel model)
     {
-        Debug.Log("Spawned " + model.Key);
-
         if (_attackRadius != null)
         {
             _attackRadius.Id = model.Id;
