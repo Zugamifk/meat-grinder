@@ -12,6 +12,7 @@ namespace MeshGenerator
         bool _isRoot;
 
         public string Key => _key;
+        public bool IsRoot => _isRoot;
 
         public Matrix4x4 GetBindPose()
         {

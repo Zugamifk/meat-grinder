@@ -16,9 +16,9 @@ namespace MeshGenerator
 
         public IGeometryGenerator CurrentGenerator { get; private set; }
 
-        public void SetMesh(Mesh mesh)
+        public void SetMesh(MeshGeneratorResult result)
         {
-            Renderer.ApplyMesh(mesh);
+            Renderer.ApplyMesh(result);
         }
 
         public void Clear()

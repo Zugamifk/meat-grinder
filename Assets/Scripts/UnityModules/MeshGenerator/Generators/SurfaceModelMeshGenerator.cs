@@ -30,7 +30,7 @@ namespace MeshGenerator
             }
 
             var result = new MeshGeneratorResult();
-            result.Meshes.Add("Main", _builder.BuildMesh());
+            result.Mesh = _builder.BuildMesh();
             return result;
         }
     }

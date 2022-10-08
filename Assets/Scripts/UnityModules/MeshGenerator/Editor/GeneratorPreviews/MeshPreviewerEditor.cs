@@ -130,8 +130,8 @@ namespace MeshGenerator.Editor
 
         void UpdateMesh(MeshPreviewer previewer)
         {
-            var mesh = Generate();
-            previewer.SetMesh(mesh);
+            var result = Generate();
+            previewer.SetMesh(result);
         }
 
         void UpdateEditor(string type)
@@ -148,9 +148,9 @@ namespace MeshGenerator.Editor
             }
         }
 
-        public Mesh Generate()
+        public MeshGeneratorResult Generate()
         {
-            return _currentGenerator.Generate().MainMesh;
+            return _currentGenerator.Generate();
         }
 
         private void OnSceneGUI()

@@ -38,7 +38,7 @@ namespace MeshGenerator
             _builder.AddQuad(p4, p5, p6, p7);
 
             var result = new MeshGeneratorResult();
-            result.Meshes.Add("Main", _builder.BuildMesh());
+            result.Mesh = _builder.BuildMesh();
             return result;
         }
     }

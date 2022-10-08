@@ -11,7 +11,7 @@ public class MeshGeneratorUser : MonoBehaviour
         var gen = new TMeshGenerator();
         initialize?.Invoke(gen);
         var res = gen.Generate();
-        meshFilter.mesh = res.MainMesh;
+        meshFilter.mesh = res.Mesh;
     }
 
     protected void AssignMesh<TMeshGenerator>(GeneratedSkinnedMeshRenderer renderer, System.Action<TMeshGenerator> initialize = null)
@@ -20,6 +20,6 @@ public class MeshGeneratorUser : MonoBehaviour
         var gen = new TMeshGenerator();
         initialize?.Invoke(gen);
         var res = gen.Generate();
-        renderer.ApplyMesh(res.MainMesh);
+        renderer.ApplyMesh(res);
     }
 }

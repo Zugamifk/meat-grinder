@@ -9,6 +9,8 @@ namespace MeshGenerator.Skeleton
         [SerializeField]
         MeshBone[] _bones;
 
+        public MeshBone Root { get; private set; }
+
         public IReadOnlyList<MeshBone> Bones => _bones;
 
         Dictionary<string, MeshBone> _nameToBone;
@@ -29,6 +31,7 @@ namespace MeshGenerator.Skeleton
             foreach (var b in _bones)
             {
                 _nameToBone[b.name] = b;
+                if (b.IsRoot) Root = b;
             }
         }
     }

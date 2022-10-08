@@ -30,10 +30,11 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
 
         // receiver
         _builder.SetBone(1);
-        _builder.PushMatrix(Matrix4x4.TRS(
+        var mountedMatrix = Matrix4x4.TRS(
             Data.MountPosition + new Vector3(0, h + Data.GunBounds.y),
             Quaternion.AngleAxis(Data.MountedAngle, Vector3.up),
-            Vector3.one));
+            Vector3.one);
+        _builder.PushMatrix(mountedMatrix);
         _builder.AddAxisAlignedBox(Data.GunBounds);
 
         // barrel
@@ -45,7 +46,10 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
             Vector3.forward,
             Data.BarrelDimensions.y);
 
-        result.Meshes.Add("Main", _builder.BuildMesh());
+        var barrelEnd = mountedMatrix.MultiplyPoint3x4(new Vector3(0,0, Data.GunBounds.z + Data.BarrelDimensions.y));
+        result.SpecialBones["BarrelEnd"] = barrelEnd;
+
+        result.Mesh = _builder.BuildMesh();
 
         return result;
     }
