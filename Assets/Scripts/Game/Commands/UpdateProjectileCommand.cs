@@ -16,6 +16,7 @@ public class UpdateProjectileCommand : ICommand
         var stepDistance = projectile.Velocity * model.TimeModel.LastDeltaTime;
         if(toEnemy.magnitude < stepDistance)
         {
+            Game.Do(new KillEnemyCommand(enemy.Id));
             model.Projectiles.RemoveItem(_id);
         } else
         {

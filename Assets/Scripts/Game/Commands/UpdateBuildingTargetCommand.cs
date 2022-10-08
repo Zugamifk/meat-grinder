@@ -39,6 +39,8 @@ public class UpdateBuildingTargetCommand : ICommand
             }
 
             var enemy = model.SpawnedEnemies.GetItem(id);
+            if (enemy == null) continue;
+
             var distance = (enemy.Position - pos).magnitude;
             if(closestDistance > distance)
             {
