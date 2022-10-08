@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ITileModel
 {
     int Height { get; }
-    bool HasPath { get; }
+    ETileType Type { get; }
     IEdgeModel NorthEdge { get; }
     IEdgeModel SouthEdge { get; }
     IEdgeModel EastEdge { get; }

@@ -62,7 +62,7 @@ public class MapGenerator
     {
         return new EdgeModel()
         {
-            Type = EMapTileEdgeType.Wall,
+            Type = ETileType.Wall,
             Tile = tile,
         };
     }
@@ -71,8 +71,8 @@ public class MapGenerator
     {
         left.Pair = right;
         right.Pair = left;
-        left.Type = EMapTileEdgeType.Empty;
-        right.Type = EMapTileEdgeType.Empty;
+        left.Type = ETileType.Empty;
+        right.Type = ETileType.Empty;
     }
 
     void GeneratePath(GameModel model, params Vector2Int[] waypoints)
@@ -112,7 +112,7 @@ public class MapGenerator
             for (int y = start.y; y != end.y + yd; y += yd)
             {
                 var tile = model.TileMap[new Vector2Int(x, y)];
-                tile.HasPath = true;
+                tile.Type = ETileType.Path;
                 UpdateEdge(tile.NorthEdge);
                 UpdateEdge(tile.SouthEdge);
                 UpdateEdge(tile.EastEdge);
@@ -122,9 +122,9 @@ public class MapGenerator
 
         void UpdateEdge(EdgeModel edge)
         {
-            if (edge.Pair == null || !edge.Pair.Tile.HasPath) return;
-            edge.Type = EMapTileEdgeType.Path;
-            edge.Pair.Type = EMapTileEdgeType.Path;
+            if (edge.Pair == null || edge.Pair.Tile.Type != ETileType.Path) return;
+            edge.Type = ETileType.Path;
+            edge.Pair.Type = ETileType.Path;
         }
     }
 }

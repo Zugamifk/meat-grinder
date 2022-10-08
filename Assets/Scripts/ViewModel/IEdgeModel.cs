@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEdgeModel
 {
-    public EMapTileEdgeType Type { get; }
+    public ETileType Type { get; }
     public ITileModel Tile { get; }
     public IEdgeModel Pair { get; }
 }

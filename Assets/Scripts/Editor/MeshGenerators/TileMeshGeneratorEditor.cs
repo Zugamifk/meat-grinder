@@ -17,12 +17,12 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         _tile = new TileModel()
         {
             Height = 1,
-            HasPath = false,
+            Type = ETileType.Empty,
         };
-        _tile.NorthEdge = new() { Tile = _tile, Type = EMapTileEdgeType.Empty };
-        _tile.SouthEdge = new() { Tile = _tile, Type = EMapTileEdgeType.Empty };
-        _tile.EastEdge = new() { Tile = _tile, Type = EMapTileEdgeType.Empty };
-        _tile.WestEdge = new() { Tile = _tile, Type = EMapTileEdgeType.Empty };
+        _tile.NorthEdge = new() { Tile = _tile, Type = ETileType.Empty };
+        _tile.SouthEdge = new() { Tile = _tile, Type = ETileType.Empty };
+        _tile.EastEdge = new() { Tile = _tile, Type = ETileType.Empty };
+        _tile.WestEdge = new() { Tile = _tile, Type = ETileType.Empty };
 
         _generator.SetTile(_tile);
     }
@@ -31,11 +31,11 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
     {
         EditorGUI.BeginChangeCheck();
 
-        _tile.HasPath = EditorGUILayout.Toggle("Has Path", _tile.HasPath);
-        _tile.NorthEdge.Type = (EMapTileEdgeType)EditorGUILayout.EnumPopup("North Edge", _tile.NorthEdge.Type);
-        _tile.SouthEdge.Type = (EMapTileEdgeType)EditorGUILayout.EnumPopup("South Edge", _tile.SouthEdge.Type);
-        _tile.EastEdge.Type = (EMapTileEdgeType)EditorGUILayout.EnumPopup("East Edge", _tile.EastEdge.Type);
-        _tile.WestEdge.Type = (EMapTileEdgeType)EditorGUILayout.EnumPopup("West Edge", _tile.WestEdge.Type);
+        _tile.Type = (ETileType)EditorGUILayout.EnumPopup("Tile Type", _tile.Type);
+        _tile.NorthEdge.Type = (ETileType)EditorGUILayout.EnumPopup("North Edge", _tile.NorthEdge.Type);
+        _tile.SouthEdge.Type = (ETileType)EditorGUILayout.EnumPopup("South Edge", _tile.SouthEdge.Type);
+        _tile.EastEdge.Type = (ETileType)EditorGUILayout.EnumPopup("East Edge", _tile.EastEdge.Type);
+        _tile.WestEdge.Type = (ETileType)EditorGUILayout.EnumPopup("West Edge", _tile.WestEdge.Type);
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -55,7 +55,7 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         var p3 = new Point(.5f, h(), -.5f);
         _wireframe.ConnectLoop(p0, p1, p2, p3);
 
-        if (_tile.HasPath)
+        if (_tile.Type==ETileType.Path)
         {
             GeneratePaths();
         }
@@ -72,7 +72,7 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         var r2 = new DynamicPoint(() => new Vector3(r(), h(), r()));
         var r3 = new DynamicPoint(() => new Vector3(r(), h(), -r()));
 
-        if (_tile.NorthEdge.Type == EMapTileEdgeType.Path)
+        if (_tile.NorthEdge.Type == ETileType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(-r(), h(), .5f));
             var p1 = new DynamicPoint(() => new Vector3(r(), h(), .5f));
@@ -84,7 +84,7 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
             _wireframe.Connect(r1, r2);
         }
 
-        if (_tile.SouthEdge.Type == EMapTileEdgeType.Path)
+        if (_tile.SouthEdge.Type == ETileType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(-r(), h(), -.5f));
             var p1 = new DynamicPoint(() => new Vector3(r(), h(), -.5f));
@@ -96,7 +96,7 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
             _wireframe.Connect(r0, r3);
         }
 
-        if (_tile.EastEdge.Type == EMapTileEdgeType.Path)
+        if (_tile.EastEdge.Type == ETileType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(.5f, h(), -r()));
             var p1 = new DynamicPoint(() => new Vector3(.5f, h(), r()));
@@ -108,7 +108,7 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
             _wireframe.Connect(r3, r2);
         }
 
-        if (_tile.WestEdge.Type == EMapTileEdgeType.Path)
+        if (_tile.WestEdge.Type == ETileType.Path)
         {
             var p0 = new DynamicPoint(() => new Vector3(-.5f, h(), r()));
             var p1 = new DynamicPoint(() => new Vector3(-.5f, h(), -r()));
@@ -123,22 +123,22 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
 
     private void GenerateWallWireFrames(IPoint p0, IPoint p1, IPoint p2, IPoint p3)
     {
-        if (_tile.NorthEdge.Type == EMapTileEdgeType.Wall)
+        if (_tile.NorthEdge.Type == ETileType.Wall)
         {
             DrawWall(p1, p2);
         }
 
-        if (_tile.SouthEdge.Type == EMapTileEdgeType.Wall)
+        if (_tile.SouthEdge.Type == ETileType.Wall)
         {
             DrawWall(p3, p0);
         }
 
-        if (_tile.WestEdge.Type == EMapTileEdgeType.Wall)
+        if (_tile.WestEdge.Type == ETileType.Wall)
         {
             DrawWall(p0, p1);
         }
 
-        if (_tile.EastEdge.Type == EMapTileEdgeType.Wall)
+        if (_tile.EastEdge.Type == ETileType.Wall)
         {
             DrawWall(p2, p3);
         }
