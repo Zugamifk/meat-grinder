@@ -26,7 +26,7 @@ public class GunTurret : MeshGeneratorUser
     {
         AssignMesh<GunTurretMeshGenerator>(_renderer);
         var data = DataService.GetData<MeshGeneratorDataCollection>().GunTurret;
-        _animator.PlayAnimation("Barrel", "", data.ShootBarrelRecoilCurve);
+        _animator.SetAnimation("Barrel", data.ShootBarrelRecoilCurve);
     }
 
     private void Update()
@@ -54,8 +54,6 @@ public class GunTurret : MeshGeneratorUser
         var target = ViewLookup.Get(targetId);
         if (target != null)
         {
-            Debug.Log("target: " + targetId);
-
             transform.LookAt(target.transform);
         }
     }
