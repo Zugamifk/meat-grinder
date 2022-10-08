@@ -45,9 +45,4 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         newOffset.y += position.y;
         Game.Do(new UpdateEnemyMovementCommand(_identifiable.Id, newOffset));
     }
-
-    //Vector3 GetAttackTargetPosition()
-    //{
-
-    //}
 }
