@@ -61,6 +61,7 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         go.transform.position = _viewRoot.parent.position;
         _viewRoot.SetParent(go.transform);
         rb.AddForce(UnityEngine.Random.onUnitSphere * 10, ForceMode.VelocityChange);
+        rb.angularVelocity = UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(-10, 10);
         _bloodSplatter.Play();
         _bloodSplatter.transform.localRotation = UnityEngine.Random.rotationUniform;
     }
