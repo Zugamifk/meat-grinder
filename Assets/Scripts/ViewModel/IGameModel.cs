@@ -12,5 +12,6 @@ public interface IGameModel
     IIdentifiableLookup<IEnemySpawnModel> Spawns { get; }
     IIdentifiableLookup<IBuildingModel> Buildings { get; }
     IIdentifiableLookup<IWeaponModel> Weapons { get; }
+    IIdentifiableLookup<IProjectileModel> Projectiles { get; }
     ICameraModel Camera { get; }
 }

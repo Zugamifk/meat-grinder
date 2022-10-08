@@ -66,7 +66,6 @@ public class GunTurret : MeshGeneratorUser
 
     void Fire()
     {
-        Debug.Log("Fire!");
         Game.Do(new ShootWeaponCommand(_identifiable.Id));
         _animator.PlayAnimation();
     }
