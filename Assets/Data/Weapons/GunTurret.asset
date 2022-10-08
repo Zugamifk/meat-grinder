@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GunTurret
   m_EditorClassIdentifier: 
   ShotCooldown: 0.5
+  ProjectileSpeed: 10

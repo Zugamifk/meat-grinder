@@ -5,4 +5,5 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public float ShotCooldown;
+    public float ProjectileSpeed;
 }

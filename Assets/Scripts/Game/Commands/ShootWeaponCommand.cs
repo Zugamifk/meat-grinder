@@ -16,10 +16,13 @@ public class ShootWeaponCommand : ICommand
         var building = model.Buildings.GetItem(_id);
 
         // create projectile
+        var enemy = model.SpawnedEnemies.GetItem(weapon.CurrentTarget);
         var projectile = new ProjectileModel()
         {
             Key = "Projectile",
-            Position = building.WorldPosition
+            Position = building.WorldPosition,
+            Velocity = weaponData.ProjectileSpeed,
+            TargetEnemyId = enemy.Id
         };
         model.Projectiles.AddItem(projectile);
 
