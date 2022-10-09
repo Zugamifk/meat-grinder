@@ -6,7 +6,7 @@ public class MapGenerator
 {
     public void GenerateMap(GameModel model)
     {
-        FillEmptyMap(model.Map);
+        FillEmptyMap(model.ShipMap);
         GeneratePath(model,
             new Vector2Int(10, 0),
             new Vector2Int(7, 0),
@@ -20,7 +20,7 @@ public class MapGenerator
             new Vector2Int(-10, 0));
     }
 
-    void FillEmptyMap(MapModel model)
+    void FillEmptyMap(ShipMapModel model)
     {
         var data = DataService.GetData<GameData>();
         var w = data.Dimensions.x;
@@ -36,7 +36,7 @@ public class MapGenerator
         }
     }
 
-    TileModel CreateTile(int x, int y, MapModel map)
+    TileModel CreateTile(int x, int y, ShipMapModel map)
     {
         var tile = new TileModel()
         {
@@ -121,7 +121,7 @@ public class MapGenerator
 
     void GeneratePath(GameModel model, params Vector2Int[] waypoints)
     {
-        var map = model.Map;
+        var map = model.ShipMap;
         PathNodeModel last = null;
         for (int i = waypoints.Length - 1; i >= 0; i--)
         {
@@ -140,7 +140,7 @@ public class MapGenerator
         GenerateTilePaths(map);
     }
 
-    void GenerateTilePaths(MapModel model)
+    void GenerateTilePaths(ShipMapModel model)
     {
         for (var start = model.Paths.StartNode; start != model.Paths.EndNode; start = start.Next)
         {
@@ -148,7 +148,7 @@ public class MapGenerator
         }
     }
 
-    void GenerateNodePath(MapModel model, Vector2Int start, Vector2Int end)
+    void GenerateNodePath(ShipMapModel model, Vector2Int start, Vector2Int end)
     {
         int xd = (int)Mathf.Sign(end.x - start.x);
         int yd = (int)Mathf.Sign(end.y - start.y);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class ShipMapTest : MonoBehaviour
 {
     [SerializeField]
     Transform _spawnedRoot;
@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
     public ShipMap Map => _map;
     public Transform SpawnRoot => _spawnedRoot;
 
-    public static Test Instance { get; private set; }
+    public static ShipMapTest Instance { get; private set; }
 
     private void Awake()
     {

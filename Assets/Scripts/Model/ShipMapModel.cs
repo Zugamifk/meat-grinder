@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapModel : IMapModel
+public class ShipMapModel : IShipMapModel
 {
     public Dictionary<Vector2Int, TileModel> TileMap = new();
 

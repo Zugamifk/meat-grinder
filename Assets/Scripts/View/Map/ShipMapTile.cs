@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapTile : MeshGeneratorUser
+public class ShipMapTile : MeshGeneratorUser
 {
     [SerializeField]
     MeshFilter _meshFilter;

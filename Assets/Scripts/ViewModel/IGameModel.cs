@@ -6,7 +6,7 @@ public interface IGameModel
 {
     ITimeModel Time { get; }
     TModel GetModel<TModel>() where TModel : IRegisteredModel;
-    IMapModel Map { get; }
+    IShipMapModel ShipMap { get; }
     IWaveModel CurrentWave { get; }
     IIdentifiableLookup<IEnemyModel> SpawnedEnemies { get; }
     IIdentifiableLookup<IEnemySpawnModel> Spawns { get; }

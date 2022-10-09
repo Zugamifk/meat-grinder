@@ -6,7 +6,7 @@ using System;
 
 public partial class GameModel : IGameModel
 {
-    public MapModel Map { get; set; } = new();
+    public ShipMapModel ShipMap { get; set; } = new();
     public IdentifiableCollection<EnemyModel> SpawnedEnemies = new();
     public IdentifiableCollection<EnemySpawnModel> Spawns = new();
     public IdentifiableCollection<BuildingModel> Buildings = new();
@@ -55,7 +55,7 @@ public partial class GameModel : IGameModel
 
     #region IGameModel
     ITimeModel IGameModel.Time => TimeModel;
-    IMapModel IGameModel.Map => Map;
+    IShipMapModel IGameModel.ShipMap => ShipMap;
     IWaveModel IGameModel.CurrentWave => CurrentWave;
     IIdentifiableLookup<IEnemySpawnModel> IGameModel.Spawns => Spawns;
     IIdentifiableLookup<IEnemyModel> IGameModel.SpawnedEnemies => SpawnedEnemies;

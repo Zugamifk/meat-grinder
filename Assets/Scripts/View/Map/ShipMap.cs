@@ -8,13 +8,13 @@ public class ShipMap : MonoBehaviour
     [SerializeField]
     BuildingViewSpawner _buildingSpawner;
     [SerializeField]
-    MapTile _tilePrefab;
+    ShipMapTile _tilePrefab;
 
     Guid _mapGuid;
 
-    Dictionary<Vector2Int, MapTile> _positionToTile = new();
+    Dictionary<Vector2Int, ShipMapTile> _positionToTile = new();
 
-    public MapTile GetTile(Vector2Int position) => _positionToTile[position];
+    public ShipMapTile GetTile(Vector2Int position) => _positionToTile[position];
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class ShipMap : MonoBehaviour
 
     private void Update()
     {
-        var map = Game.Model.Map;
+        var map = Game.Model.ShipMap;
         if (_mapGuid != map.Id)
         {
             UpdateMap(map);
@@ -31,7 +31,7 @@ public class ShipMap : MonoBehaviour
         Game.Do(new UpdateMapCommand());
     }
 
-    void UpdateMap(IMapModel map)
+    void UpdateMap(IShipMapModel map)
     {
         for (int x = map.Bounds.xMin; x <= map.Bounds.xMax; x++)
         {

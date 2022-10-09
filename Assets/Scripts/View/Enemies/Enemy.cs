@@ -43,7 +43,7 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         }
 
         var position = enemy.Position;
-        position.y = Test.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
+        position.y = ShipMapTest.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
         transform.position = position;
         var newOffset = _targetOffset.localPosition;
         newOffset.y += position.y;
