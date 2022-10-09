@@ -21,6 +21,10 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
 
         var w = .5f;
         var h = _tile.Height * Data.TileStepHeight;
+        if(_tile.Type == ETileType.Wall)
+        {
+            h += 1;
+        }
 
         // edges and bottom
         var p0 = new Vector3(-w, 0, -w);

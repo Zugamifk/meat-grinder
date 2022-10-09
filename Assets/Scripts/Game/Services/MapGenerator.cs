@@ -8,7 +8,7 @@ public class MapGenerator
     {
         FillEmptyMap(model.Map);
         GeneratePath(model,
-            new Vector2Int(10,0),
+            new Vector2Int(10, 0),
             new Vector2Int(7, 0),
             new Vector2Int(7, 5),
             new Vector2Int(3, 5),
@@ -40,39 +40,83 @@ public class MapGenerator
     {
         var tile = new TileModel()
         {
-            Height = 1
+            Height = 1,
+            Type = UnityEngine.Random.value > 0.5f ? ETileType.Empty : ETileType.Wall
         };
 
         tile.NorthEdge = CreateEdge(tile);
         tile.SouthEdge = CreateEdge(tile);
         if (y > map.Bounds.yMin)
         {
-            ConfigureNeighbourEdges(tile.SouthEdge, map.TileMap[new Vector2Int(x, y - 1)].NorthEdge);
+            var south = map.TileMap[new Vector2Int(x, y - 1)];
+            ConnectNewTileEdges(tile.SouthEdge, south.NorthEdge);
         }
         tile.EastEdge = CreateEdge(tile);
         tile.WestEdge = CreateEdge(tile);
         if (x > map.Bounds.xMin)
         {
-            ConfigureNeighbourEdges(tile.WestEdge, map.TileMap[new Vector2Int(x - 1, y)].EastEdge);
+            var west = map.TileMap[new Vector2Int(x - 1, y)];
+            ConnectNewTileEdges(tile.WestEdge, west.EastEdge);
         }
         return tile;
     }
 
     EdgeModel CreateEdge(TileModel tile)
     {
-        return new EdgeModel()
+        var edge = new EdgeModel()
         {
             Type = ETileType.Wall,
             Tile = tile,
         };
+        UpdateEdge(edge);
+        return edge;
     }
 
-    void ConfigureNeighbourEdges(EdgeModel left, EdgeModel right)
+    void ConnectNewTileEdges(EdgeModel leftEdge, EdgeModel rightEdge)
     {
-        left.Pair = right;
-        right.Pair = left;
-        left.Type = ETileType.Empty;
-        right.Type = ETileType.Empty;
+        leftEdge.Pair = rightEdge;
+        rightEdge.Pair = leftEdge;
+        UpdateEdge(leftEdge);
+        UpdateEdge(rightEdge);
+    }
+
+    void UpdateEdgeAndPair(EdgeModel edge)
+    {
+        UpdateEdge(edge);
+        if (edge.Pair != null)
+        {
+            UpdateEdge(edge.Pair);
+        }
+    }
+
+    void UpdateEdge(EdgeModel edge)
+    {
+        var tile = edge.Tile;
+        var other = edge.Pair;
+        if (other == null)
+        {
+            if(tile.Type == ETileType.Wall)
+            {
+                edge.Type = ETileType.Empty;
+            } else
+            {
+                edge.Type = ETileType.Wall;
+            }
+            return;
+        }
+        var nextTile = other.Tile;
+        if (nextTile.Type == ETileType.Wall && tile.Type != ETileType.Wall)
+        {
+            edge.Type = ETileType.Wall;
+        }
+        else if (tile.Type == ETileType.Path && nextTile.Type == ETileType.Path)
+        {
+            edge.Type = ETileType.Path;
+        }
+        else
+        {
+            edge.Type = ETileType.Empty;
+        }
     }
 
     void GeneratePath(GameModel model, params Vector2Int[] waypoints)
@@ -82,10 +126,11 @@ public class MapGenerator
         for (int i = waypoints.Length - 1; i >= 0; i--)
         {
             var node = new PathNodeModel() { Position = waypoints[i], Next = last };
-            if(last == null)
+            if (last == null)
             {
                 map.Paths.EndNode = node;
-            } else if(i ==0)
+            }
+            else if (i == 0)
             {
                 map.Paths.StartNode = node;
             }
@@ -113,18 +158,11 @@ public class MapGenerator
             {
                 var tile = model.TileMap[new Vector2Int(x, y)];
                 tile.Type = ETileType.Path;
-                UpdateEdge(tile.NorthEdge);
-                UpdateEdge(tile.SouthEdge);
-                UpdateEdge(tile.EastEdge);
-                UpdateEdge(tile.WestEdge);
+                UpdateEdgeAndPair(tile.NorthEdge);
+                UpdateEdgeAndPair(tile.SouthEdge);
+                UpdateEdgeAndPair(tile.EastEdge);
+                UpdateEdgeAndPair(tile.WestEdge);
             }
-        }
-
-        void UpdateEdge(EdgeModel edge)
-        {
-            if (edge.Pair == null || edge.Pair.Tile.Type != ETileType.Path) return;
-            edge.Type = ETileType.Path;
-            edge.Pair.Type = ETileType.Path;
         }
     }
 }

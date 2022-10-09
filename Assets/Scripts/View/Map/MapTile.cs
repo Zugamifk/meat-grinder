@@ -31,6 +31,10 @@ public class MapTile : MeshGeneratorUser
     {
         var data = DataService.GetData<GameData>();
         SurfaceY = tile.Height * data.TileStepHeight;
+        if(tile.Type == ETileType.Wall)
+        {
+            SurfaceY += 1;
+        }
 
         AssignMesh<TileMeshGenerator>(_meshFilter, gen => gen.SetTile(tile));
 
