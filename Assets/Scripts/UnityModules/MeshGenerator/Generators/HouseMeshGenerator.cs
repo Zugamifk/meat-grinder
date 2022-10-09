@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MeshGenerator
 {
     [MeshGenerator("House")]
-    public class HouseGenerator : MeshGenerator
+    public class HouseMeshGenerator : MeshGenerator
     {
         public class GeometryData : ScriptableObject
         {
@@ -81,7 +81,7 @@ namespace MeshGenerator
         Frame _wireframe;
         IPoint[] _wallCorners;
 
-        static HouseGenerator()
+        static HouseMeshGenerator()
         {
             if (_data == null)
             {

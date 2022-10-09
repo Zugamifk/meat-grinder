@@ -7,10 +7,10 @@ using System;
 
 namespace MeshGenerator.Editor
 {
-    [MeshGeneratorEditor(typeof(HouseGenerator))]
+    [MeshGeneratorEditor(typeof(HouseMeshGenerator))]
     public class HouseMeshGeneratorEditor : IMeshGeneratorEditor
     {
-        HouseGenerator _generator;
+        HouseMeshGenerator _generator;
 
         public void DrawInspectorGUI()
         {
@@ -48,7 +48,7 @@ namespace MeshGenerator.Editor
                     {
                         for(int j=windowCount;j<newWindowCount;j++)
                         {
-                            wall.Windows.Add(new HouseGenerator.GeometryData.WindowData());
+                            wall.Windows.Add(new HouseMeshGenerator.GeometryData.WindowData());
                         }
                     }
                     rebuildWireframe = true;
@@ -86,7 +86,7 @@ namespace MeshGenerator.Editor
 
         public void SetGenerator(IGeometryGenerator generator)
         {
-            _generator = (HouseGenerator)generator;
+            _generator = (HouseMeshGenerator)generator;
             _generator.BuildWireframe();
         }
     }

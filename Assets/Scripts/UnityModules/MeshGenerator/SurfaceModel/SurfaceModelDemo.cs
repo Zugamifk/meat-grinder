@@ -31,7 +31,7 @@ namespace MeshGenerator
 
         void CubeFromMesh()
         {
-            var cb = new CubeGenerator();
+            var cb = new CubeMeshGenerator();
             var res = cb.Generate();
             var m = res.Mesh;
             var smb = new MeshToSurfaceModelBuilder();

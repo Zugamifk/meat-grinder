@@ -67,9 +67,9 @@ public class MeshGeneratorWindow : EditorWindow
 
         AssetDatabase.Refresh();
 
-        RegenerateMeshGeneratorDataCollectionScript();
         CreateGeneratorScript();
         CreateEditorScript();
+        RegenerateMeshGeneratorDataCollectionScript();
 
         //CreateDataAsset();
     }
@@ -93,8 +93,6 @@ public class {name} : ScriptableObject
     void CreateDataAsset()
     {
         var t = Type.GetType($"{_meshGeneratorName}MeshGeneratorData");
-        //Debug.Log(t.Name);
-        //Debug.Log(typeof(ScriptableObject).IsAssignableFrom(t));
         var data = CreateInstance(t);
         var path = Path.Combine(DATA_ASSET_PATH, $"{_meshGeneratorName}MeshGeneratorData.asset");
         AssetDatabase.CreateAsset(data, path);
@@ -114,7 +112,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator(""{_meshGeneratorName}"")]
 public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorData>
 {{
-    public override MeshGeneratorResult Generate()
+    protected override MeshGeneratorResult BuildMesh()
     {{
         return new();
     }}
@@ -161,7 +159,7 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 
         foreach(var type in AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a=>a.GetTypes())
-            .Where(t => typeof(MeshGenerator.MeshGenerator).IsAssignableFrom(t))
+            .Where(t => !t.IsAbstract && typeof(MeshGeneratorWithData<>).IsAssignableFrom(t) && t.Name.Contains("MeshGenerator"))
             .Select(t => t.Name.Substring(0, t.Name.IndexOf("MeshGenerator")))
             .Where(t=>!string.IsNullOrEmpty(t)))
             {

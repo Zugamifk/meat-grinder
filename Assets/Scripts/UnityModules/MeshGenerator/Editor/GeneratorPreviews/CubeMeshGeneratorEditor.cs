@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace MeshGenerator.Editor
 {
-    [MeshGeneratorEditor(typeof(CubeGenerator))]
+    [MeshGeneratorEditor(typeof(CubeMeshGenerator))]
     public class CubeMeshGeneratorEditor : IMeshGeneratorEditor
     {
         public void DrawInspectorGUI()
