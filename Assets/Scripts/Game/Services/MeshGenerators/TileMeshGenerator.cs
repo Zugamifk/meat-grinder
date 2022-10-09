@@ -16,12 +16,12 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
 
     protected override MeshGeneratorResult BuildMesh()
     {
-        var grassColor = Data.GrassColor;
+        var grassColor = _tile.Type == ETileType.Wall ? Data.WallColor : Data.GrassColor;
         _builder.SetColor(grassColor);
 
         var w = .5f;
         var h = _tile.Height * Data.TileStepHeight;
-        if(_tile.Type == ETileType.Wall)
+        if (_tile.Type == ETileType.Wall)
         {
             h += 1;
         }
@@ -63,20 +63,19 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         _builder.AddQuad(p6, p67r2, r2, p56r2);
         _builder.AddQuad(p7, p74r3, r3, p67r3);
 
-        var roadColor = Data.PathColor;
-        _builder.SetColor(GetColor(_tile.Type));
+        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.Type));
         _builder.AddQuad(r0, r1, r2, r3);
 
-        _builder.SetColor(GetColor(_tile.WestEdge.Type));
+        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.WestEdge.Type));
         _builder.AddQuad(p45r0, p45r1, r1, r0);
 
-        _builder.SetColor(GetColor(_tile.NorthEdge.Type));
+        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.NorthEdge.Type));
         _builder.AddQuad(p56r1, p56r2, r2, r1);
 
-        _builder.SetColor(GetColor(_tile.EastEdge.Type));
+        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.EastEdge.Type));
         _builder.AddQuad(p67r2, p67r3, r3, r2);
 
-        _builder.SetColor(GetColor(_tile.SouthEdge.Type));
+        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.SouthEdge.Type));
         _builder.AddQuad(p74r3, p74r0, r0, r3);
 
         GenerateWallMeshes(p4, p5, p6, p7);
