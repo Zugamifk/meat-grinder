@@ -5,5 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Data/Mesh Generators/WorldMap")]
 public class WorldMapMeshGeneratorData : ScriptableObject
 {
-
+    public Vector2 PatchDimensions;
+    public Vector2Int PatchGridSize;
+    [Range(0,1)]
+    public float PointVariance;
 }

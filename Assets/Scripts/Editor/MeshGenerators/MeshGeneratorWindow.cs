@@ -136,7 +136,7 @@ using MeshGenerator;
 [MeshGeneratorEditor(typeof({_meshGeneratorName}MeshGenerator))]
 public class {name} : MeshGeneratorEditorWithWireFrame<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}MeshGeneratorData>
 {{
-        public override void BuildWireframe()
+    public override void BuildWireframe()
     {{
 
     }}
