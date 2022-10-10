@@ -37,6 +37,7 @@ namespace MeshGenerator.Editor
             {
                 so.ApplyModifiedProperties();
                 EditorUtility.SetDirty(d);
+                OnPropertiesChanged();
             }
 
             DrawInspectorFields();
@@ -54,6 +55,8 @@ namespace MeshGenerator.Editor
                 WireframeDrawer.Draw(_wireframe);
             }
         }
+
+        protected virtual void OnPropertiesChanged() { }
 
         public abstract void BuildWireframe();
 
