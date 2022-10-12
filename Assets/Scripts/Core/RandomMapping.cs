@@ -54,6 +54,8 @@ public static class RandomMapping
 
     static unsafe void FillBuffer(uint length)
     {
+        throw new InvalidOperationException("This method will crash unity! do not call it!");
+
         ulong x = _x, y = _y, z = _z, w = _w; // copy the state into locals temporarily
         fixed (byte* pbytes = _buffer)
         {

@@ -11,14 +11,13 @@ public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Worl
 {
     protected override void OnPropertiesChanged()
     {
-        //_generator.GenerateOffsets();
+        _generator.GenerateOffsets();
         BuildWireframe();
     }
 
     protected override void OnSetGenerator()
     {
-        //Debug.Log(RandomMapping.RandomInt());
-        //_generator.GenerateOffsets();
+        _generator.GenerateOffsets();
     }
 
     public override void BuildWireframe()
@@ -42,7 +41,7 @@ public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Worl
 
         Vector3 GetOffset(int x, int y)
         {
-            var offset = RandomMapping.Vector2(x, y).normalized;
+            var offset = _generator.GetOffset(x, y);
             return new Vector3(offset.x, 0, offset.y);
         }
 
