@@ -159,7 +159,7 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 
         foreach(var type in AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a=>a.GetTypes())
-            .Where(t => !t.IsAbstract && typeof(MeshGeneratorWithData<>).IsAssignableFrom(t) && t.Name.Contains("MeshGenerator"))
+            .Where(t => !t.IsAbstract && t.Name.Contains("MeshGenerator"))
             .Select(t => t.Name.Substring(0, t.Name.IndexOf("MeshGenerator")))
             .Where(t=>!string.IsNullOrEmpty(t)))
             {

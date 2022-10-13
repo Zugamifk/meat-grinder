@@ -10,4 +10,5 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
     public GunTurretMeshGeneratorData GunTurret;
     public TileMeshGeneratorData Tile;
     public WorldMapMeshGeneratorData WorldMap;
+    public GearMeshGeneratorData Gear;
 }
