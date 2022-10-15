@@ -50,16 +50,15 @@ namespace MeshGenerator.Wireframe
             }
         }
 
-        public void Prism(IList<IPoint> points, Func<float> height)
+        public void Prism(IList<IPoint> points, Func<Vector3> normal, Func<float> height)
         {
-            Func<Vector3> n = () => Vector3.Cross((points[0].Position - points[1].Position).normalized, (points[2].Position - points[1].Position).normalized);
             for(int i = 0; i <points.Count;i++)
             {
                 var p0 = points[i];
                 var p1 = points[(i + 1) % points.Count];
                 Connect(p0, p1);
-                var p2 = new DynamicPoint(() => p0.Position + n() * height());
-                var p3 = new DynamicPoint(() => p1.Position + n() * height());
+                var p2 = new DynamicPoint(() => p0.Position + normal() * height());
+                var p3 = new DynamicPoint(() => p1.Position + normal() * height());
                 Connect(p2, p3);
                 Connect(p0, p2);
             }

@@ -6,6 +6,7 @@ using MeshGenerator;
 using MeshGenerator.Wireframe;
 using UnityEngine.TestTools.Utils;
 using System;
+using UnityEditor;
 
 [MeshGeneratorEditor(typeof(GearMeshGenerator))]
 public class GearMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearMeshGenerator, GearMeshGeneratorData>
@@ -35,16 +36,17 @@ public class GearMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearMesh
         for (int i = 0; i < _data.TeethCount; i++)
         {
             var d0 = d;
-            Func<Vector3> d1 = () => toothRot() * d0();
-            Func<Vector3> d2 = () => climbRot() * d1();
-            Func<Vector3> d3 = () => toothRot() * d2();
-            Func<Vector3> d4 = () => climbRot() * d3();
+            Func<Vector3> d1 = () => climbRot() * d0();
+            Func<Vector3> d2 = () => toothRot() * d1();
+            Func<Vector3> d3 = () => climbRot() * d2();
+            Func<Vector3> d4 = () => toothRot() * d3();
             points.Add(new DynamicPoint(() => d0() * r0()));
-            points.Add(new DynamicPoint(() => d1() * r0()));
+            points.Add(new DynamicPoint(() => d1() * r1()));
             points.Add(new DynamicPoint(() => d2() * r1()));
-            points.Add(new DynamicPoint(() => d3() * r1()));
+            points.Add(new DynamicPoint(() => d3() * r0()));
             d = d4;
         }
-        _wireframe.Prism(points, () => _data.GearThickness);
+        _wireframe.Prism(points, () => Vector3.forward, () => _data.GearThickness);
+        _wireframe.Cylinder(()=>Vector3.zero, ()=>_data.AxelRadius, ()=>_data.GearThickness, ()=>Vector3.forward,()=>SceneView.currentDrawingSceneView.camera.transform.forward);
     }
 }

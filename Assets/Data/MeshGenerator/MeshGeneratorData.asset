@@ -18,3 +18,4 @@ MonoBehaviour:
   GunTurret: {fileID: 11400000, guid: 06430954fee889046be9221435fddb5d, type: 2}
   Tile: {fileID: 11400000, guid: 1a4e06f28137694469b3494fee366070, type: 2}
   WorldMap: {fileID: 11400000, guid: a660f3e73a7029b478c0e723a1df2c6a, type: 2}
+  Gear: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}

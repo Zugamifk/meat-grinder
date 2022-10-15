@@ -10,4 +10,5 @@ public class GearMeshGeneratorData : ScriptableObject
     public float WorkingDepth;
     public float ToothThickness;
     public float GearThickness;
+    public float AxelRadius;
 }
