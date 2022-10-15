@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace MeshGenerator.Editor
+namespace MeshGenerator.Surfaces.Editor
 {
     [CustomEditor(typeof(SurfaceModelDemo))]
     public class SurfaceModelDemoEditor : UnityEditor.Editor

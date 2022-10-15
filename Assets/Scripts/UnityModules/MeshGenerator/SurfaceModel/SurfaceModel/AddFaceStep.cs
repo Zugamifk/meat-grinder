@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MeshGenerator
+namespace MeshGenerator.Surfaces
 {
     public class AddFaceStep : IStep
     {
         int[] _vertices;
         Face _face;
-
 
         public AddFaceStep(params int[] indices)
         {

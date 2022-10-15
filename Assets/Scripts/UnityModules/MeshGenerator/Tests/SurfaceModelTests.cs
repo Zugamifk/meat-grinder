@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using MeshGenerator.Surfaces;
 
 namespace MeshGenerator.Tests
 {

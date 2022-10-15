@@ -1,5 +1,5 @@
 using MeshGenerator;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 using System;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;

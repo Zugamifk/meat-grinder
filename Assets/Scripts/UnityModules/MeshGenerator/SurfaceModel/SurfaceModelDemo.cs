@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace MeshGenerator
+namespace MeshGenerator.Surfaces
 {
     [ExecuteInEditMode]
     public class SurfaceModelDemo : MonoBehaviour

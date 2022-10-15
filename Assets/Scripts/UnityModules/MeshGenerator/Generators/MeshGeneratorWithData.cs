@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 namespace MeshGenerator
 {

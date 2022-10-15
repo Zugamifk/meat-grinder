@@ -9,6 +9,7 @@ public class GearAssemblyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<
 {
     protected override void BuildWireframe()
     {
+        var gear1 = new GearAssemblyMeshGenerator();
 
     }
 }

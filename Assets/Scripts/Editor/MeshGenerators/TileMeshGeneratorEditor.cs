@@ -4,7 +4,7 @@ using UnityEngine;
 using MeshGenerator;
 using MeshGenerator.Editor;
 using UnityEditor;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 using System;
 
 [MeshGeneratorEditor(typeof(TileMeshGenerator))]

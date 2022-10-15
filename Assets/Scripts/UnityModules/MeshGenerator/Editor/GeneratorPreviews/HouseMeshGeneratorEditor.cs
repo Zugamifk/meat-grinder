@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 using System;
 
 namespace MeshGenerator.Editor

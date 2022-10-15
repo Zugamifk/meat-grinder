@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MeshGenerator.Editor;
 using MeshGenerator;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 [MeshGeneratorEditor(typeof(ArrowTowerMeshGenerator))]
 public class ArrowTowerMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<ArrowTowerMeshGenerator, ArrowTowerMeshGeneratorData>

@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-namespace MeshGenerator.Wireframe
+namespace MeshGenerator.Wireframes
 {
     public class Frame
     {
         public List<IPoint> Points = new();
         public List<Edge> Edges = new();
         public List<Ring> Rings = new();
+
+        public void Clear()
+        {
+            Points.Clear();
+            Edges.Clear();
+            Rings.Clear();
+        }
 
         public void Connect(IPoint a, IPoint b)
         {

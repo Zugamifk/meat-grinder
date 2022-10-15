@@ -1,4 +1,4 @@
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -10,7 +10,7 @@ namespace MeshGenerator.Editor
         where TGenerator : MeshGeneratorWithData<TData>
         where TData : ScriptableObject
     {
-        protected Frame _wireframe;
+        protected Frame _wireframe = new();
 
         protected TGenerator _generator;
         protected TData _data => _generator.Data;
@@ -61,7 +61,7 @@ namespace MeshGenerator.Editor
 
         public void RebuildWireframe()
         {
-            _wireframe = new();
+            _wireframe.Clear();
             BuildWireframe();
         }
 

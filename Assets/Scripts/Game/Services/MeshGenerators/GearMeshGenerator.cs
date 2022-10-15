@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MeshGenerator;
 using System;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 [MeshGenerator("Gear")]
 public class GearMeshGenerator : MeshGeneratorWithData<GearMeshGeneratorData>

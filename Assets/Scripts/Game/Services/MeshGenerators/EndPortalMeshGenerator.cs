@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MeshGenerator;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 [MeshGenerator("End Portal")]
 public class EndPortalMeshGenerator : MeshGeneratorWithData<EndPortalMeshGeneratorData>

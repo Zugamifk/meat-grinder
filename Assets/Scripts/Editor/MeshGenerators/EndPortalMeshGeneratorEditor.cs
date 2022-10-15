@@ -4,7 +4,7 @@ using UnityEngine;
 using MeshGenerator.Editor;
 using MeshGenerator;
 using UnityEditor;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 [MeshGeneratorEditor(typeof(EndPortalMeshGenerator))]
 public class EndPortalMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<EndPortalMeshGenerator, EndPortalMeshGeneratorData>

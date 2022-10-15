@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MeshGenerator.Wireframe
+namespace MeshGenerator.Wireframes
 {
     public class DynamicPoint : IPoint
     {

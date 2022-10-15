@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace MeshGenerator
+namespace MeshGenerator.Surfaces
 {
     public class SurfaceModelBuilder
     {

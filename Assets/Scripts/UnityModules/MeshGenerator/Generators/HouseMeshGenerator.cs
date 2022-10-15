@@ -1,4 +1,4 @@
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 using System;
 using System.Collections;
 using System.Collections.Generic;

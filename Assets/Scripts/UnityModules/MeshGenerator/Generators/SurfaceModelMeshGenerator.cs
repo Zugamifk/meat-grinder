@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace MeshGenerator
+namespace MeshGenerator.Surfaces
 {
     [MeshGenerator("Surface Model")]
     public class SurfaceModelMeshGenerator : MeshGenerator

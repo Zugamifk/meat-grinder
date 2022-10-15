@@ -4,7 +4,7 @@ using UnityEngine;
 using MeshGenerator.Editor;
 using MeshGenerator;
 using UnityEditor;
-using MeshGenerator.Wireframe;
+using MeshGenerator.Wireframes;
 
 [MeshGeneratorEditor(typeof(EnemyMeshGenerator))]
 public class EnemyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<EnemyMeshGenerator, EnemyMeshGeneratorData>

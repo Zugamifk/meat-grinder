@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Data/Mesh Generators/GearAssembly")]
 public class GearAssemblyMeshGeneratorData : ScriptableObject
 {
-
+    public GearMeshGeneratorData[] gears;
 }
