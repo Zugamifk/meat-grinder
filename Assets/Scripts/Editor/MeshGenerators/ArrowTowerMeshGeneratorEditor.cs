@@ -8,9 +8,8 @@ using MeshGenerator.Wireframe;
 [MeshGeneratorEditor(typeof(ArrowTowerMeshGenerator))]
 public class ArrowTowerMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<ArrowTowerMeshGenerator, ArrowTowerMeshGeneratorData>
 {
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
-        _wireframe = new();
         void AddRing(float t)
         {
             _wireframe.Rings.Add(new Ring()

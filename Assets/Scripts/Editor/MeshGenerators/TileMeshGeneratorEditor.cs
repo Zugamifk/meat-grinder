@@ -40,13 +40,12 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
         if (EditorGUI.EndChangeCheck())
         {
             _generator.SetTile(_tile);
-            BuildWireframe();
+            RebuildWireframe();
         }
     }
 
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
-        _wireframe = new();
         Func<float> h = () => _tile.Height * _data.TileStepHeight;
 
         var p0 = new Point(-.5f, h(), -.5f);

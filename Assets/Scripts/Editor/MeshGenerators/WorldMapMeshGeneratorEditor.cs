@@ -13,7 +13,6 @@ public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Worl
     protected override void OnPropertiesChanged()
     {
         _generator.GenerateOffsets();
-        BuildWireframe();
     }
 
     protected override void OnSetGenerator()
@@ -21,7 +20,7 @@ public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Worl
         _generator.GenerateOffsets();
     }
 
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
         Func<float> w = () => _data.PatchDimensions.x;
         Func<float> h = () => _data.PatchDimensions.y;

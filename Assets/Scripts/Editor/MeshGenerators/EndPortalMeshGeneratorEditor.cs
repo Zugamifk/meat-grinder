@@ -9,10 +9,8 @@ using MeshGenerator.Wireframe;
 [MeshGeneratorEditor(typeof(EndPortalMeshGenerator))]
 public class EndPortalMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<EndPortalMeshGenerator, EndPortalMeshGeneratorData>
 {
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
-        _wireframe = new();
-
         var b = .5f;
         var b0 = new Point(-b, 0, -b);
         var b1 = new Point(-b, 0, b);

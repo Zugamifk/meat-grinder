@@ -7,7 +7,7 @@ using MeshGenerator;
 [MeshGeneratorEditor(typeof(GearAssemblyMeshGenerator))]
 public class GearAssemblyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearAssemblyMeshGenerator, GearAssemblyMeshGeneratorData>
 {
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
 
     }

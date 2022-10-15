@@ -10,10 +10,8 @@ using UnityEditor;
 [MeshGeneratorEditor(typeof(GunTurretMeshGenerator))]
 public class GunTurretMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GunTurretMeshGenerator, GunTurretMeshGeneratorData>
 {
-    public override void BuildWireframe()
+    protected override void BuildWireframe()
     {
-        _wireframe = new();
-
         Func<float> w = () => _data.BaseDimensions.x / 2;
         Func<float> h = () => _data.BaseDimensions.y / 2;
 

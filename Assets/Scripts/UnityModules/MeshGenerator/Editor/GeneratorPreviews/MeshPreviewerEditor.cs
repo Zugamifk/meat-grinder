@@ -155,8 +155,11 @@ namespace MeshGenerator.Editor
 
         private void OnSceneGUI()
         {
-            var previewer = target as MeshPreviewer;
-            _currentEditor?.DrawSceneGUI(_rootTransform);
+            Debug.Log("Draw: " + _currentEditor);
+            if(_currentEditor!=null)
+            {
+                _currentEditor.DrawSceneGUI(_rootTransform);
+            }
         }
     }
 }

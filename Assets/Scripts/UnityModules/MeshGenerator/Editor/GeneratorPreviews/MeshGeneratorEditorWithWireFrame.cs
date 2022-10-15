@@ -38,6 +38,7 @@ namespace MeshGenerator.Editor
                 so.ApplyModifiedProperties();
                 EditorUtility.SetDirty(d);
                 OnPropertiesChanged();
+                RebuildWireframe();
             }
 
             DrawInspectorFields();
@@ -48,23 +49,30 @@ namespace MeshGenerator.Editor
 
         }
 
+        protected virtual void OnPropertiesChanged() { }
+
         public void DrawSceneGUI(Transform rootTransform)
         {
+            Debug.Log("DRAW: " + _wireframe);
             if (_wireframe != null)
             {
                 WireframeDrawer.Draw(_wireframe);
             }
         }
 
-        protected virtual void OnPropertiesChanged() { }
+        public void RebuildWireframe()
+        {
+            _wireframe = new();
+            BuildWireframe();
+        }
 
-        public abstract void BuildWireframe();
+        protected abstract void BuildWireframe();
 
         public void SetGenerator(IGeometryGenerator generator)
         {
             _generator = (TGenerator)generator;
             OnSetGenerator();
-            BuildWireframe();
+            RebuildWireframe();
         }
 
         protected virtual void OnSetGenerator()
