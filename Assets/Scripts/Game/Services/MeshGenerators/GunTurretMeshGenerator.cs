@@ -8,7 +8,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Gun Turret")]
 public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGeneratorData>
 {
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
         var result = new MeshGeneratorResult();
 
@@ -30,10 +30,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
 
         // receiver
         _builder.SetBone(1);
-        var mountedMatrix = Matrix4x4.TRS(
-            Data.MountPosition + new Vector3(0, h + Data.GunBounds.y),
-            Quaternion.AngleAxis(Data.MountedAngle, Vector3.up),
-            Vector3.one);
+        var mountedMatrix = GunTransform();
         _builder.PushMatrix(mountedMatrix);
         _builder.AddAxisAlignedBox(Data.GunBounds);
 
@@ -45,13 +42,23 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
             12,
             Vector3.forward,
             Data.BarrelDimensions.y);
+    }
 
+    protected override MeshGeneratorResult BuildResult()
+    {
+        var result =  base.BuildResult();
+        var mountedMatrix = GunTransform();
         var barrelEnd = mountedMatrix.MultiplyPoint3x4(new Vector3(0,0, Data.GunBounds.z + Data.BarrelDimensions.y));
         result.SpecialBones["BarrelEnd"] = barrelEnd;
-
-        result.Mesh = _builder.BuildMesh();
-
         return result;
+    }
+
+    Matrix4x4 GunTransform()
+    {
+        return Matrix4x4.TRS(
+            Data.MountPosition + new Vector3(0, Data.BaseDimensions.y / 2 + Data.GunBounds.y),
+            Quaternion.AngleAxis(Data.MountedAngle, Vector3.up),
+            Vector3.one);
     }
 
     protected override GunTurretMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().GunTurret;

@@ -19,7 +19,7 @@ namespace MeshGenerator
             new Vector3(1,1,0)
         };
 
-        protected override MeshGeneratorResult BuildMesh()
+        protected override void BuildMesh()
         {
             var p0 = _points[0];
             var p1 = _points[1];
@@ -36,10 +36,6 @@ namespace MeshGenerator
             _builder.AddQuad(p1, p2, p6, p5);
             _builder.AddQuad(p3, p7, p6, p2);
             _builder.AddQuad(p4, p5, p6, p7);
-
-            var result = new MeshGeneratorResult();
-            result.Mesh = _builder.BuildMesh();
-            return result;
         }
     }
 }

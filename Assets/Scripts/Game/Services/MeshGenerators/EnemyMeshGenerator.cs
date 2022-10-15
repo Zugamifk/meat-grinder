@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Enemy")]
 public class EnemyMeshGenerator : MeshGeneratorWithData<EnemyMeshGeneratorData>
 {
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
         var f = Data.Fatness;
         var p0 = new Vector3(-f, 0, -f);
@@ -46,10 +46,6 @@ public class EnemyMeshGenerator : MeshGeneratorWithData<EnemyMeshGeneratorData>
         _builder.AddQuad(p2, p3, p7, p6);
         _builder.AddQuad(p3, p0, p4, p7);
         _builder.AddQuad(p4, p5, p6, p7);
-
-        var result = new MeshGeneratorResult();
-        result.Mesh = _builder.BuildMesh();
-        return result;
     }
 
     protected override EnemyMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Enemy;

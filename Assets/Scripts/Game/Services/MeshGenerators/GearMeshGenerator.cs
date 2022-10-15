@@ -8,10 +8,8 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Gear")]
 public class GearMeshGenerator : MeshGeneratorWithData<GearMeshGeneratorData>
 {
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
-        var result = new MeshGeneratorResult();
-
         var ang = 360f / (float)Data.TeethCount;
         var d = Vector3.right;
         var toothRot = Quaternion.Euler(0, 0, ang * Data.ToothThickness);
@@ -60,9 +58,6 @@ public class GearMeshGenerator : MeshGeneratorWithData<GearMeshGeneratorData>
             _builder.AddQuad(p8, t2, t1, p5);
             _builder.AddQuad(t2, p8, p9, t5);
         }
-
-        result.Mesh = _builder.BuildMesh();
-        return result;
     }
 
     protected override GearMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Gear;

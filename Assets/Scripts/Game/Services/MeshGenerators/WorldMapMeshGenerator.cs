@@ -37,9 +37,8 @@ public class WorldMapMeshGenerator : MeshGeneratorWithData<WorldMapMeshGenerator
         }
     }
 
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
-        return new();
     }
 
     protected override WorldMapMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().WorldMap;

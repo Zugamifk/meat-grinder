@@ -11,10 +11,18 @@ namespace MeshGenerator
         public MeshGeneratorResult Generate()
         {
             _builder.Clear();
-            return BuildMesh();
+            BuildMesh();
+            return BuildResult();
         }
 
-        protected abstract MeshGeneratorResult BuildMesh();
+        protected virtual MeshGeneratorResult BuildResult()
+        {
+            var result = new MeshGeneratorResult();
+            result.Mesh = _builder.BuildMesh();
+            return result;
+        }
+
+        protected abstract void BuildMesh();
         public void Clear()
         {
             _builder.Clear();

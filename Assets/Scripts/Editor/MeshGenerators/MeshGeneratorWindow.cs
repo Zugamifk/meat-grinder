@@ -171,7 +171,7 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
         _stringBuilder.Append("}");
 
         File.Delete(GENERATOR_DATA_COLLECTION_PATH);
-        File.AppendAllText(GENERATOR_DATA_COLLECTION_PATH, _stringBuilder.ToString());
+        File.WriteAllText(GENERATOR_DATA_COLLECTION_PATH, _stringBuilder.ToString());
     }
 
 

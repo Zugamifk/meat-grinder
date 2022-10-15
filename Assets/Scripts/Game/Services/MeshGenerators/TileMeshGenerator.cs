@@ -14,7 +14,7 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         _tile = tile;
     }
 
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
         var grassColor = _tile.Type == ETileType.Wall ? Data.WallColor : Data.GrassColor;
         _builder.SetColor(grassColor);
@@ -79,10 +79,6 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         _builder.AddQuad(p74r3, p74r0, r0, r3);
 
         GenerateWallMeshes(p4, p5, p6, p7);
-
-        var result = new MeshGeneratorResult();
-        result.Mesh = _builder.BuildMesh();
-        return result;
     }
 
     void GenerateWallMeshes(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)

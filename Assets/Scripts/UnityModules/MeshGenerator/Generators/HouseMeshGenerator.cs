@@ -90,7 +90,7 @@ namespace MeshGenerator
             }
         }
 
-        protected override MeshGeneratorResult BuildMesh()
+        protected override void BuildMesh()
         {
             //base
             _builder.AddQuad(_basePoints[0].Position, _basePoints[1].Position, _basePoints[2].Position, _basePoints[3].Position);
@@ -104,10 +104,6 @@ namespace MeshGenerator
             _builder.AddQuad(_roofPoints[2].Position, _roofPoints[1].Position, _roofPoints[4].Position, _roofPoints[3].Position);
             _builder.AddQuad(_roofPoints[0].Position, _roofPoints[5].Position, _roofPoints[4].Position, _roofPoints[1].Position);
             _builder.AddQuad(_roofPoints[2].Position, _roofPoints[3].Position, _roofPoints[4].Position, _roofPoints[1].Position);
-
-            var result = new MeshGeneratorResult();
-            result.Mesh = _builder.BuildMesh();
-            return result;
         }
 
         public void BuildWireframe()

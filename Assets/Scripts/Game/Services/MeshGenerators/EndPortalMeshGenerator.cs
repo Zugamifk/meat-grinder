@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("End Portal")]
 public class EndPortalMeshGenerator : MeshGeneratorWithData<EndPortalMeshGeneratorData>
 {
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
         void AddColumn(float x, float y)
         {
@@ -55,10 +55,6 @@ public class EndPortalMeshGenerator : MeshGeneratorWithData<EndPortalMeshGenerat
 
         AddRoofStep(.5f, 0);
         AddRoofStep(.4f, Data.RoofThickness);
-
-        var result = new MeshGeneratorResult();
-        result.Mesh = _builder.BuildMesh();
-        return result;
     }
 
     protected override EndPortalMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().EndPortal;

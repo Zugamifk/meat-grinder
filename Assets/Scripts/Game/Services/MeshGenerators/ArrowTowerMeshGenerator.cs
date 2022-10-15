@@ -7,7 +7,7 @@ using MeshGenerator.Wireframe;
 [MeshGenerator("Arrow Tower")]
 public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGeneratorData>
 {
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {
         _builder.SetColor(Color.white);
         var top = new List<Vector3>();
@@ -35,10 +35,6 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGener
             top.Add(p);
         }
         _builder.AddPolygon(top);
-
-        var result = new MeshGeneratorResult();
-        result.Mesh = _builder.BuildMesh();
-        return result;
     }
 
     protected override ArrowTowerMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().ArrowTower;
