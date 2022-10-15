@@ -112,9 +112,8 @@ using MeshGenerator.Wireframe;
 [MeshGenerator(""{_meshGeneratorName}"")]
 public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorData>
 {{
-    protected override MeshGeneratorResult BuildMesh()
+    protected override void BuildMesh()
     {{
-        return new();
     }}
 
     protected override {_meshGeneratorName}MeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().{_meshGeneratorName};
