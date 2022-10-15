@@ -53,7 +53,6 @@ namespace MeshGenerator.Editor
 
         public void DrawSceneGUI(Transform rootTransform)
         {
-            Debug.Log("DRAW: " + _wireframe);
             if (_wireframe != null)
             {
                 WireframeDrawer.Draw(_wireframe);

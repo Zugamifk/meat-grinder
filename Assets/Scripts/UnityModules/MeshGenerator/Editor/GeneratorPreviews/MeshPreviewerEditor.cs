@@ -155,7 +155,6 @@ namespace MeshGenerator.Editor
 
         private void OnSceneGUI()
         {
-            Debug.Log("Draw: " + _currentEditor);
             if(_currentEditor!=null)
             {
                 _currentEditor.DrawSceneGUI(_rootTransform);
