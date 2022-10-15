@@ -5,6 +5,7 @@ using MeshGenerator.Editor;
 using MeshGenerator;
 using MeshGenerator.Wireframe;
 using System;
+using System.Runtime.InteropServices;
 
 [MeshGeneratorEditor(typeof(WorldMapMeshGenerator))]
 public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<WorldMapMeshGenerator, WorldMapMeshGeneratorData>
@@ -24,6 +25,7 @@ public class WorldMapMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<Worl
     {
         Func<float> w = () => _data.PatchDimensions.x;
         Func<float> h = () => _data.PatchDimensions.y;
+        Func<Vector2> ps = () => Vector2.Scale(_data.PatchGridSize, new Vector2(1/_data.PatchDimensions.x, 1/_data.PatchDimensions.y));
         _wireframe = new();
         var c0 = new Point();
         var c1 = new DynamicPoint(() => new Vector3(0, 0, h()));
