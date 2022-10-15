@@ -14,7 +14,7 @@ public class GearMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearMesh
 
     protected override void OnPropertiesChanged()
     {
-        if(_data.TeethCount != _currentTeeth)
+        if (_data.TeethCount != _currentTeeth)
         {
             BuildWireframe();
         }
@@ -31,23 +31,20 @@ public class GearMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearMesh
         Func<Quaternion> climbRot = () => Quaternion.Euler(0, 0, ang() * (0.5f - _data.ToothThickness));
         Func<float> r0 = () => _data.Radius;
         Func<float> r1 = () => r0() + _data.WorkingDepth;
+        var points = new List<IPoint>();
         for (int i = 0; i < _data.TeethCount; i++)
         {
             var d0 = d;
-            var p0 = new DynamicPoint(() => d0() * r0());
             Func<Vector3> d1 = () => toothRot() * d0();
-            var p1 = new DynamicPoint(() => d1() * r0());
             Func<Vector3> d2 = () => climbRot() * d1();
-            var p2 = new DynamicPoint(() => d2() * r1());
             Func<Vector3> d3 = () => toothRot() * d2();
-            var p3 = new DynamicPoint(() => d3() * r1());
             Func<Vector3> d4 = () => climbRot() * d3();
-            var p4 = new DynamicPoint(() => d4() * r0());
-            _wireframe.Connect(p0, p1);
-            _wireframe.Connect(p1, p2);
-            _wireframe.Connect(p2, p3);
-            _wireframe.Connect(p3, p4);
+            points.Add(new DynamicPoint(() => d0() * r0()));
+            points.Add(new DynamicPoint(() => d1() * r0()));
+            points.Add(new DynamicPoint(() => d2() * r1()));
+            points.Add(new DynamicPoint(() => d3() * r1()));
             d = d4;
         }
+        _wireframe.Prism(points, () => _data.GearThickness);
     }
 }

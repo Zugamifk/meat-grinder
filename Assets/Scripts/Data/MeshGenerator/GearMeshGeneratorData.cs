@@ -9,4 +9,5 @@ public class GearMeshGeneratorData : ScriptableObject
     public int TeethCount;
     public float WorkingDepth;
     public float ToothThickness;
+    public float GearThickness;
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace MeshGenerator.Wireframe
@@ -46,6 +47,21 @@ namespace MeshGenerator.Wireframe
                 Func<Vector3> p3 = () => p1() + direction * height();
                 Connect(new DynamicPoint(p2), new DynamicPoint(p3));
                 rot *= step;
+            }
+        }
+
+        public void Prism(IList<IPoint> points, Func<float> height)
+        {
+            Func<Vector3> n = () => Vector3.Cross((points[0].Position - points[1].Position).normalized, (points[2].Position - points[1].Position).normalized);
+            for(int i = 0; i <points.Count;i++)
+            {
+                var p0 = points[i];
+                var p1 = points[(i + 1) % points.Count];
+                Connect(p0, p1);
+                var p2 = new DynamicPoint(() => p0.Position + n() * height());
+                var p3 = new DynamicPoint(() => p1.Position + n() * height());
+                Connect(p2, p3);
+                Connect(p0, p2);
             }
         }
 
