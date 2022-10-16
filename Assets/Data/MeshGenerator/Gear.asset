@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed015fd893b6b544b567e4e4739cf69, type: 3}
   m_Name: Gear
   m_EditorClassIdentifier: 
-  Radius: 1.33
-  TeethCount: 19
-  WorkingDepth: 0.39
-  ToothThickness: 0.35
-  GearThickness: 1.62
-  AxelRadius: 0.67
+  Radius: 1.95
+  TeethCount: 7
+  WorkingDepth: 0.55
+  ToothThickness: 0.25
+  GearThickness: 1.56
+  AxelRadius: 1.27

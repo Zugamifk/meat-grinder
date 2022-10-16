@@ -15,7 +15,8 @@ MonoBehaviour:
   ArrowTower: {fileID: 11400000, guid: a8cdc51f1808e0b4eab1ff9385ccd451, type: 2}
   EndPortal: {fileID: 11400000, guid: d71500afb122150428fb5f8b24ed3138, type: 2}
   Enemy: {fileID: 11400000, guid: e3c0f18feacbab14ebf4a3bfaace0399, type: 2}
+  Gear: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
   GunTurret: {fileID: 11400000, guid: 06430954fee889046be9221435fddb5d, type: 2}
   Tile: {fileID: 11400000, guid: 1a4e06f28137694469b3494fee366070, type: 2}
   WorldMap: {fileID: 11400000, guid: a660f3e73a7029b478c0e723a1df2c6a, type: 2}
-  Gear: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
+  GearAssembly: {fileID: 11400000, guid: 17c44e7f93c165c4cae3337746428cf6, type: 2}

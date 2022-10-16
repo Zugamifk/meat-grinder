@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace MeshGenerator.Editor
 {
-    public abstract class MeshGeneratorEditorWithWireFrame<TGenerator, TData> : IMeshGeneratorEditor
+    public abstract class MeshGeneratorEditorWithWireFrame<TGenerator, TWireframeGenerator, TData> : IMeshGeneratorEditor
         where TGenerator : MeshGeneratorWithData<TData>
+        where TWireframeGenerator : WireframeGenerator<TData>, new()
         where TData : ScriptableObject
     {
-        protected Frame _wireframe = new();
-
         protected TGenerator _generator;
+
+        protected Wireframe _wireframe = new();
+        protected TWireframeGenerator _wireframeGenerator = new();
         protected TData _data => _generator.Data;
 
         public void DrawInspectorGUI()
@@ -62,10 +64,9 @@ namespace MeshGenerator.Editor
         public void RebuildWireframe()
         {
             _wireframe.Clear();
-            BuildWireframe();
+            _wireframeGenerator.Generate(_wireframe, _data);
         }
 
-        protected abstract void BuildWireframe();
 
         public void SetGenerator(IGeometryGenerator generator)
         {

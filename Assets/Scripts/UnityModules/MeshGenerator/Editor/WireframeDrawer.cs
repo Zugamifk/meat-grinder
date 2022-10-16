@@ -8,7 +8,7 @@ namespace MeshGenerator.Editor
 {
     public static class WireframeDrawer
     {
-        public static void Draw(Frame frame)
+        public static void Draw(Wireframe frame)
         {
             foreach(var e in frame.Edges)
             {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MeshGenerator.Wireframes
 {
-    public class Frame
+    public class Wireframe
     {
         public List<IPoint> Points = new();
         public List<Edge> Edges = new();
@@ -17,6 +17,11 @@ namespace MeshGenerator.Wireframes
             Points.Clear();
             Edges.Clear();
             Rings.Clear();
+        }
+
+        public void Connect(Vector3 a, Vector3 b)
+        {
+            Connect(new Point(a), new Point(b));
         }
 
         public void Connect(IPoint a, IPoint b)

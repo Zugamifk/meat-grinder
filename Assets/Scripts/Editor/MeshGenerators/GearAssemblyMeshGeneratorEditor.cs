@@ -5,11 +5,6 @@ using MeshGenerator.Editor;
 using MeshGenerator;
 
 [MeshGeneratorEditor(typeof(GearAssemblyMeshGenerator))]
-public class GearAssemblyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearAssemblyMeshGenerator, GearAssemblyMeshGeneratorData>
+public class GearAssemblyMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<GearAssemblyMeshGenerator, GearAssemblyWireframeGenerator, GearAssemblyMeshGeneratorData>
 {
-    protected override void BuildWireframe()
-    {
-        var gear1 = new GearAssemblyMeshGenerator();
-
-    }
 }

@@ -74,11 +74,11 @@ namespace MeshGenerator
         List<IPoint> _atticWallPoints = new();
 
         public GeometryData Data => _data;
-        public Frame Wireframe => _wireframe;
+        public Wireframe Wireframe => _wireframe;
 
         static GeometryData _data => GeometryData.Instance;
 
-        Frame _wireframe;
+        Wireframe _wireframe;
         IPoint[] _wallCorners;
 
         static HouseMeshGenerator()
