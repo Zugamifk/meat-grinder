@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 namespace MeshGenerator.Wireframes
 {
@@ -16,7 +18,7 @@ namespace MeshGenerator.Wireframes
         public void PushMatrix(Matrix4x4 matrix)
         {
             _stack.Push(_matrix);
-            _matrix = matrix;
+            _matrix = _matrix * matrix;
         }
 
         public void PopMatrix()
@@ -35,6 +37,8 @@ namespace MeshGenerator.Wireframes
 
         public void Connect(Vector3 a, Vector3 b)
         {
+            a = _matrix.MultiplyPoint3x4(a);
+            b = _matrix.MultiplyPoint3x4(b);
             Edges.Add(new Edge() { A = a, B = b });
         }
 
@@ -50,6 +54,18 @@ namespace MeshGenerator.Wireframes
         {
             Connect(points);
             Connect(points[0], points[points.Length - 1]);
+        }
+
+        public void AddRing(Vector3 baseCentre, float radius, Vector3 normal)
+        {
+            baseCentre = _matrix.MultiplyPoint3x4(baseCentre);
+            normal = _matrix.MultiplyVector(normal);
+            Rings.Add(new Ring()
+            {
+                Center = baseCentre,
+                Radius = radius,
+                Normal = normal
+            });
         }
 
         public void Prism(Vector3 baseCentre, float height, int sides, float radius, Vector3 direction)
@@ -114,14 +130,14 @@ namespace MeshGenerator.Wireframes
 
         public void Cuboid(float width, float height, float depth)
         {
-            var p0 = _matrix.MultiplyPoint3x4(new Vector3(-width, -height, -depth));
-            var p1 = _matrix.MultiplyPoint3x4(new Vector3(-width, -height, depth));
-            var p2 = _matrix.MultiplyPoint3x4(new Vector3(width, -height, depth));
-            var p3 = _matrix.MultiplyPoint3x4(new Vector3(width, -height, -depth));
-            var p4 = _matrix.MultiplyPoint3x4(new Vector3(-width, height, -depth));
-            var p5 = _matrix.MultiplyPoint3x4(new Vector3(-width, height, depth));
-            var p6 = _matrix.MultiplyPoint3x4(new Vector3(width, height, depth));
-            var p7 = _matrix.MultiplyPoint3x4(new Vector3(width, height, -depth));
+            var p0 = new Vector3(-width, -height, -depth);
+            var p1 = new Vector3(-width, -height, depth);
+            var p2 = new Vector3(width, -height, depth);
+            var p3 = new Vector3(width, -height, -depth);
+            var p4 = new Vector3(-width, height, -depth);
+            var p5 = new Vector3(-width, height, depth);
+            var p6 = new Vector3(width, height, depth);
+            var p7 = new Vector3(width, height, -depth);
 
             Connect(p0, p1);
             Connect(p1, p2);
@@ -139,22 +155,12 @@ namespace MeshGenerator.Wireframes
             Connect(p7, p4);
         }
 
-        public void Cylinder(Vector3 baseCentre, float radius, float length, Vector3 normal, Vector3 edgeTangent)
+        public void Cylinder(Vector3 baseCentre, float radius, float length, Vector3 normal)
         {
-            Rings.Add(new Ring()
-            {
-                Center = baseCentre,
-                Radius = radius,
-                Normal = normal
-            });
+            AddRing(baseCentre, radius, normal);
+            AddRing(baseCentre + normal * length, radius, normal);
 
-            Rings.Add(new Ring()
-            {
-                Center = baseCentre + normal * length,
-                Radius = radius,
-                Normal = normal
-            });
-
+            var edgeTangent = SceneView.lastActiveSceneView.camera.transform.forward;
             var edge = Vector3.Cross(edgeTangent, normal).normalized;
             var p0 = baseCentre + edge * radius;
             var p1 = baseCentre + -edge * radius;

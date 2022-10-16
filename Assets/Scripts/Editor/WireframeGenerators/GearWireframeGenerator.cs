@@ -30,6 +30,6 @@ public class GearWireframeGenerator : WireframeGenerator<GearMeshGeneratorData>
             d = d4;
         }
         wireframe.Prism(points, Vector3.forward, data.GearThickness);
-        wireframe.Cylinder(Vector3.zero, data.AxelRadius, data.GearThickness, Vector3.forward, SceneView.currentDrawingSceneView.camera.transform.forward);
+        wireframe.Cylinder(Vector3.zero, data.AxelRadius, data.GearThickness, Vector3.forward);
     }
 }

@@ -10,7 +10,7 @@ public class GunTurretWireframeGenerator : WireframeGenerator<GunTurretMeshGener
     protected override void BuildWireframe(Wireframe wireframe, GunTurretMeshGeneratorData data)
     {
         float w = data.BaseDimensions.x / 2;
-        float h = data.BaseDimensions.y / 2;
+        float h = data.BaseDimensions.y;
 
         var b0 = new Vector3(-w, 0, -w);
         var b1 = new Vector3(-w, 0, w);
@@ -35,7 +35,8 @@ public class GunTurretWireframeGenerator : WireframeGenerator<GunTurretMeshGener
         wireframe.Cylinder(new Vector3(0, 0, data.GunBounds.z),
             data.BarrelDimensions.x,
             data.BarrelDimensions.y,
-            gunMatrix.MultiplyVector(Vector3.forward),
-            SceneView.currentDrawingSceneView.camera.transform.forward);
+            Vector3.forward);
+
+        wireframe.PopMatrix();
     }
 }
