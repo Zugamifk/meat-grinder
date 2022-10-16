@@ -7,8 +7,8 @@ namespace MeshGenerator.Wireframes
 {
     public class Ring
     {
-        public IPoint Center;
-        public Func<float> Radius;
-        public Func<Vector3> Normal;
+        public Vector3 Center;
+        public float Radius;
+        public Vector3 Normal;
     }
 }

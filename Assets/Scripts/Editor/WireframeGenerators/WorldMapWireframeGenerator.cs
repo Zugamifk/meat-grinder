@@ -12,10 +12,10 @@ public class WorldMapWireframeGenerator : WireframeGenerator<WorldMapMeshGenerat
         var h = data.PatchDimensions.y;
         var ps = Vector2.Scale(data.PatchGridSize, new Vector2(1 / data.PatchDimensions.x, 1 / data.PatchDimensions.y));
 
-        var c0 = new Point();
-        var c1 = new DynamicPoint(() => new Vector3(0, 0, h));
-        var c2 = new DynamicPoint(() => new Vector3(w, 0, h));
-        var c3 = new DynamicPoint(() => new Vector3(w, 0, 0));
+        var c0 = Vector3.zero;
+        var c1 = new Vector3(0, 0, h);
+        var c2 = new Vector3(w, 0, h);
+        var c3 = new Vector3(w, 0, 0);
         wireframe.Connect(c0, c1);
         wireframe.Connect(c1, c2);
         wireframe.Connect(c2, c3);

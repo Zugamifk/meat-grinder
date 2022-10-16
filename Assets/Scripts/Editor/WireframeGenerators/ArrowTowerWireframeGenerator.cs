@@ -13,9 +13,9 @@ namespace MeshGenerator.Editor
             {
                 wireframe.Rings.Add(new Ring()
                 {
-                    Center = new DynamicPoint(() => new Vector3(0, t * data.Height, 0)),
-                    Normal = () => Vector3.up,
-                    Radius = () => Mathf.Lerp(data.RadiusMinMax.x, data.RadiusMinMax.y, data.TowerCurve.Evaluate(t))
+                    Center = new Vector3(0, t * data.Height, 0),
+                    Normal = Vector3.up,
+                    Radius = Mathf.Lerp(data.RadiusMinMax.x, data.RadiusMinMax.y, data.TowerCurve.Evaluate(t))
                 });
             }
 

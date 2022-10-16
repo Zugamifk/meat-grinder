@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class GearAssemblyWireframeGenerator : WireframeGenerator<GearAssemblyMeshGeneratorData>
 {
+    GearWireframeGenerator _gearGenerator = new();
+
     protected override void BuildWireframe(Wireframe wireframe, GearAssemblyMeshGeneratorData data)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

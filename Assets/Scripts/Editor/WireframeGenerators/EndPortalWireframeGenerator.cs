@@ -10,10 +10,10 @@ namespace MeshGenerator.Editor
         protected override void BuildWireframe(Wireframe wireframe, EndPortalMeshGeneratorData data)
         {
             var b = .5f;
-            var b0 = new Point(-b, 0, -b);
-            var b1 = new Point(-b, 0, b);
-            var b2 = new Point(b, 0, b);
-            var b3 = new Point(b, 0, -b);
+            var b0 = new Vector3(-b, 0, -b);
+            var b1 = new Vector3(-b, 0, b);
+            var b2 = new Vector3(b, 0, b);
+            var b3 = new Vector3(b, 0, -b);
 
             // base
             wireframe.Connect(b0, b1);
@@ -22,14 +22,14 @@ namespace MeshGenerator.Editor
             wireframe.Connect(b3, b0);
 
             // columns
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(-data.ColumnSpacing, 0, -data.ColumnSpacing)), () => data.Height, () => data.ColumnSize);
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(-data.ColumnSpacing, 0, data.ColumnSpacing)), () => data.Height, () => data.ColumnSize);
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(data.ColumnSpacing, 0, data.ColumnSpacing)), () => data.Height, () => data.ColumnSize);
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(data.ColumnSpacing, 0, -data.ColumnSpacing)), () => data.Height, () => data.ColumnSize);
+            wireframe.SquareColumn(new Vector3(-data.ColumnSpacing, 0, -data.ColumnSpacing), data.Height, data.ColumnSize);
+            wireframe.SquareColumn(new Vector3(-data.ColumnSpacing, 0, data.ColumnSpacing), data.Height, data.ColumnSize);
+            wireframe.SquareColumn(new Vector3(data.ColumnSpacing, 0, data.ColumnSpacing), data.Height, data.ColumnSize);
+            wireframe.SquareColumn(new Vector3(data.ColumnSpacing, 0, -data.ColumnSpacing), data.Height, data.ColumnSize);
 
             // roof
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, data.Height, 0)), () => data.RoofThickness, () => .5f);
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, data.Height + data.RoofThickness, 0)), () => data.RoofThickness, () => .4f);
+            wireframe.SquareColumn(new Vector3(0, data.Height, 0), data.RoofThickness, .5f);
+            wireframe.SquareColumn(new Vector3(0, data.Height + data.RoofThickness, 0), data.RoofThickness, .4f);
         }
     }
 }

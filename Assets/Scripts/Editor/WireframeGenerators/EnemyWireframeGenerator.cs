@@ -9,8 +9,8 @@ namespace MeshGenerator.Editor
     {
         protected override void BuildWireframe(Wireframe wireframe, EnemyMeshGeneratorData data)
         {
-            wireframe.SquareColumn(new Point(), () => data.Height, () => data.Fatness);
-            wireframe.SquareColumn(new DynamicPoint(() => new Vector3(0, data.Height, 0)), () => data.HeadHeight, () => data.HeadSize);
+            wireframe.SquareColumn(Vector3.zero, data.Height, data.Fatness);
+            wireframe.SquareColumn(new Vector3(0, data.Height, 0), data.HeadHeight, data.HeadSize);
         }
     }
 }

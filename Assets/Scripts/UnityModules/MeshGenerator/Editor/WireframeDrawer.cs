@@ -12,12 +12,12 @@ namespace MeshGenerator.Editor
         {
             foreach(var e in frame.Edges)
             {
-                Handles.DrawLine(e.A.Position, e.B.Position);
+                Handles.DrawLine(e.A, e.B);
             }
 
             foreach(var r in frame.Rings)
             {
-                Handles.DrawWireDisc(r.Center.Position, r.Normal(), r.Radius());
+                Handles.DrawWireDisc(r.Center, r.Normal, r.Radius);
             }
         }
     }

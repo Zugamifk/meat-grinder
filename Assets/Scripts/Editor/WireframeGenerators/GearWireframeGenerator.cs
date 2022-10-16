@@ -15,7 +15,7 @@ public class GearWireframeGenerator : WireframeGenerator<GearMeshGeneratorData>
         var climbRot = Quaternion.Euler(0, 0, ang * (0.5f - data.ToothThickness));
         var r0 = data.Radius;
         var r1 = r0 + data.WorkingDepth;
-        var points = new List<IPoint>();
+        var points = new List<Vector3>();
         for (int i = 0; i < data.TeethCount; i++)
         {
             var d0 = d;
@@ -23,13 +23,13 @@ public class GearWireframeGenerator : WireframeGenerator<GearMeshGeneratorData>
             var d2 = toothRot * d1;
             var d3 = climbRot * d2;
             var d4 = toothRot * d3;
-            points.Add(new Point(d0 * r0));
-            points.Add(new Point(d1 * r1));
-            points.Add(new Point(d2 * r1));
-            points.Add(new Point(d3 * r0));
+            points.Add(d0 * r0);
+            points.Add(d1 * r1);
+            points.Add(d2 * r1);
+            points.Add(d3 * r0);
             d = d4;
         }
-        wireframe.Prism(points, () => Vector3.forward, () => data.GearThickness);
-        wireframe.Cylinder(() => Vector3.zero, () => data.AxelRadius, () => data.GearThickness, () => Vector3.forward, () => SceneView.currentDrawingSceneView.camera.transform.forward);
+        wireframe.Prism(points, Vector3.forward, data.GearThickness);
+        wireframe.Cylinder(Vector3.zero, data.AxelRadius, data.GearThickness, Vector3.forward, SceneView.currentDrawingSceneView.camera.transform.forward);
     }
 }
