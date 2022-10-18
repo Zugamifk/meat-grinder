@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestGearAssembly
   m_EditorClassIdentifier: 
   gears:
-  - GeneratorData: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
+  - GeneratorData: {fileID: 11400000, guid: b21d853db9b2b6e4ca06b8c739b5bea5, type: 2}
     Position: {x: 1, y: 0, z: 0}
     RotationOffset: 0
-  - GeneratorData: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
+  - GeneratorData: {fileID: 11400000, guid: c2d3c189f4345c34c98efa83b0cad3e4, type: 2}
     Position: {x: -3.53, y: 0, z: 0}
     RotationOffset: 22.2

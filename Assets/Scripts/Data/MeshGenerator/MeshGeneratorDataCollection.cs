@@ -12,4 +12,5 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
     public TileMeshGeneratorData Tile;
     public WorldMapMeshGeneratorData WorldMap;
     public GearAssemblyMeshGeneratorData GearAssembly;
+    public ShipMeshGeneratorData Ship;
 }

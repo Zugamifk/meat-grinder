@@ -16,6 +16,7 @@ public class MeshGeneratorWindow : EditorWindow
     const string DATA_SCRIPT_PATH = "Assets/Scripts/Data/MeshGenerator";
     const string DATA_ASSET_PATH = "Assets/Data/MeshGenerator";
     const string GENERATOR_SCRIPT_PATH = "Assets/Scripts/Game/Services/MeshGenerators";
+    const string WIREFRAME_GENERATOR_SCRIPT_PATH = "Assets/Scripts/Game/Services/WireframeGenerators";
     const string GENERATOR_EDITOR_SCRIPT_PATH = "Assets/Scripts/Editor/MeshGenerators";
     const string GENERATOR_DATA_COLLECTION_PATH = "Assets/Scripts/Data/MeshGenerator/MeshGeneratorDataCollection.cs";
 
@@ -68,6 +69,7 @@ public class MeshGeneratorWindow : EditorWindow
         AssetDatabase.Refresh();
 
         CreateGeneratorScript();
+        CreateWireframeGeneratorScript();
         CreateEditorScript();
         RegenerateMeshGeneratorDataCollectionScript();
 
@@ -107,7 +109,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using MeshGenerator;
 using System;
-using MeshGenerator.Wireframe;
 
 [MeshGenerator(""{_meshGeneratorName}"")]
 public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorData>
@@ -123,6 +124,28 @@ public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorDat
             GENERATOR_SCRIPT_PATH);
     }
 
+    void CreateWireframeGeneratorScript()
+    {
+        var name = $"{_meshGeneratorName}WireframeGenerator";
+        CreateScript($@"using MeshGenerator.Editor;
+using MeshGenerator.Wireframes;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+public class {name} : WireframeGenerator<{_meshGeneratorName}GeneratorData>
+{{
+    protected override void BuildWireframe(Wireframe wireframe, {_meshGeneratorName}GeneratorData data)
+    {{
+
+    }}
+}}
+",
+            name,
+            WIREFRAME_GENERATOR_SCRIPT_PATH);
+    }
+
     void CreateEditorScript()
     {
         var name = $"{_meshGeneratorName}MeshGeneratorEditor";
@@ -135,10 +158,7 @@ using MeshGenerator;
 [MeshGeneratorEditor(typeof({_meshGeneratorName}MeshGenerator))]
 public class {name} : MeshGeneratorEditorWithWireFrame<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}MeshGeneratorData>
 {{
-    public override void BuildWireframe()
-    {{
 
-    }}
 }}
 ",
             name,

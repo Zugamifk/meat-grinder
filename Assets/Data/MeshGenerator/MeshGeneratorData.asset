@@ -20,3 +20,4 @@ MonoBehaviour:
   Tile: {fileID: 11400000, guid: 1a4e06f28137694469b3494fee366070, type: 2}
   WorldMap: {fileID: 11400000, guid: a660f3e73a7029b478c0e723a1df2c6a, type: 2}
   GearAssembly: {fileID: 11400000, guid: 17c44e7f93c165c4cae3337746428cf6, type: 2}
+  Ship: {fileID: 11400000, guid: 8c8e5885d21225845a2a2350a4cf0dd7, type: 2}
