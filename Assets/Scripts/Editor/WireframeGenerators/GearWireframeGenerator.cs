@@ -9,7 +9,7 @@ public class GearWireframeGenerator : WireframeGenerator<GearMeshGeneratorData>
 {
     protected override void BuildWireframe(Wireframe wireframe, GearMeshGeneratorData data)
     {
-        var ang = 360f / (float)data.TeethCount;
+        var ang = 360f / (float)data.TeethCount;    
         var d = Vector3.right;
         var toothRot = Quaternion.Euler(0, 0, ang * data.ToothThickness);
         var climbRot = Quaternion.Euler(0, 0, ang * (0.5f - data.ToothThickness));

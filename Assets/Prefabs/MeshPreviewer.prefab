@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 0}
-  _meshType: Gear
+  _meshType: GearAssembly
   _generatorTransform: {fileID: 1931500580171676400}
 --- !u!1 &1931500580797686937
 GameObject:

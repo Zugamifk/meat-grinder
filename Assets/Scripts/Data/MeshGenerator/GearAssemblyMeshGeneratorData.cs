@@ -5,5 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Data/Mesh Generators/GearAssembly")]
 public class GearAssemblyMeshGeneratorData : ScriptableObject
 {
-    public GearMeshGeneratorData[] gears;
+    [System.Serializable]
+    public class GearInfo
+    {
+        public GearMeshGeneratorData GeneratorData;
+        public Vector3 Position;
+        public float RotationOffset;
+    }
+
+    public GearInfo[] gears;
 }

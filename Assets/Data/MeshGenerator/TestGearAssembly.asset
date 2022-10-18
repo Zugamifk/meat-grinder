@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392ccf34622399349a10cd0694904faa, type: 3}
   m_Name: TestGearAssembly
   m_EditorClassIdentifier: 
+  gears:
+  - GeneratorData: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
+    Position: {x: 1, y: 0, z: 0}
+    RotationOffset: 0
+  - GeneratorData: {fileID: 11400000, guid: a58da60b82bd66044b123fe65c426399, type: 2}
+    Position: {x: -3.53, y: 0, z: 0}
+    RotationOffset: 22.2

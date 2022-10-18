@@ -17,14 +17,15 @@ namespace MeshGenerator.Editor
         protected TWireframeGenerator _wireframeGenerator = new();
         protected TData _data => _generator.Data;
 
+        protected SerializedObject _data_serObj;
+
         public void DrawInspectorGUI()
         {
-            var d = _generator.Data;
+            _data_serObj.Update();
 
             EditorGUI.BeginChangeCheck();
 
-            var so = new SerializedObject(d);
-            var iter = so.GetIterator();
+            var iter = _data_serObj.GetIterator();
             if (iter.NextVisible(true))
             {
                 iter.NextVisible(false);
@@ -37,8 +38,7 @@ namespace MeshGenerator.Editor
 
             if (EditorGUI.EndChangeCheck())
             {
-                so.ApplyModifiedProperties();
-                EditorUtility.SetDirty(d);
+                _data_serObj.ApplyModifiedProperties();
                 OnPropertiesChanged();
                 RebuildWireframe();
             }
@@ -71,6 +71,8 @@ namespace MeshGenerator.Editor
         public void SetGenerator(IGeometryGenerator generator)
         {
             _generator = (TGenerator)generator;
+            _data_serObj = new SerializedObject(_generator.Data);
+
             OnSetGenerator();
             RebuildWireframe();
         }
