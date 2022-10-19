@@ -16,7 +16,7 @@ public class MeshGeneratorWindow : EditorWindow
     const string DATA_SCRIPT_PATH = "Assets/Scripts/Data/MeshGenerator";
     const string DATA_ASSET_PATH = "Assets/Data/MeshGenerator";
     const string GENERATOR_SCRIPT_PATH = "Assets/Scripts/Game/Services/MeshGenerators";
-    const string WIREFRAME_GENERATOR_SCRIPT_PATH = "Assets/Scripts/Game/Services/WireframeGenerators";
+    const string WIREFRAME_GENERATOR_SCRIPT_PATH = "Assets/Scripts/Editor/WireframeGenerators";
     const string GENERATOR_EDITOR_SCRIPT_PATH = "Assets/Scripts/Editor/MeshGenerators";
     const string GENERATOR_DATA_COLLECTION_PATH = "Assets/Scripts/Data/MeshGenerator/MeshGeneratorDataCollection.cs";
 
