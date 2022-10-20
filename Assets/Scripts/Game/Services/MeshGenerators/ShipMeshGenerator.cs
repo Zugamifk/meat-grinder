@@ -7,8 +7,9 @@ using System;
 [MeshGenerator("Ship")]
 public class ShipMeshGenerator : MeshGeneratorWithData<ShipMeshGeneratorData>
 {
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
+
     }
 
     protected override ShipMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Ship;

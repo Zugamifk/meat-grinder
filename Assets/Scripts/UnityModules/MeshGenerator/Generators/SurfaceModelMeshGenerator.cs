@@ -22,11 +22,11 @@ namespace MeshGenerator.Surfaces
             //_model = smb.ConvertMesh(m);
         }
 
-        protected override void BuildMesh()
+        protected override void BuildMesh(MeshBuilder builder)
         {
             foreach(var f in _model.Faces)
             {
-                _builder.AddPolygon(f.HalfEdge.Loop().Select(he => he.Vertex.Position).ToArray());
+                builder.AddPolygon(f.HalfEdge.Loop().Select(he => he.Vertex.Position).ToArray());
             }
         }
     }

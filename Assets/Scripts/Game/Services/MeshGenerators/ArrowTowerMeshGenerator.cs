@@ -7,9 +7,9 @@ using MeshGenerator.Wireframes;
 [MeshGenerator("Arrow Tower")]
 public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGeneratorData>
 {
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
-        _builder.SetColor(Color.white);
+        builder.SetColor(Color.white);
         var top = new List<Vector3>();
         for (float a0 = 0; a0 < 360; a0 += Data.Angle)
         {
@@ -27,14 +27,14 @@ public class ArrowTowerMeshGenerator : MeshGeneratorWithData<ArrowTowerMeshGener
                 var p1 = new Vector3(0, t * Data.Height, 0) + d1 * r0;
                 var p2 = new Vector3(0, (t + layerStep) * Data.Height, 0) + d1 * r1;
                 var p3 = new Vector3(0, (t + layerStep) * Data.Height, 0) + d0 * r1;
-                _builder.AddQuad(p0, p1, p2, p3);
+                builder.AddQuad(p0, p1, p2, p3);
             }
             var tt = Data.TowerCurve.Evaluate(1);
             var r = Mathf.Lerp(Data.RadiusMinMax.x, Data.RadiusMinMax.y, tt);
             var p = new Vector3(0, Data.Height, 0) + d0 * r;
             top.Add(p);
         }
-        _builder.AddPolygon(top);
+        builder.AddPolygon(top);
     }
 
     protected override ArrowTowerMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().ArrowTower;

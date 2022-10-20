@@ -37,7 +37,7 @@ public class WorldMapMeshGenerator : MeshGeneratorWithData<WorldMapMeshGenerator
         }
     }
 
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
     }
 

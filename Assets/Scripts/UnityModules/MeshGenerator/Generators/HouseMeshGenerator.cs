@@ -90,20 +90,20 @@ namespace MeshGenerator
             }
         }
 
-        protected override void BuildMesh()
+        protected override void BuildMesh(MeshBuilder builder)
         {
             //base
-            _builder.AddQuad(_basePoints[0], _basePoints[1], _basePoints[2], _basePoints[3]);
+            builder.AddQuad(_basePoints[0], _basePoints[1], _basePoints[2], _basePoints[3]);
 
             //walls
-            _builder.AddTriangle(_atticWallPoints[0], _atticWallPoints[1], _atticWallPoints[2]);
-            _builder.AddTriangle(_atticWallPoints[3], _atticWallPoints[4], _atticWallPoints[5]);
+            builder.AddTriangle(_atticWallPoints[0], _atticWallPoints[1], _atticWallPoints[2]);
+            builder.AddTriangle(_atticWallPoints[3], _atticWallPoints[4], _atticWallPoints[5]);
 
             //roof
-            _builder.AddQuad(_roofPoints[0], _roofPoints[1], _roofPoints[4], _roofPoints[5]);
-            _builder.AddQuad(_roofPoints[2], _roofPoints[1], _roofPoints[4], _roofPoints[3]);
-            _builder.AddQuad(_roofPoints[0], _roofPoints[5], _roofPoints[4], _roofPoints[1]);
-            _builder.AddQuad(_roofPoints[2], _roofPoints[3], _roofPoints[4], _roofPoints[1]);
+            builder.AddQuad(_roofPoints[0], _roofPoints[1], _roofPoints[4], _roofPoints[5]);
+            builder.AddQuad(_roofPoints[2], _roofPoints[1], _roofPoints[4], _roofPoints[3]);
+            builder.AddQuad(_roofPoints[0], _roofPoints[5], _roofPoints[4], _roofPoints[1]);
+            builder.AddQuad(_roofPoints[2], _roofPoints[3], _roofPoints[4], _roofPoints[1]);
         }
 
         public void BuildWireframe()

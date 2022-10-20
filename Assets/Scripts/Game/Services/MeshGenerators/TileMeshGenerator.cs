@@ -14,10 +14,10 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         _tile = tile;
     }
 
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
         var grassColor = _tile.Type == ETileType.Wall ? Data.WallColor : Data.GrassColor;
-        _builder.SetColor(grassColor);
+        builder.SetColor(grassColor);
 
         var w = .5f;
         var h = _tile.Height * Data.TileStepHeight;
@@ -36,11 +36,11 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         var p6 = new Vector3(w, h, w);
         var p7 = new Vector3(w, h, -w);
 
-        _builder.AddQuad(p0, p3, p2, p1);
-        _builder.AddQuad(p0, p4, p7, p3);
-        _builder.AddQuad(p0, p1, p5, p4);
-        _builder.AddQuad(p1, p2, p6, p5);
-        _builder.AddQuad(p3, p7, p6, p2);
+        builder.AddQuad(p0, p3, p2, p1);
+        builder.AddQuad(p0, p4, p7, p3);
+        builder.AddQuad(p0, p1, p5, p4);
+        builder.AddQuad(p1, p2, p6, p5);
+        builder.AddQuad(p3, p7, p6, p2);
 
         // top, with road slices
         var r = w * Data.PathWidth;
@@ -58,54 +58,54 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         var p74r3 = new Vector3(r, h, -w);
         var p74r0 = new Vector3(-r, h, -w);
 
-        _builder.AddQuad(p4, p45r0, r0, p74r0);
-        _builder.AddQuad(p5, p56r1, r1, p45r1);
-        _builder.AddQuad(p6, p67r2, r2, p56r2);
-        _builder.AddQuad(p7, p74r3, r3, p67r3);
+        builder.AddQuad(p4, p45r0, r0, p74r0);
+        builder.AddQuad(p5, p56r1, r1, p45r1);
+        builder.AddQuad(p6, p67r2, r2, p56r2);
+        builder.AddQuad(p7, p74r3, r3, p67r3);
 
-        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.Type));
-        _builder.AddQuad(r0, r1, r2, r3);
+        if (_tile.Type != ETileType.Wall) builder.SetColor(GetColor(_tile.Type));
+        builder.AddQuad(r0, r1, r2, r3);
 
-        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.WestEdge.Type));
-        _builder.AddQuad(p45r0, p45r1, r1, r0);
+        if (_tile.Type != ETileType.Wall) builder.SetColor(GetColor(_tile.WestEdge.Type));
+        builder.AddQuad(p45r0, p45r1, r1, r0);
 
-        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.NorthEdge.Type));
-        _builder.AddQuad(p56r1, p56r2, r2, r1);
+        if (_tile.Type != ETileType.Wall) builder.SetColor(GetColor(_tile.NorthEdge.Type));
+        builder.AddQuad(p56r1, p56r2, r2, r1);
 
-        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.EastEdge.Type));
-        _builder.AddQuad(p67r2, p67r3, r3, r2);
+        if (_tile.Type != ETileType.Wall) builder.SetColor(GetColor(_tile.EastEdge.Type));
+        builder.AddQuad(p67r2, p67r3, r3, r2);
 
-        if (_tile.Type != ETileType.Wall) _builder.SetColor(GetColor(_tile.SouthEdge.Type));
-        _builder.AddQuad(p74r3, p74r0, r0, r3);
+        if (_tile.Type != ETileType.Wall) builder.SetColor(GetColor(_tile.SouthEdge.Type));
+        builder.AddQuad(p74r3, p74r0, r0, r3);
 
-        GenerateWallMeshes(p4, p5, p6, p7);
+        GenerateWallMeshes(builder, p4, p5, p6, p7);
     }
 
-    void GenerateWallMeshes(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+    void GenerateWallMeshes(MeshBuilder builder, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
-        _builder.SetColor(Data.WallColor);
+        builder.SetColor(Data.WallColor);
         if (_tile.NorthEdge.Type == ETileType.Wall)
         {
-            AddWallMesh(p1, p2);
+            AddWallMesh(builder, p1, p2);
         }
 
         if (_tile.SouthEdge.Type == ETileType.Wall)
         {
-            AddWallMesh(p3, p0);
+            AddWallMesh(builder, p3, p0);
         }
 
         if (_tile.WestEdge.Type == ETileType.Wall)
         {
-            AddWallMesh(p0, p1);
+            AddWallMesh(builder, p0, p1);
         }
 
         if (_tile.EastEdge.Type == ETileType.Wall)
         {
-            AddWallMesh(p2, p3);
+            AddWallMesh(builder, p2, p3);
         }
     }
 
-    void AddWallMesh(Vector3 p0, Vector3 p1)
+    void AddWallMesh(MeshBuilder builder, Vector3 p0, Vector3 p1)
     {
         var wallInset = Vector3.Cross(p0 - p1, Vector3.up).normalized * Data.WallInset;
 
@@ -120,10 +120,10 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         var p2 = p0 + Vector3.up;
         var p3 = p1 + Vector3.up;
 
-        _builder.AddQuad(i0, w0, w1, i1);
-        _builder.AddQuad(w0, w2, w3, w1);
-        _builder.AddQuad(i2, i3, w3, w2);
-        _builder.AddQuad(i2, p2, p3, i3);
+        builder.AddQuad(i0, w0, w1, i1);
+        builder.AddQuad(w0, w2, w3, w1);
+        builder.AddQuad(i2, i3, w3, w2);
+        builder.AddQuad(i2, p2, p3, i3);
     }
 
     protected override TileMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Tile;

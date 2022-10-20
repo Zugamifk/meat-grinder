@@ -8,7 +8,7 @@ using MeshGenerator.Wireframes;
 [MeshGenerator("Gun Turret")]
 public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGeneratorData>
 {
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
         var result = new MeshGeneratorResult();
 
@@ -23,20 +23,20 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
         var mp = new Vector3(0, h, 0);
 
         // base 
-        _builder.AddTriangle(b0,b1,mp);
-        _builder.AddTriangle(b1,b2,mp);
-        _builder.AddTriangle(b2,b3,mp);
-        _builder.AddTriangle(b3,b0,mp);
+        builder.AddTriangle(b0,b1,mp);
+        builder.AddTriangle(b1,b2,mp);
+        builder.AddTriangle(b2,b3,mp);
+        builder.AddTriangle(b3,b0,mp);
 
         // receiver
-        _builder.SetBone(1);
+        builder.SetBone(1);
         var mountedMatrix = GunTransform();
-        _builder.PushMatrix(mountedMatrix);
-        _builder.AddAxisAlignedBox(Data.GunBounds);
+        builder.PushMatrix(mountedMatrix);
+        builder.AddAxisAlignedBox(Data.GunBounds);
 
         // barrel
-        _builder.SetBone(2);
-        _builder.AddPrism(
+        builder.SetBone(2);
+        builder.AddPrism(
             new Vector3(0,0,Data.GunBounds.z),
             Data.BarrelDimensions.x,
             12,

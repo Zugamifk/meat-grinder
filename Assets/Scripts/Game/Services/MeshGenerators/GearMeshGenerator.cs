@@ -8,7 +8,7 @@ using MeshGenerator.Wireframes;
 [MeshGenerator("Gear")]
 public class GearMeshGenerator : MeshGeneratorWithData<GearMeshGeneratorData>
 {
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {
         var ang = 360f / (float)Data.TeethCount;
         var d = Vector3.right;
@@ -38,25 +38,25 @@ public class GearMeshGenerator : MeshGeneratorWithData<GearMeshGeneratorData>
             var p4 = d * r0;
             var t4 = d * r2;
             var t5 = t4 + oppStep;
-            _builder.AddQuad(p2, p1, p0, p3);
+            builder.AddQuad(p2, p1, p0, p3);
 
             var p5 = p0 + oppStep;
             var p6 = p1 + oppStep;
             var p7 = p2 + oppStep;
             var p8 = p3 + oppStep;
             var p9 = p4 + oppStep;
-            _builder.AddQuad(p5, p6, p7, p8);
-            _builder.AddQuad(p0, p1, p6, p5);
-            _builder.AddQuad(p1, p2, p7, p6);
-            _builder.AddQuad(p2, p3, p8, p7);
-            _builder.AddQuad(p3, p4, p9, p8);
+            builder.AddQuad(p5, p6, p7, p8);
+            builder.AddQuad(p0, p1, p6, p5);
+            builder.AddQuad(p1, p2, p7, p6);
+            builder.AddQuad(p2, p3, p8, p7);
+            builder.AddQuad(p3, p4, p9, p8);
 
-            _builder.AddQuad(t0, t1, t2, t3);
-            _builder.AddQuad(t4, t3, t2, t5);
-            _builder.AddQuad(t0, t3, p3, p0);
-            _builder.AddQuad(p4, p3, t3, t4);
-            _builder.AddQuad(p8, t2, t1, p5);
-            _builder.AddQuad(t2, p8, p9, t5);
+            builder.AddQuad(t0, t1, t2, t3);
+            builder.AddQuad(t4, t3, t2, t5);
+            builder.AddQuad(t0, t3, p3, p0);
+            builder.AddQuad(p4, p3, t3, t4);
+            builder.AddQuad(p8, t2, t1, p5);
+            builder.AddQuad(t2, p8, p9, t5);
         }
     }
 

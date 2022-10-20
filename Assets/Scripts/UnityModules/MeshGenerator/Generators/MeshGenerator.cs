@@ -6,12 +6,12 @@ namespace MeshGenerator
 {
     public abstract class MeshGenerator : IGeometryGenerator
     {
-        protected MeshBuilder _builder = new();
+        private MeshBuilder _builder = new();
 
         public MeshGeneratorResult Generate()
         {
             _builder.Clear();
-            BuildMesh();
+            BuildMesh(_builder);
             return BuildResult();
         }
 
@@ -22,7 +22,7 @@ namespace MeshGenerator
             return result;
         }
 
-        protected abstract void BuildMesh();
+        protected abstract void BuildMesh(MeshBuilder builder);
         public void Clear()
         {
             _builder.Clear();
