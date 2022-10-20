@@ -28,7 +28,8 @@ public class WorldMapWireframeGenerator : WireframeGenerator<WorldMapMeshGenerat
 
         Vector3 GetOffset(int x, int y)
         {
-            return Random.insideUnitCircle;
+            var v = RandomMapping.Vector2(x, y).normalized;
+            return new Vector3(v.x, 0, v.y);
         }
 
         for (int x = 0; x < gx; x++)

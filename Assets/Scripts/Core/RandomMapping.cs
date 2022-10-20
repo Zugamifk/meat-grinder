@@ -14,28 +14,28 @@ public static class RandomMapping
 
     public static Vector2 Vector2(int x, int y)
     {
-        SetSeed((uint)x);
+        SetSeed((uint)x.GetHashCode());
         float xf = RandomFloat();
-        SetSeed((uint)y);
+        SetSeed((uint)y.GetHashCode());
         float yf = RandomFloat();
         return new Vector2(xf, yf);
     }
 
     public static float RandomFloat()
     {
-        FillBuffer(32);
+        FillBuffer(4);
         return BitConverter.ToSingle(_buffer);
     }
 
     public static int RandomInt()
     {
-        FillBuffer(32);
+        FillBuffer(4);
         return BitConverter.ToInt32(_buffer);
     }
 
     public static ulong RandomIntLong()
     {
-        FillBuffer(64);
+        FillBuffer(8);
         return BitConverter.ToUInt64(_buffer);
     }
 
