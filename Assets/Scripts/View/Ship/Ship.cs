@@ -17,6 +17,11 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
         _identifiable.Id = model.Id;
     }
 
+    void Awake()
+    {
+        _identifiable = GetComponent<Identifiable>();
+    }
+
     private void Start()
     {
         AssignMesh<ShipMeshGenerator>(_meshFilter);

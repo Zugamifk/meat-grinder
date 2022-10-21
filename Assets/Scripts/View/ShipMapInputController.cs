@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class ShipMapInputController : MonoBehaviour
 {
     Vector2 _lastMousePosition;
 

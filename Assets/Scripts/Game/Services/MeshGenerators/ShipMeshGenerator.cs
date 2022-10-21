@@ -9,6 +9,7 @@ public class ShipMeshGenerator : MeshGeneratorWithData<ShipMeshGeneratorData>
 {
     protected override void BuildMesh(MeshBuilder builder)
     {
+        builder.SetColor(Color.green);
         builder.AddAxisAlignedBox(new Vector3(1, 1, 3));
     }
 

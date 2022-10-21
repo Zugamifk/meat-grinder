@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4616532609948054243}
   - component: {fileID: 4616532609948054240}
+  - component: {fileID: 8492061950494171957}
   m_Layer: 0
   m_Name: TestShip
   m_TagString: Untagged
@@ -46,6 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshFilter: {fileID: 4616532611897586640}
+--- !u!114 &8492061950494171957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616532609948054242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a026304af239046a2c06c7bd7fed06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4616532611897586653
 GameObject:
   m_ObjectHideFlags: 0
