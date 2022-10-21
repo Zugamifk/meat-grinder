@@ -14,6 +14,8 @@ public partial class GameModel : IGameModel
     public IdentifiableCollection<ProjectileModel> Projectiles = new();
     public IdentifiableCollection<ShipModel> Ships = new();
 
+    public Guid PlayerShipId { get; set; } = Guid.NewGuid();
+
     public WaveModel CurrentWave { get; set; }
     public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
 
