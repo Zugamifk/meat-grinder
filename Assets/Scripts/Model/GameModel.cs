@@ -12,6 +12,7 @@ public partial class GameModel : IGameModel
     public IdentifiableCollection<BuildingModel> Buildings = new();
     public IdentifiableCollection<WeaponModel> Weapons = new();
     public IdentifiableCollection<ProjectileModel> Projectiles = new();
+    public IdentifiableCollection<ShipModel> Ships = new();
 
     public WaveModel CurrentWave { get; set; }
     public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
@@ -58,10 +59,12 @@ public partial class GameModel : IGameModel
     IShipMapModel IGameModel.ShipMap => ShipMap;
     IWaveModel IGameModel.CurrentWave => CurrentWave;
     IIdentifiableLookup<IEnemySpawnModel> IGameModel.Spawns => Spawns;
-    IIdentifiableLookup<IEnemyModel> IGameModel.SpawnedEnemies => SpawnedEnemies;
+    IIdentifiableLookup<IEnemyModel> IGameModel.Enemies => SpawnedEnemies;
     IIdentifiableLookup<IBuildingModel> IGameModel.Buildings => Buildings;
     IIdentifiableLookup<IWeaponModel> IGameModel.Weapons => Weapons;
     IIdentifiableLookup<IProjectileModel> IGameModel.Projectiles => Projectiles;
+    IIdentifiableLookup<IShipModel> IGameModel.Ships => Ships;
+
     ICameraModel IGameModel.Camera => Camera;
     #endregion
 

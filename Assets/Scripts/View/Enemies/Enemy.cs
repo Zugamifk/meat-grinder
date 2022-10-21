@@ -36,7 +36,7 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
 
     private void Update()
     {
-        var enemy = Game.Model.SpawnedEnemies.GetItem(_identifiable.Id);
+        var enemy = Game.Model.Enemies.GetItem(_identifiable.Id);
         if (enemy == null)
         {
             return;

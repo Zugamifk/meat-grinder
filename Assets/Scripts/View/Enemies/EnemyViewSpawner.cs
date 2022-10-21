@@ -6,9 +6,9 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemyViewSpawner : RegisteredPrefabViewSpawner<IEnemyModel, Enemy>
 {
-    protected override IEnumerable<IEnemyModel> AllModels() => Game.Model.SpawnedEnemies.AllItems;
+    protected override IEnumerable<IEnemyModel> AllModels() => Game.Model.Enemies.AllItems;
 
-    protected override IEnemyModel GetModel(Guid id) => Game.Model.SpawnedEnemies.GetItem(id);
+    protected override IEnemyModel GetModel(Guid id) => Game.Model.Enemies.GetItem(id);
 
     protected override void SpawnedView(IEnemyModel model, Enemy view)
     {
