@@ -100,15 +100,19 @@ namespace MeshGenerator
 
         public void AddAxisAlignedBox(Vector3 dimensions)
         {
+            var x = dimensions.x / 2;
+            var y = dimensions.y / 2;
+            var z = dimensions.z / 2;
+
             AddCubic(
-                new Vector3(-dimensions.x, -dimensions.y, -dimensions.z),
-                new Vector3(-dimensions.x, -dimensions.y, dimensions.z),
-                new Vector3(dimensions.x, -dimensions.y, dimensions.z),
-                new Vector3(dimensions.x, -dimensions.y, -dimensions.z),
-                new Vector3(-dimensions.x, dimensions.y, -dimensions.z),
-                new Vector3(-dimensions.x, dimensions.y, dimensions.z),
-                new Vector3(dimensions.x, dimensions.y, dimensions.z),
-                new Vector3(dimensions.x, dimensions.y, -dimensions.z)
+                new Vector3(-x, -y, -z),
+                new Vector3(-x, -y, z),
+                new Vector3(x, -y, z),
+                new Vector3(x, -y, -z),
+                new Vector3(-x, y, -z),
+                new Vector3(-x, y, z),
+                new Vector3(x, y, z),
+                new Vector3(x, y, -z)
             );
         }
 

@@ -7,6 +7,8 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
 {
     [SerializeField]
     MeshFilter _meshFilter;
+    [SerializeField]
+    InputHandler _inputHandler;
 
     Identifiable _identifiable;
 
@@ -15,6 +17,7 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
     public void InitializeFromModel(IShipModel model)
     {
         _identifiable.Id = model.Id;
+        _inputHandler.Id = model.Id;
     }
 
     void Awake()
