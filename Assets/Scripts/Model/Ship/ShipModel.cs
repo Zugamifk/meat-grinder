@@ -8,4 +8,6 @@ public class ShipModel : IShipModel
     public Guid Id { get; } = Guid.NewGuid(); 
 
     public string Key { get; set; }
+
+    public ShipMovementModel Movement { get; } = new();
 }

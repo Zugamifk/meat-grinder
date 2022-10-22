@@ -8,7 +8,7 @@ public class EnemyModel : IEnemyModel
     public Guid Id { get; } = Guid.NewGuid();
 
     public string Key { get; set; } = "Enemy";
-    public MovementModel Movement { get; } = new();
+    public PathMovementModel Movement { get; } = new();
 
     public Vector3 Position => Movement.CurrentPosition;
     public Vector3 TargetOffset { get; set; }
