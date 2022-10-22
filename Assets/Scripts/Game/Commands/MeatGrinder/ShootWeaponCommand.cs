@@ -33,5 +33,6 @@ public class ShootWeaponCommand : ICommand
         };
         model.Projectiles.AddItem(projectile);
 
+        Game.AddUpdater(projectile.Id, new ProjectileUpdater(projectile.Id));
     }
 }

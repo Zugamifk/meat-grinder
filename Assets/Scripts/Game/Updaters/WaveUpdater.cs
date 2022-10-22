@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
-public class UpdateWaveCommand : ICommand
+public class WaveUpdater : IUpdater
 {
-    public void Execute(GameModel model)
+    public void Update(GameModel model)
     {
+        if(model.CurrentWave == null)
+        {
+            return;
+        }
+
         if (model.Spawns.IsEmpty) return;
 
         var dt = model.TimeModel.LastDeltaTime;
@@ -21,7 +26,7 @@ public class UpdateWaveCommand : ICommand
         for (wave.WaveCounter += dt * (wave.SpawnsPerMinute / 60); wave.WaveCounter > 1 && wave.EnemiesRemaining > 0; wave.WaveCounter--, wave.EnemiesRemaining--)
         {
             var spawn = spawns.ElementAt(Random.Range(0, spawns.Count()));
-            Game.Do(new SpawnEnemyCommand(spawn.Id));    
+            Game.Do(new SpawnEnemyCommand(spawn.Id));
         }
     }
 }

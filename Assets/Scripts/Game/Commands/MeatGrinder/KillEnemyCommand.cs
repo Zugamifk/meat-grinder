@@ -11,5 +11,6 @@ public class KillEnemyCommand : ICommand
     public void Execute(GameModel model)
     {
         model.SpawnedEnemies.RemoveItem(_id);
+        Game.RemoveUpdater(_id);
     }
 }

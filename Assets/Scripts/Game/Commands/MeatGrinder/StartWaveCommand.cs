@@ -12,5 +12,6 @@ public class StartWaveCommand : ICommand
             SpawnsPerMinute = 120,
             WaveCounter = 0
         };
+        Game.AddUpdater(new WaveUpdater());
     }
 }

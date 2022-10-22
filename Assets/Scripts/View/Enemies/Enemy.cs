@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
 {
@@ -18,6 +19,7 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
     Identifiable _identifiable;
 
     public Guid Id => _identifiable.Id;
+    public Vector3 TargetOffset { get; private set; }
 
     public void InitializeFromModel(IEnemyModel model)
     {
@@ -43,11 +45,13 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         }
 
         var position = enemy.Position;
-        position.y = ShipMapTest.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
+        var height = ShipMapTest.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
+        position.y = height;
         transform.position = position;
-        var newOffset = _targetOffset.localPosition;
-        newOffset.y += position.y;
-        Game.Do(new UpdateEnemyMovementCommand(_identifiable.Id, newOffset));
+
+        var targetOffset = _targetOffset.localPosition;
+        targetOffset.y += height;
+        TargetOffset = targetOffset;
     }
 
     public void OnKilled()

@@ -3,20 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateBuildingTargetCommand : ICommand
+public class WeaponUpdater : IUpdater
 {
     Guid _id;
-    public UpdateBuildingTargetCommand(Guid id) => _id = id;
 
-    public void Execute(GameModel model)
+    public WeaponUpdater(Guid id)
     {
-        if(_id == Guid.Empty)
-        {
-            throw new InvalidOperationException($"Nothing to spawn! Id is empty!");
-        }
+        _id = id;
+    }
 
+    public void Update(GameModel model)
+    {
+        UpdateCurrentTarget(model);
+        UpdateShotCooldown(model);
+    }
+
+    void UpdateCurrentTarget(GameModel model)
+    {
         var building = model.Buildings.GetItem(_id);
-        if(building== null)
+        if (building == null)
         {
             throw new InvalidOperationException($"No building with id {_id}");
         }
@@ -30,7 +35,7 @@ public class UpdateBuildingTargetCommand : ICommand
         var pos = building.WorldPosition;
         Guid closest = Guid.Empty;
         float closestDistance = float.MaxValue;
-        foreach(var id in weapon.TargetsInRange)
+        foreach (var id in weapon.TargetsInRange)
         {
             var enemy = model.SpawnedEnemies.GetItem(id);
             if (enemy == null) continue;
@@ -42,7 +47,7 @@ public class UpdateBuildingTargetCommand : ICommand
             }
 
             var distance = (enemy.Position - pos).magnitude;
-            if(closestDistance > distance)
+            if (closestDistance > distance)
             {
                 closest = id;
                 closestDistance = distance;
@@ -50,5 +55,11 @@ public class UpdateBuildingTargetCommand : ICommand
         }
 
         weapon.CurrentTarget = closest;
+    }
+
+    void UpdateShotCooldown(GameModel model)
+    {
+        var weapon = model.Weapons.GetItem(_id);
+        weapon.ShotTimer = MathF.Max(weapon.ShotTimer - model.TimeModel.LastDeltaTime, 0);
     }
 }

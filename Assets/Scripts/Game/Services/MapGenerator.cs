@@ -41,7 +41,7 @@ public class MapGenerator
         var tile = new TileModel()
         {
             Height = 1,
-            Type = UnityEngine.Random.value > 0.5f ? ETileType.Empty : ETileType.Wall
+            Type = ETileType.Empty
         };
 
         tile.NorthEdge = CreateEdge(tile);

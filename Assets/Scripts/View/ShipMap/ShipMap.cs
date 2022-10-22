@@ -21,6 +21,16 @@ public class ShipMap : MonoBehaviour
         _buildingSpawner.OnSpawnedBuilding += OnSpawnedBuilding;
     }
 
+    private IEnumerator Start()
+    {
+        while(Game.Model.ShipMap == null)
+        {
+            yield return null;
+        }
+        UpdateMap(Game.Model.ShipMap);
+        _buildingSpawner.enabled = true;
+    }
+
     private void Update()
     {
         var map = Game.Model.ShipMap;
@@ -28,7 +38,6 @@ public class ShipMap : MonoBehaviour
         {
             UpdateMap(map);
         } 
-        Game.Do(new UpdateMapCommand());
     }
 
     void UpdateMap(IShipMapModel map)

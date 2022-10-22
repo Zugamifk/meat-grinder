@@ -9,10 +9,15 @@ public class Projectile : MonoBehaviour, IModelView<IProjectileModel>
 
     Identifiable _identifiable;
 
+    Enemy _targetEnemy;
+
     public void InitializeFromModel(IProjectileModel model)
     {
         _identifiable.Id = model.Id;
         transform.position = model.Position;
+
+        var go = ViewLookup.Get(model.TargetEnemyId);
+        _targetEnemy = go.GetComponent<Enemy>();
     }
 
     private void Awake()
@@ -25,7 +30,6 @@ public class Projectile : MonoBehaviour, IModelView<IProjectileModel>
         var projectile = Game.Model.Projectiles.GetItem(_identifiable.Id);
         if(projectile == null) return;
 
-        transform.position = projectile.Position;
-        Game.Do(new UpdateProjectileCommand(_identifiable.Id));
+        transform.position = projectile.Position + _targetEnemy.TargetOffset;
     }
 }

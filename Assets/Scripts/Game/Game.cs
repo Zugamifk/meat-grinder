@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ public class Game : MonoBehaviour
     static Queue<ICommand> _commandQueue = new Queue<ICommand>();
     static Dictionary<Guid, IUpdater> _idToUpdater = new();
     static HashSet<IUpdater> _uniqueUpdaters = new();
+    static Stack<Guid> _toRemove = new();
 
     public static IGameModel Model => _game._model;
 
@@ -33,9 +35,9 @@ public class Game : MonoBehaviour
         _idToUpdater.Add(id, updater);
     }
 
-    internal static void RemoveUpdate(Guid id)
+    internal static void RemoveUpdater(Guid id)
     {
-        _idToUpdater.Remove(id);
+        _toRemove.Push(id);
     }
 
     Game()
@@ -51,6 +53,12 @@ public class Game : MonoBehaviour
         {
             var command = _commandQueue.Dequeue();
             command.Execute(_model);
+        }
+
+        while(_toRemove.Count > 0)
+        {
+            var id = _toRemove.Pop();
+            _idToUpdater.Remove(id);
         }
 
         foreach (var updater in _uniqueUpdaters)

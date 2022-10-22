@@ -43,8 +43,6 @@ public class GunTurret : MeshGeneratorUser
             throw new InvalidOperationException($"No building with id {_identifiable.Id}");
         }
 
-        Game.Do(new UpdateWeaponShotCooldownCommand(_identifiable.Id));
-        Game.Do(new UpdateBuildingTargetCommand(_identifiable.Id));
         if(weapon?.CurrentTarget!=Guid.Empty)
         {
             UpdateTarget(weapon.CurrentTarget);

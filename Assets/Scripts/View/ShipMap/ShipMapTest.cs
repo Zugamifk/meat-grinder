@@ -25,12 +25,4 @@ public class ShipMapTest : MonoBehaviour
         Game.Do(new SpawnBuildingCommand("GunTurret", new Vector2Int(0,0)));
         Game.Do(new StartWaveCommand());
     }
-
-    private void Update()
-    {
-        if (Game.Model.CurrentWave != null)
-        {
-            Game.Do(new UpdateWaveCommand());
-        }
-    }
 }

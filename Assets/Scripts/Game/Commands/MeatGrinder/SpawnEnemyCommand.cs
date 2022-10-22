@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpawnEnemyCommand : ICommand
 {
     Guid _spawnId;
+
     public SpawnEnemyCommand(Guid spawnId)
     {
         _spawnId = spawnId;
@@ -19,5 +20,7 @@ public class SpawnEnemyCommand : ICommand
         enemy.Movement.CurrentPosition = spawn.PathNode.WorldPosition;
         model.SpawnedEnemies.AddItem(enemy);
         spawn.SpawnQueue.Add(enemy.Id);
+
+        Game.AddUpdater(enemy.Id, new EnemyUpdater(enemy.Id));
     }
 }
