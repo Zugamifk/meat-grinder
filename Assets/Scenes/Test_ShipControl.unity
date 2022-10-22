@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb059e008ca97f409f76c7ed9c9a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _handlerKey: WorldMap
 --- !u!65 &1710051047
 BoxCollider:
   m_ObjectHideFlags: 0

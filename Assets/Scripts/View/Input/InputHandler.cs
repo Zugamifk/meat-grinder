@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
+    [SerializeField]
+    string _handlerKey;
+
+    public string HandlerKey => _handlerKey;
     public Guid Id;
 
     private void Awake()

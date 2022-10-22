@@ -5,14 +5,22 @@ using UnityEngine;
 
 public class ClickedWorldObjectCommand : ICommand
 {
-    Guid _handlerId;
-    public ClickedWorldObjectCommand(Guid handlerId)
+    static InputService _inputService = new();
+    string _handlerKey;
+    Guid _targetId;
+    public ClickedWorldObjectCommand(string handlerKey, Guid targetId)
     {
-        _handlerId = handlerId;
+        if (string.IsNullOrEmpty(handlerKey))
+        {
+            throw new InvalidOperationException("Handler key is empty!");
+        }
+
+        _handlerKey = handlerKey;
+        _targetId = targetId;
     }
 
     public void Execute(GameModel model)
     {
-        Debug.Log("Clicked " + _handlerId);
+        _inputService.HandleClick(_handlerKey, _targetId);
     }
 }

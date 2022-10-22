@@ -71,7 +71,7 @@ public class InputController : MonoBehaviour
             return false;
         }
 
-        Game.Do(new ClickedWorldObjectCommand(handler.Id));
+        Game.Do(new ClickedWorldObjectCommand(handler.HandlerKey, handler.Id));
 
         return true;
     }
