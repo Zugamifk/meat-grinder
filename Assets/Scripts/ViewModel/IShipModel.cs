@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IShipModel : IIdentifiable, IKeyHolder
 {
     Vector3 Position { get; }
+    float Rotation { get; }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class ShipUpdater : IUpdater
 {
@@ -16,6 +17,7 @@ public class ShipUpdater : IUpdater
     {
         var ship = model.Ships.GetItem(_id);
         MoveToPosition(model, ship);
+        RotateToTarget(model, ship);
     }
 
     void MoveToPosition(GameModel model, ShipModel ship)
@@ -41,5 +43,26 @@ public class ShipUpdater : IUpdater
         {
             movement.CurrentPosition += to.normalized * step;
         }
+
+        ship.Movement.TargetRotation = Mathf.Rad2Deg * Mathf.Atan2(to.x, to.z);
+    }
+
+    void RotateToTarget(GameModel model, ShipModel ship)
+    {
+        if(!ship.Movement.TargetRotation.HasValue)
+        {
+            return;
+        }
+
+        var step = ship.Movement.TurnSpeed * model.TimeModel.LastDeltaTime;
+        var diff = ship.Movement.TargetRotation.Value - ship.Movement.CurrentAngle;
+        if(step > Mathf.Abs(diff))
+        {
+            ship.Movement.CurrentAngle = ship.Movement.TargetRotation.Value;
+            ship.Movement.TargetRotation = null;
+            return;
+        }
+
+        ship.Movement.CurrentAngle += Mathf.Sign(diff) * step;
     }
 }

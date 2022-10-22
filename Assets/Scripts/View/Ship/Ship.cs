@@ -34,5 +34,6 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
     {
         var ship = Game.Model.Ships.GetItem(Id);
         transform.position = ship.Position;
+        transform.rotation = Quaternion.Euler(0, ship.Rotation, 0);
     }
 }
