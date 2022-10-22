@@ -12,14 +12,14 @@ public class InputService
         _idToHandler["WorldMap"] = new WorldMapInputBehaviour();
     }
 
-    public void HandleClick(string handlerKey, Guid targetId)
+    public void HandleClick(ClickInfo clickInfo)
     {
-        if(!_idToHandler.ContainsKey(handlerKey))
+        if(!_idToHandler.ContainsKey(clickInfo.InputHandlerKey))
         {
-            throw new ArgumentException($"No input handler for key {handlerKey}");
+            throw new ArgumentException($"No input handler for key {clickInfo.InputHandlerKey}");
         }
 
-        var handler = _idToHandler[handlerKey];
-        handler.HandleClick(targetId);
+        var handler = _idToHandler[clickInfo.InputHandlerKey];
+        handler.HandleClick(clickInfo);
     }
 }

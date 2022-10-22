@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IInputHandler
 {
-    void HandleClick(Guid id);
+    void HandleClick(ClickInfo clickInfo);
 }

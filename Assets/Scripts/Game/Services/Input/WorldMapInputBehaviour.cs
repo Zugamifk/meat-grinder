@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class WorldMapInputBehaviour : IInputHandler
 {
-    public void HandleClick(Guid id)
+    public void HandleClick(ClickInfo clickInfo)
     {
-        throw new NotImplementedException();
+        Debug.Log("Move to " + clickInfo.ClickPosition);
     }
 }

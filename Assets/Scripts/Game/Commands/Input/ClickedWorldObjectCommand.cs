@@ -6,21 +6,21 @@ using UnityEngine;
 public class ClickedWorldObjectCommand : ICommand
 {
     static InputService _inputService = new();
-    string _handlerKey;
-    Guid _targetId;
-    public ClickedWorldObjectCommand(string handlerKey, Guid targetId)
+    
+    ClickInfo _clickInfo;
+
+    public ClickedWorldObjectCommand(ClickInfo clickInfo)
     {
-        if (string.IsNullOrEmpty(handlerKey))
+        if (string.IsNullOrEmpty(clickInfo.InputHandlerKey))
         {
             throw new InvalidOperationException("Handler key is empty!");
         }
 
-        _handlerKey = handlerKey;
-        _targetId = targetId;
+        _clickInfo = clickInfo;
     }
 
     public void Execute(GameModel model)
     {
-        _inputService.HandleClick(_handlerKey, _targetId);
+        _inputService.HandleClick(_clickInfo);
     }
 }
