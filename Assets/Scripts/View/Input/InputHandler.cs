@@ -6,4 +6,13 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public Guid Id;
+
+    private void Awake()
+    {
+        var ident = GetComponent<Identifiable>();
+        if(ident!=null)
+        {
+            Id = ident.Id;
+        }
+    }
 }

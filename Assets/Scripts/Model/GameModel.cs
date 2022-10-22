@@ -16,6 +16,8 @@ public partial class GameModel : IGameModel
 
     public Guid PlayerShipId { get; set; } = Guid.NewGuid();
 
+    public InputModel Input { get; } = new(); 
+
     public WaveModel CurrentWave { get; set; }
     public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
 
@@ -66,7 +68,7 @@ public partial class GameModel : IGameModel
     IIdentifiableLookup<IWeaponModel> IGameModel.Weapons => Weapons;
     IIdentifiableLookup<IProjectileModel> IGameModel.Projectiles => Projectiles;
     IIdentifiableLookup<IShipModel> IGameModel.Ships => Ships;
-
+    IInputModel IGameModel.Input => Input; 
     ICameraModel IGameModel.Camera => Camera;
     #endregion
 

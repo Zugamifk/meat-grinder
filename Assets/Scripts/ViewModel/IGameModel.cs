@@ -15,4 +15,5 @@ public interface IGameModel
     IIdentifiableLookup<IProjectileModel> Projectiles { get; }
     IIdentifiableLookup<IShipModel> Ships { get; }
     ICameraModel Camera { get; }
+    IInputModel Input { get; }
 }
