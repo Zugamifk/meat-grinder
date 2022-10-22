@@ -13,6 +13,7 @@ public partial class GameModel : IGameModel
     public IdentifiableCollection<WeaponModel> Weapons = new();
     public IdentifiableCollection<ProjectileModel> Projectiles = new();
     public IdentifiableCollection<ShipModel> Ships = new();
+    public IdentifiableCollection<AIModel> AI = new();
 
     public Guid PlayerShipId { get; set; } = Guid.NewGuid();
 

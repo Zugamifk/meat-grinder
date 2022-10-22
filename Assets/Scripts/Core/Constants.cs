@@ -8,3 +8,9 @@ public static class Buildings
     public const string END_PORTAL = "EndPortal";
     public const string ENEMY_SPAWN = "EnemySpawn";
 }
+
+public static class AIBehaviours
+{
+    public const string IDLE = "Idle";
+    public const string PATROL = "Patrol";
+}
