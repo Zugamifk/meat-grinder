@@ -10,4 +10,6 @@ public class ShipModel : IShipModel
     public string Key { get; set; }
 
     public ShipMovementModel Movement { get; } = new();
+
+    Vector3 IShipModel.Position => Movement.CurrentPosition;
 }

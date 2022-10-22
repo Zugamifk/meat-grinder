@@ -29,4 +29,10 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
     {
         AssignMesh<ShipMeshGenerator>(_meshFilter);
     }
+
+    void Update()
+    {
+        var ship = Game.Model.Ships.GetItem(Id);
+        transform.position = ship.Position;
+    }
 }

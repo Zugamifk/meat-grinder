@@ -5,17 +5,19 @@ using UnityEngine;
 
 internal class SpawnShipCommand : ICommand
 {
-    Guid _spawnId;
+    Guid _shipId;
     public SpawnShipCommand(Guid spawnId)
     {
-        _spawnId = spawnId;
+        _shipId = spawnId;
     }
 
     public void Execute(GameModel model)
     {
         var ship = new ShipModel();
         ship.Key = "Test_Ship";
-        ship.Id = _spawnId;
+        ship.Id = _shipId;
         model.Ships.AddItem(ship);
+
+        Game.AddUpdater(_shipId, new ShipUpdater(_shipId)); ;
     }
 }
