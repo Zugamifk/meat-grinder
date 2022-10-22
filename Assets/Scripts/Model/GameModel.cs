@@ -6,7 +6,7 @@ using System;
 
 public partial class GameModel : IGameModel
 {
-    public ShipMapModel ShipMap { get; set; } = new();
+    public ShipMapModel ShipMap { get; set; }
     public IdentifiableCollection<EnemyModel> SpawnedEnemies = new();
     public IdentifiableCollection<EnemySpawnModel> Spawns = new();
     public IdentifiableCollection<BuildingModel> Buildings = new();

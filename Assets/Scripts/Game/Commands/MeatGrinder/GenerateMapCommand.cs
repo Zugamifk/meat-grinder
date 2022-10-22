@@ -6,6 +6,8 @@ public class GenerateMapCommand : ICommand
 {
     public void Execute(GameModel model)
     {
+        model.ShipMap = new();
+
         var generator = new MapGenerator();
         generator.GenerateMap(model);
 
