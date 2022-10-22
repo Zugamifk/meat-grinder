@@ -13,11 +13,29 @@ public class Game : MonoBehaviour
 
     static Game _game;
     static Queue<ICommand> _commandQueue = new Queue<ICommand>();
+    static Dictionary<Guid, IUpdater> _idToUpdater = new();
+    static HashSet<IUpdater> _uniqueUpdaters = new();
+
     public static IGameModel Model => _game._model;
 
     public static void Do(ICommand command)
     {
         _commandQueue.Enqueue(command);
+    }
+
+    internal static void AddUpdater(IUpdater updater)
+    {
+        _uniqueUpdaters.Add(updater);
+    }
+
+    internal static void AddUpdater(Guid id, IUpdater updater)
+    {
+        _idToUpdater.Add(id, updater);
+    }
+
+    internal static void RemoveUpdate(Guid id)
+    {
+        _idToUpdater.Remove(id);
     }
 
     Game()
@@ -29,12 +47,20 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        UpdateTimeModel();
-
         while (_commandQueue.Count > 0)
         {
             var command = _commandQueue.Dequeue();
             command.Execute(_model);
+        }
+
+        foreach (var updater in _uniqueUpdaters)
+        {
+            updater.Update(_model);
+        }
+
+        foreach (var updater in _idToUpdater.Values)
+        {
+            updater.Update(_model);
         }
     }
 
@@ -43,12 +69,7 @@ public class Game : MonoBehaviour
         var timeModel = _model.TimeModel;
         var time = DateTime.Now;
         timeModel.RealTime = TimeSpan.FromSeconds(time.TimeOfDay.TotalSeconds / TimeModel.TIME_MULTIPLIER);
-    }
 
-    void UpdateTimeModel()
-    {
-        var timeModel = _model.TimeModel;
-        timeModel.LastDeltaTime = Time.deltaTime;
-        timeModel.RealTime += TimeSpan.FromSeconds(Time.deltaTime);
+        AddUpdater(new TimeModelUpdater());
     }
 }
