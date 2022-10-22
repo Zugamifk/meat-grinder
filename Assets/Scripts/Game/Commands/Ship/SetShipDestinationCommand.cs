@@ -17,5 +17,6 @@ public class SetShipDestinationCommand : ICommand
     public void Execute(GameModel model)
     {
         var ship = model.Ships.GetItem(_shipId);
+        ship.Movement.TargetPosition = _position;
     }
 }

@@ -15,6 +15,7 @@ internal class SpawnShipCommand : ICommand
     {
         var ship = new ShipModel();
         ship.Key = "Test_Ship";
+        ship.Id = _spawnId;
         model.Ships.AddItem(ship);
     }
 }

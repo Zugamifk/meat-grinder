@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShipModel : IShipModel
 {
-    public Guid Id { get; } = Guid.NewGuid(); 
+    public Guid Id { get; set; }
 
     public string Key { get; set; }
 

@@ -7,6 +7,6 @@ public class WorldMapInputBehaviour : IInputHandler
 {
     public void HandleClick(ClickInfo clickInfo)
     {
-        Debug.Log("Move to " + clickInfo.ClickPosition);
+        Game.Do(new SetShipDestinationCommand(Game.Model.PlayerShipId, clickInfo.ClickPosition));
     }
 }

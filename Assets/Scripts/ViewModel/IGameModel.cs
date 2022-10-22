@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public interface IGameModel
     IIdentifiableLookup<IWeaponModel> Weapons { get; }
     IIdentifiableLookup<IProjectileModel> Projectiles { get; }
     IIdentifiableLookup<IShipModel> Ships { get; }
+    Guid PlayerShipId { get; }
     ICameraModel Camera { get; }
     IInputModel Input { get; }
 }
