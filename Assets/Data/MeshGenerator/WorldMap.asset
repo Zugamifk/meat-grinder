@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5456ed2bd67f4344b9482cf2e976189c, type: 3}
   m_Name: WorldMap
   m_EditorClassIdentifier: 
-  PatchDimensions: {x: 10, y: 10}
+  PatchDimensions: {x: 100, y: 100}
   PatchGridSize: {x: 10, y: 10}
   PointVariance: 1
