@@ -20,7 +20,7 @@ public partial class GameModel : IGameModel
     public InputModel Input { get; } = new(); 
 
     public WaveModel CurrentWave { get; set; }
-    public CameraModel Camera = new() { Height = 15, MoveSpeed = 5, RotateSpeed = 45 };
+    public CameraModel Camera = new() { Height = 10, MoveSpeed = 5, RotateSpeed = 45 };
 
     public TimeModel TimeModel = new TimeModel();
     public Dictionary<Type, object> TypeToModel = new();

@@ -57,6 +57,7 @@ namespace MeshGenerator
             _data.Normals.Add(normal);
             _data.Colors.Add(_currentColor);
             _data.BoneWeights.Add(new BoneWeight1() { boneIndex = _currentBone, weight = 1 });
+            _data.Uvs.Add(new Vector2(position.x, position.z));
         }
 
         public void AddTriangle(int i0, int i1, int i2)
@@ -175,6 +176,7 @@ namespace MeshGenerator
                 normals = _data.Normals.ToArray(),
                 colors = _data.Colors.ToArray(),
                 triangles = _data.Triangles.ToArray(),
+                uv = _data.Uvs.ToArray()
             };
 
             var bonesPerVertex = new NativeArray<byte>(_data.BoneWeights.Count, Allocator.Temp);
