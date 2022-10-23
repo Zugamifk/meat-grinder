@@ -6,7 +6,7 @@ public class AIPatrolBehaviour : AIBehaviour
 {
     public override void Update(GameModel model, AIModel ai)
     {
-        var ship = model.Ships.GetItem(ai.AgentId);
+        var ship = model.Ships.GetItem(ai.Id);
         if(ship.Movement.TargetPosition != null)
         {
             return;

@@ -18,7 +18,7 @@ public class AIStartPatrolCommand : ICommand
     public void Execute(GameModel model)
     {
         var ai = model.AI.GetItem(_id);
-        var ship = model.Ships.GetItem(ai.AgentId);
+        var ship = model.Ships.GetItem(ai.Id);
         ai.Behaviour.Waypoints.Clear();
         var start = _otherPosition.HasValue ? _otherPosition.Value : ship.Movement.CurrentPosition;
         ai.Behaviour.Waypoints.Add(start);
