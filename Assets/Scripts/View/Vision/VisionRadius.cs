@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponAttackRadius : MonoBehaviour
+public class VisionRadius : MonoBehaviour
 {
+    [SerializeField]
+    SphereCollider _collider;
+
     public Guid Id;
 
     bool _targetsChanged = false;
@@ -12,9 +15,12 @@ public class WeaponAttackRadius : MonoBehaviour
 
     private void Update()
     {
+        var vision = Game.Model.Vision.GetItem(Id);
+        _collider.radius = vision.Range;
+
         if(_targetsChanged)
         {
-            Game.Do(new UpdateEnemiesInRangeCommand(Id, _targets));
+            Game.Do(new SetObjectsInVisionRangeCommand(Id, _targets));
             _targetsChanged = false;
         }
     }

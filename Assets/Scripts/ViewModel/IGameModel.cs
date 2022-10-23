@@ -15,6 +15,7 @@ public interface IGameModel
     IIdentifiableLookup<IWeaponModel> Weapons { get; }
     IIdentifiableLookup<IProjectileModel> Projectiles { get; }
     IIdentifiableLookup<IShipModel> Ships { get; }
+    IIdentifiableLookup<IVisionModel> Vision { get; }
     Guid PlayerShipId { get; }
     ICameraModel Camera { get; }
     IInputModel Input { get; }

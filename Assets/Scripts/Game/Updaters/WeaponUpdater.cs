@@ -32,10 +32,16 @@ public class WeaponUpdater : IUpdater
             throw new InvalidOperationException($"No weapon with id {_id}");
         }
 
+        var vision = model.Vision.GetItem(_id);
+        if (vision == null)
+        {
+            throw new InvalidOperationException($"No vision with id {_id}");
+        }
+
         var pos = building.WorldPosition;
         Guid closest = Guid.Empty;
         float closestDistance = float.MaxValue;
-        foreach (var id in weapon.TargetsInRange)
+        foreach (var id in vision.ObjectsInRange)
         {
             var enemy = model.SpawnedEnemies.GetItem(id);
             if (enemy == null) continue;

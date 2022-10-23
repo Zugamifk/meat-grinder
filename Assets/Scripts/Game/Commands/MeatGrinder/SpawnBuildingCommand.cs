@@ -40,6 +40,13 @@ public class SpawnBuildingCommand : ICommand
                 ShotTimer = weaponData.ShotCooldown
             };
             model.Weapons.AddItem(weapon);
+
+            var vision = new VisionModel() { 
+                Id = building.Id, 
+                Range = 10 
+            };
+            model.Vision.AddItem(vision);
+
             Game.AddUpdater(building.Id, new WeaponUpdater(building.Id));
         }
     }

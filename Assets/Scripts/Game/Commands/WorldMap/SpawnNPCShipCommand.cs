@@ -9,7 +9,7 @@ public class SpawnNPCShipCommand : ICommand
     protected Vector3 _position;
     protected Guid? _setId;
 
-    public SpawnNPCShipCommand(bool isFriend, Vector3 position, Guid? setId)
+    public SpawnNPCShipCommand(bool isFriend, Vector3 position, Guid? setId = null)
     {
         _setId = setId;
         _isFriend = isFriend;

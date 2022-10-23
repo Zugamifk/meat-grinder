@@ -14,6 +14,7 @@ public partial class GameModel : IGameModel
     public IdentifiableCollection<ProjectileModel> Projectiles = new();
     public IdentifiableCollection<ShipModel> Ships = new();
     public IdentifiableCollection<AIModel> AI = new();
+    public IdentifiableCollection<VisionModel> Vision = new();
 
     public Guid PlayerShipId { get; set; } = Guid.NewGuid();
 
@@ -69,6 +70,7 @@ public partial class GameModel : IGameModel
     IIdentifiableLookup<IWeaponModel> IGameModel.Weapons => Weapons;
     IIdentifiableLookup<IProjectileModel> IGameModel.Projectiles => Projectiles;
     IIdentifiableLookup<IShipModel> IGameModel.Ships => Ships;
+    IIdentifiableLookup<IVisionModel> IGameModel.Vision => Vision;
     IInputModel IGameModel.Input => Input; 
     ICameraModel IGameModel.Camera => Camera;
     #endregion

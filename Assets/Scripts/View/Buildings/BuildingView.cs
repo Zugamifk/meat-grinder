@@ -6,7 +6,7 @@ using UnityEngine;
 public class BuildingView : MonoBehaviour, IModelView<IBuildingModel>
 {
     [SerializeField]
-    WeaponAttackRadius _attackRadius;
+    VisionRadius _attackRadius;
 
     Identifiable _identifiable;
 
