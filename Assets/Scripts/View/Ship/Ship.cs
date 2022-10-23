@@ -29,7 +29,7 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
 
     private void Start()
     {
-        AssignMesh<ShipMeshGenerator>(_meshFilter);
+        AssignMesh<ShipMeshGenerator, IShipModel, ShipMeshGeneratorData>(_meshFilter, GetModel());
     }
 
     void Update()

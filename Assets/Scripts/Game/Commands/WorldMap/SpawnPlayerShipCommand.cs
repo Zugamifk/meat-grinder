@@ -7,6 +7,6 @@ public class SpawnPlayerShipCommand : ICommand
     public void Execute(GameModel model)
     {
         var id = model.PlayerShipId;
-        Game.Do(new SpawnShipCommand(id));
+        Game.Do(new SpawnShipCommand(id, true, Vector3.zero));
     }
 }

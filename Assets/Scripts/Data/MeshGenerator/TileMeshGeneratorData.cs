@@ -1,8 +1,9 @@
+using MeshGenerator;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileMeshGeneratorData : ScriptableObject
+public class TileMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public Color GrassColor;
     public Color PathColor;

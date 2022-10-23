@@ -1,8 +1,9 @@
+using MeshGenerator;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndPortalMeshGeneratorData : ScriptableObject
+public class EndPortalMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public float Height = 2;
     public float ColumnSpacing = .5f;

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MeshGenerator;
 
 [CreateAssetMenu(menuName="Data/Mesh Generators/GearAssembly")]
-public class GearAssemblyMeshGeneratorData : ScriptableObject
+public class GearAssemblyMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     [System.Serializable]
     public class GearInfo

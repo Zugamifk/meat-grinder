@@ -1,8 +1,9 @@
+using MeshGenerator;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMeshGeneratorData : ScriptableObject
+public class EnemyMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public float Fatness;
     public float Height;

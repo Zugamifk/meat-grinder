@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunTurretMeshGeneratorData : ScriptableObject
+public class GunTurretMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public Vector2 BaseDimensions;
     public Vector3 GunBounds;

@@ -1,8 +1,9 @@
+using MeshGenerator;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowTowerMeshGeneratorData : ScriptableObject
+public class ArrowTowerMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public float Height;
     public Vector2 RadiusMinMax;

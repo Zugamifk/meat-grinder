@@ -6,4 +6,5 @@ public interface IShipModel : IIdentifiable, IKeyHolder
 {
     Vector3 Position { get; }
     float Rotation { get; }
+    bool IsFriend { get; }
 }

@@ -6,7 +6,7 @@ using MeshGenerator.Wireframes;
 namespace MeshGenerator
 {
     public abstract class MeshGeneratorWithData<TData> : MeshGenerator
-        where TData : ScriptableObject
+        where TData : IMeshGeneratorData
     {
         static TData _data;
         public TData Data

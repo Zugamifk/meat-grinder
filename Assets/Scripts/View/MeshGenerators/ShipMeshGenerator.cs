@@ -5,11 +5,12 @@ using MeshGenerator;
 using System;
 
 [MeshGenerator("Ship")]
-public class ShipMeshGenerator : MeshGeneratorWithData<ShipMeshGeneratorData>
+public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGeneratorData>
 {
     protected override void BuildMesh(MeshBuilder builder)
     {
-        builder.SetColor(Color.green);
+        var color = Model.IsFriend ? Color.green : Color.red;
+        builder.SetColor(color);
         builder.AddAxisAlignedBox(new Vector3(1, 1, 3));
         builder.PushMatrix(Matrix4x4.Translate(Vector3.forward * 2));
         builder.SetColor(Color.blue);

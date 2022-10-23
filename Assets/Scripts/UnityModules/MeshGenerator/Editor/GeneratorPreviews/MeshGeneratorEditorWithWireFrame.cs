@@ -9,7 +9,7 @@ namespace MeshGenerator.Editor
     public abstract class MeshGeneratorEditorWithWireFrame<TGenerator, TWireframeGenerator, TData> : IMeshGeneratorEditor
         where TGenerator : MeshGeneratorWithData<TData>
         where TWireframeGenerator : WireframeGenerator<TData>, new()
-        where TData : ScriptableObject
+        where TData : IMeshGeneratorData
     {
         protected TGenerator _generator;
 
@@ -71,7 +71,13 @@ namespace MeshGenerator.Editor
         public void SetGenerator(IGeometryGenerator generator)
         {
             _generator = (TGenerator)generator;
-            _data_serObj = new SerializedObject(_generator.Data);
+            var so = _generator.Data as ScriptableObject;
+            if(so == null)
+            {
+                throw new System.InvalidOperationException($"Can't show wirefreame for generator of type {_generator.GetType()}, need ScriptableObject, type is {_generator.Data.GetType()}");
+            }
+
+            _data_serObj = new SerializedObject(so);
 
             OnSetGenerator();
             RebuildWireframe();
