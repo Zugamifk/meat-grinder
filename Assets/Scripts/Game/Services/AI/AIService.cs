@@ -11,13 +11,13 @@ public class AIService
         _keyToBehaviour[AIBehaviours.PATROL] = new AIPatrolBehaviour();
     }
 
-    public void UpdateBehaviour(AIModel model)
+    public void UpdateBehaviour(GameModel model, AIModel ai)
     {
-        if(!_keyToBehaviour.TryGetValue(model.Behaviour.Key, out AIBehaviour behaviour))
+        if(!_keyToBehaviour.TryGetValue(ai.Behaviour.Key, out AIBehaviour behaviour))
         {
             return;
         }
 
-        behaviour.Update(model);
+        behaviour.Update(model, ai);
     }
 }

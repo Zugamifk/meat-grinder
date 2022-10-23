@@ -16,6 +16,6 @@ public class AIBehaviourUpdater : IUpdater
     public void Update(GameModel model)
     {
         var ai = model.AI.GetItem(_id);
-        _aiService.UpdateBehaviour(ai);
+        _aiService.UpdateBehaviour(model, ai);
     }
 }

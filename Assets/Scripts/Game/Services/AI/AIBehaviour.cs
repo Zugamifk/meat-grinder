@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class AIBehaviour
 {
-    public abstract void Update(AIModel model);
+    public abstract void Update(GameModel model, AIModel ai);
 }

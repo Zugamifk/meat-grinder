@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class AIPatrolBehaviour : AIBehaviour
 {
-    public override void Update(AIModel model)
+    public override void Update(GameModel model, AIModel ai)
     {
-        throw new System.NotImplementedException();
+        var ship = model.Ships.GetItem(ai.AgentId);
+        if(ship.Movement.TargetPosition != null)
+        {
+            return;
+        }
+
+        var bvr = ai.Behaviour;
+        bvr.CurrentWaypointIndex = (bvr.CurrentWaypointIndex + 1) % bvr.Waypoints.Count;
+
+        Game.Do(new SetShipDestinationCommand(ship.Id, bvr.Waypoints[bvr.CurrentWaypointIndex]));
     }
 }
