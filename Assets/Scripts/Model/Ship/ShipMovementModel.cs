@@ -16,5 +16,5 @@ public class ShipMovementModel
     // ship stats from ship data
     public float MaxMoveSpeed { get; set; } = 5;
     public float Acceleration { get; set; } = 5;
-    public float TurnSpeed { get; set; } = 45;
+    public float TurnSpeed { get; set; } = 180;
 }

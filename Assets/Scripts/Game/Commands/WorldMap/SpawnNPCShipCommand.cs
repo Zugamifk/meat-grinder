@@ -16,6 +16,6 @@ public class SpawnNPCShipCommand : ICommand
         model.AI.AddItem(ai);
         Game.AddUpdater(new AIBehaviourUpdater(ai.Id));
 
-        Game.Do(new AIStartPatrolCommand(ai.Id, new Vector3(10, 0, 0)));
+        Game.Do(new AIStartPatrolCommand(ai.Id, new Vector3(10, 0, 0), new Vector3(-10, 0, 0)));
     }
 }
