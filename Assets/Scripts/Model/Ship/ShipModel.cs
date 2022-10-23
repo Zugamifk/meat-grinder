@@ -11,6 +11,8 @@ public class ShipModel : IShipModel
 
     public ShipMovementModel Movement { get; } = new();
 
+    public bool IsFriend { get; set; }
+
     Vector3 IShipModel.Position => Movement.CurrentPosition;
     float IShipModel.Rotation => Movement.CurrentAngle;
 }

@@ -14,6 +14,8 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
 
     public Guid Id => _identifiable.Id;
 
+    public IShipModel GetModel() => Game.Model.Ships.GetItem(Id);
+
     public void InitializeFromModel(IShipModel model)
     {
         _identifiable.Id = model.Id;

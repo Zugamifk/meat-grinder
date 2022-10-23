@@ -10,6 +10,8 @@ public class BuildingView : MonoBehaviour, IModelView<IBuildingModel>
 
     Identifiable _identifiable;
 
+    public IBuildingModel GetModel() => Game.Model.Buildings.GetItem(Id);
+
     public Guid Id => _identifiable.Id;
 
     void Awake()
@@ -24,4 +26,6 @@ public class BuildingView : MonoBehaviour, IModelView<IBuildingModel>
             _attackRadius.Id = model.Id;
         }
     }
+
+    
 }

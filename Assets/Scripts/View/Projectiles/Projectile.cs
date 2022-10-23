@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour, IModelView<IProjectileModel>
 
     Enemy _targetEnemy;
 
+    public IProjectileModel GetModel() => Game.Model.Projectiles.GetItem(_identifiable.Id);
+
     public void InitializeFromModel(IProjectileModel model)
     {
         _identifiable.Id = model.Id;

@@ -21,6 +21,8 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
     public Guid Id => _identifiable.Id;
     public Vector3 TargetOffset { get; private set; }
 
+    public IEnemyModel GetModel() => Game.Model.Enemies.GetItem(Id);
+
     public void InitializeFromModel(IEnemyModel model)
     {
         _identifiable.Id = model.Id;
