@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(VisionRadius))]
 public class VisionRadiusDebug : MonoBehaviour
 {
+    const int CIRCLE_SEGMENTS = 64;
+
     [SerializeField]
     LineRenderer _lineRenderer;
 
@@ -15,7 +17,7 @@ public class VisionRadiusDebug : MonoBehaviour
     private void Awake()
     {
         _visionRadius = GetComponent<VisionRadius>();
-        _lineRenderer.positionCount = 32;
+        _lineRenderer.positionCount = CIRCLE_SEGMENTS;
     }
 
     private void Update()
@@ -33,12 +35,12 @@ public class VisionRadiusDebug : MonoBehaviour
     {
         _range = model.Range;
 
-        var p = new Vector3[32];
+        var p = new Vector3[CIRCLE_SEGMENTS];
         Vector3 dir = Vector3.right;
 
-        float step = 360f / 32f;
+        float step = 360f / CIRCLE_SEGMENTS;
         var ang = Quaternion.AngleAxis(step, Vector3.up);
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < CIRCLE_SEGMENTS; i++)
         {
             p[i] = dir * _range;
             dir = ang * dir;
