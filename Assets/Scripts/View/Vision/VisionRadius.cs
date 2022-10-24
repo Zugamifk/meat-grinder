@@ -28,20 +28,20 @@ public class VisionRadius : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        var enemy = collision.GetComponent<Enemy>();
-        if (enemy!=null)
+        var target = collision.GetComponent<VisionTarget>();
+        if (target!=null)
         {
-            _targets.Add(enemy.Id);
+            _targets.Add(target.Id);
             _targetsChanged = true;
         }
     }
 
     private void OnTriggerExit(Collider collision)
     {
-        var enemy = collision.GetComponent<Enemy>();
-        if (enemy != null)
+        var target = collision.GetComponent<VisionTarget>();
+        if (target != null)
         {
-            _targets.Remove(enemy.Id);
+            _targets.Remove(target.Id);
             _targetsChanged = true;
         }
     }

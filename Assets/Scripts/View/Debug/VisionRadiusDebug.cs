@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +11,8 @@ public class VisionRadiusDebug : MonoBehaviour
 
     [SerializeField]
     LineRenderer _lineRenderer;
+    [SerializeField]
+    LineRenderer _taretLine;
 
     VisionRadius _visionRadius;
     float _range=-1;
@@ -23,12 +26,23 @@ public class VisionRadiusDebug : MonoBehaviour
     private void Update()
     {
         var model = Game.Model.Vision.GetItem(_visionRadius.Id);
-        if (model == null || model.Range == _range)
+        if (model == null)
         {
             return;
         }
 
-        UpdateRange(model);
+        if(model.Range != _range)
+        {
+            UpdateRange(model);
+        }
+
+        if(model.ObjectsInRange.Count > 0)
+        {
+            var t = model.ObjectsInRange.First();
+            var go = ViewLookup.Get(t);
+            _taretLine.SetPositions(new Vector3[] { Vector3.zero, go.transform.position });
+            _taretLine.positionCount = 2;
+        }
     }
 
     void UpdateRange(IVisionModel model)

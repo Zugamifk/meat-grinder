@@ -9,4 +9,5 @@ public class VisionModel : IVisionModel
     public HashSet<Guid> ObjectsInRange { get; set; } = new HashSet<Guid>();
     public float Range { get; set; }
 
+    IReadOnlyCollection<Guid> IVisionModel.ObjectsInRange => ObjectsInRange;
 }
