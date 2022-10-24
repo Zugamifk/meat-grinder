@@ -16,6 +16,7 @@ public class VisionRadius : MonoBehaviour
     private void Update()
     {
         var vision = Game.Model.Vision.GetItem(Id);
+        if (vision == null) return;
         _collider.radius = vision.Range;
 
         if(_targetsChanged)

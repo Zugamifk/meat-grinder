@@ -20,11 +20,6 @@ public class SpawnNPCShipCommand : ICommand
     {
         var shipId = _setId.HasValue ? _setId.Value : Guid.NewGuid();
         new SpawnShipCommand(_isFriend, _position, shipId).Execute(model);
-
-        var ai = new AIModel();
-        ai.Id = shipId;
-        ai.Behaviour.Key = AIBehaviours.IDLE;
-        model.AI.AddItem(ai);
-        Game.AddUpdater(new AIBehaviourUpdater(ai.Id));
+        new CreateAICommand(shipId).Execute(model);
     }
 }
