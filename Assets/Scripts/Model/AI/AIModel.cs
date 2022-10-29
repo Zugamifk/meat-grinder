@@ -6,5 +6,5 @@ using UnityEngine;
 public class AIModel : IIdentifiable
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public AIBehaviourModel Behaviour { get; set; } = new();
+    public IAIBehaviourModel Behaviour { get; set; }
 }

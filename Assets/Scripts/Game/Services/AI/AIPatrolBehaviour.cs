@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIPatrolBehaviour : AIBehaviour
+public class AIPatrolBehaviour : IAIBehaviour
 {
-    public override void Update(GameModel model, AIModel ai)
+    public void Update(GameModel model, AIModel ai)
     {
         var ship = model.Ships.GetItem(ai.Id);
         if(ship.Movement.TargetPosition != null)
@@ -12,9 +13,9 @@ public class AIPatrolBehaviour : AIBehaviour
             return;
         }
 
-        var bvr = ai.Behaviour;
-        bvr.CurrentWaypointIndex = (bvr.CurrentWaypointIndex + 1) % bvr.Waypoints.Count;
+        var behaviour = (AIPatrolBehaviourModel)ai.Behaviour;
+        behaviour.CurrentWaypointIndex = (behaviour.CurrentWaypointIndex + 1) % behaviour.Waypoints.Count;
 
-        Game.Do(new SetShipDestinationCommand(ship.Id, bvr.Waypoints[bvr.CurrentWaypointIndex]));
+        Game.Do(new SetShipDestinationCommand(ship.Id, behaviour.Waypoints[behaviour.CurrentWaypointIndex]));
     }
 }

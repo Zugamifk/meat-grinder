@@ -16,7 +16,6 @@ public class CreateAICommand : ICommand
     {
         var ai = new AIModel();
         ai.Id = _id;
-        ai.Behaviour.Key = AIBehaviours.IDLE;
         model.AI.AddItem(ai);
         Game.AddUpdater(new AIBehaviourUpdater(ai.Id));
         new CreateVisionCommand(_id, 5).Execute(model);

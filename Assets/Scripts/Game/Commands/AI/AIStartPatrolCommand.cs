@@ -19,10 +19,11 @@ public class AIStartPatrolCommand : ICommand
     {
         var ai = model.AI.GetItem(_id);
         var ship = model.Ships.GetItem(ai.Id);
-        ai.Behaviour.Waypoints.Clear();
+        var behaviour = new AIPatrolBehaviourModel();
+        behaviour.Waypoints.Clear();
         var start = _otherPosition.HasValue ? _otherPosition.Value : ship.Movement.CurrentPosition;
-        ai.Behaviour.Waypoints.Add(start);
-        ai.Behaviour.Waypoints.Add(_targetPosition);
-        ai.Behaviour.Key = AIBehaviours.PATROL;
+        behaviour.Waypoints.Add(start);
+        behaviour.Waypoints.Add(_targetPosition);
+        ai.Behaviour = behaviour;
     }
 }

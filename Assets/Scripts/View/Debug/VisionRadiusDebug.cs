@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,19 @@ public class VisionRadiusDebug : MonoBehaviour
     [SerializeField]
     LineRenderer _lineRenderer;
     [SerializeField]
-    LineRenderer _taretLine;
+    LineRenderer _targetLine;
 
     VisionRadius _visionRadius;
     float _range=-1;
+    Stack<LineRenderer> _pool = new();
+    Dictionary<Guid, LineRenderer> _activeLines = new();
+    List<Guid> _toRemove = new();
 
     private void Awake()
     {
         _visionRadius = GetComponent<VisionRadius>();
         _lineRenderer.positionCount = CIRCLE_SEGMENTS;
+        _pool.Push(_targetLine);
     }
 
     private void Update()
@@ -36,12 +41,47 @@ public class VisionRadiusDebug : MonoBehaviour
             UpdateRange(model);
         }
 
-        if(model.ObjectsInRange.Count > 0)
+        UpdateLines(model);
+    }
+
+    void UpdateLines(IVisionModel model)
+    {
+        _toRemove.Clear();
+        foreach (var id in _activeLines.Keys)
         {
-            var t = model.ObjectsInRange.First();
-            var go = ViewLookup.Get(t);
-            _taretLine.SetPositions(new Vector3[] { Vector3.zero, go.transform.position });
-            _taretLine.positionCount = 2;
+            if(!model.ObjectsInRange.Contains(id))
+            {
+                var l = _activeLines[id];
+                l.gameObject.SetActive(false);
+                _pool.Push(l);
+                _toRemove.Add(id);
+            }
+        }
+
+        foreach(var id in _toRemove)
+        {
+            _activeLines.Remove(id);
+        }
+
+        foreach(var id in model.ObjectsInRange)
+        {
+            if(!_activeLines.TryGetValue(id, out LineRenderer l))
+            {
+                if(_pool.Count > 0)
+                {
+                    l = _pool.Pop();
+                } else
+                {
+                    l = Instantiate(_targetLine);
+                    l.transform.parent = _targetLine.transform.parent;
+                }
+                l.gameObject.SetActive(true);
+                _activeLines[id] = l;
+            }
+
+            var go = ViewLookup.Get(id);
+            l.SetPositions(new Vector3[] { Vector3.zero, go.transform.position });
+            l.positionCount = 2;
         }
     }
 
