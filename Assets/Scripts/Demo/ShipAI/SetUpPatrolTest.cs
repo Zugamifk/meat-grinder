@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AI;
+
 namespace ShipAITest
 {
     public class SetUpPatrolTest : ICommand
@@ -19,7 +21,7 @@ namespace ShipAITest
             var id = Guid.NewGuid();
 
             Game.Do(new SpawnNPCShipCommand(true, _start, id));
-            Game.Do(new AIStartPatrolCommand(id, _start, _end));
+            Game.Do(new StartPatrol(id, _start, _end));
         }
     }
 }

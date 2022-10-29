@@ -37,7 +37,7 @@ public class VisionDemo : MonoBehaviour
     void Start()
     {
         _id = Guid.NewGuid();
-        Game.Do(new CreateAICommand(_id));
+        Game.Do(new CreateAI(_id));
         _vision.Id = _id;
     }
 
@@ -46,7 +46,7 @@ public class VisionDemo : MonoBehaviour
         var rad = Game.Model.Vision.GetItem(_id);
         if (_radius != rad.Range)
         {
-            Game.Do(new SetVisionRangeCommand(_id, _radius));
+            Game.Do(new SetVisionRange(_id, _radius));
         }
 
         var to = (_targetPathEnd.position - _targetPathStart.position);

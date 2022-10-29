@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateVisionCommand : ICommand
+public class CreateVision : ICommand
 {
     Guid _id;
     float _range;
 
-    public CreateVisionCommand(Guid id, float range)
+    public CreateVision(Guid id, float range)
     {
         _id = id;
         _range = range;

@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetVisionRangeCommand : ICommand
+public class SetVisionRange : ICommand
 {
     Guid _id;
     float _range;
 
-    public SetVisionRangeCommand(Guid id, float range)
+    public SetVisionRange(Guid id, float range)
     {
         _id = id;
         _range = range;

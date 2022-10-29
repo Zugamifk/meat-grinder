@@ -12,12 +12,14 @@ namespace AI
         static AIService()
         {
             _keyToBehaviour[typeof(PatrolBehaviourModel)] = new PatrolBehaviour();
+            _keyToBehaviour[typeof(MoveToBehaviourModel)] = new MoveToBehaviour();
         }
 
         public void UpdateBehaviour(GameModel model, AIModel ai)
         {
             if (!_keyToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
             {
+                throw new ArgumentException($"No bbehaviour for AIBEhaviourModel type {ai.Behaviour.GetType()}");
                 return;
             }
 

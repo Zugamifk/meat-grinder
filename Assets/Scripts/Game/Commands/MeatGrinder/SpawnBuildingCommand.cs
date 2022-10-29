@@ -41,7 +41,7 @@ public class SpawnBuildingCommand : ICommand
             };
             model.Weapons.AddItem(weapon);
 
-            new CreateVisionCommand(building.Id, 7).Execute(model);
+            new CreateVision(building.Id, 7).Execute(model);
 
             Game.AddUpdater(building.Id, new WeaponUpdater(building.Id));
         }
