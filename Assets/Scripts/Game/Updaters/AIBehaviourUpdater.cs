@@ -18,7 +18,10 @@ namespace AI
         public void Update(GameModel model)
         {
             var ai = model.AI.GetItem(_id);
-            _aiService.UpdateBehaviour(model, ai);
+            if (ai.Behaviour != null)
+            {
+                _aiService.UpdateBehaviour(model, ai);
+            }
         }
     }
 }
