@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AI;
 
 public class AIStartPatrolCommand : ICommand
 {
@@ -19,7 +20,7 @@ public class AIStartPatrolCommand : ICommand
     {
         var ai = model.AI.GetItem(_id);
         var ship = model.Ships.GetItem(ai.Id);
-        var behaviour = new AIPatrolBehaviourModel();
+        var behaviour = new PatrolBehaviourModel();
         behaviour.Waypoints.Clear();
         var start = _otherPosition.HasValue ? _otherPosition.Value : ship.Movement.CurrentPosition;
         behaviour.Waypoints.Add(start);

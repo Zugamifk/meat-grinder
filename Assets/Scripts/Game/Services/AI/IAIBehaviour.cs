@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace AI
 {
-    public interface IAIBehaviourModel
+    public interface IAIBehaviour
     {
+        void Update(GameModel model, AIModel ai);
 
     }
 }

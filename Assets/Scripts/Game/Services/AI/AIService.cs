@@ -3,22 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIService
+namespace AI
 {
-    static Dictionary<Type, IAIBehaviour> _keyToBehaviour = new Dictionary<Type, IAIBehaviour>();
-
-    static AIService()
+    public class AIService
     {
-        _keyToBehaviour[typeof(AIPatrolBehaviourModel)] = new AIPatrolBehaviour();
-    }
+        static Dictionary<Type, IAIBehaviour> _keyToBehaviour = new Dictionary<Type, IAIBehaviour>();
 
-    public void UpdateBehaviour(GameModel model, AIModel ai)
-    {
-        if(!_keyToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
+        static AIService()
         {
-            return;
+            _keyToBehaviour[typeof(PatrolBehaviourModel)] = new PatrolBehaviour();
         }
 
-        behaviour.Update(model, ai);
+        public void UpdateBehaviour(GameModel model, AIModel ai)
+        {
+            if (!_keyToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
+            {
+                return;
+            }
+
+            behaviour.Update(model, ai);
+        }
     }
 }

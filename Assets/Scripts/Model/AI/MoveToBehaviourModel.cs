@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace AI
 {
-    public interface IAIBehaviourModel
+    public class MoveToBehaviourModel : IAIBehaviourModel
     {
-
+        public Vector3 Destination;
     }
 }
