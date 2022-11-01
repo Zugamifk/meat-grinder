@@ -9,5 +9,6 @@ namespace AI
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public IAIBehaviourModel Behaviour { get; set; }
+        public PlanModel Plan { get; set; }
     }
 }
