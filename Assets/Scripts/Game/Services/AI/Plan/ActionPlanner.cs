@@ -12,6 +12,7 @@ namespace AI
         HashSet<PlannableAction> _usableActions = new();
         HashSet<PlanNode> _leaves = new();
         HashSet<PlannableAction> _actionSubset = new();
+        static Dictionary<string, PlannableAction> _registeredActions = new();
 
         void Reset()
         {
@@ -19,16 +20,20 @@ namespace AI
             _leaves.Clear();
         }
 
-        public PlanModel GetPlan(GameModel game, AIModel ai, IEnumerable<PlannableAction> availableActions, State goal)
+        public PlanModel GetPlan(GameModel game, AIModel ai, State currentState, State goal)
         {
             Reset();
 
             var plan = new PlanModel();
-            var worldState = GetWorldState(game, ai);
 
-            foreach (var action in availableActions)
+            foreach (var name in ai.AvailableActions)
             {
-                if(action.IsActionUsable(game, ai))
+                if(!_registeredActions.TryGetValue(name, out PlannableAction action))
+                {
+                    throw new System.ArgumentException($"No registered action called \'{name}\'!");
+                }
+
+                if(action.IsActionUsableForPlan(game, ai))
                 {
                     _usableActions.Add(action);
                 }
@@ -36,7 +41,7 @@ namespace AI
 
             var start = new PlanNode()
             {
-                State = worldState,
+                State = currentState,
             };
 
             var planExists = FindPlan(start, goal, _usableActions);
@@ -63,10 +68,6 @@ namespace AI
             }
 
             return plan;
-        }
-
-        State GetWorldState(GameModel game, AIModel ai) {
-            return new State();
         }
 
         bool FindPlan(PlanNode start, State goal, HashSet<PlannableAction> usableActions)
@@ -101,14 +102,14 @@ namespace AI
                 Cost = current.Cost + action.Cost
             };
             
-            foreach(var s in current.State.States)
+            foreach(var s in current.State.Values)
             {
-                node.State.States.Add(s.Key, s.Value);
+                node.State.Values.Add(s.Key, s.Value);
             }
 
-            foreach(var s in action.Effect.States)
+            foreach(var s in action.Effect.Values)
             {
-                node.State.States[s.Key] = s.Value;
+                node.State.Values[s.Key] = s.Value;
             }
 
             return node;

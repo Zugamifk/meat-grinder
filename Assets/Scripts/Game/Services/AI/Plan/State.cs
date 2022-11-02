@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace AI
 {
-    internal sealed class State
+    public sealed class State
     {
-        public Dictionary<string, bool> States { get; } = new();
+        public Dictionary<string, bool> Values { get; } = new();
 
         /// <summary>
         /// return true if this state contains all keys in condition and all the values match
@@ -16,9 +16,9 @@ namespace AI
         /// <returns></returns>
         public bool InState(State condition)
         {
-            foreach(var k in condition.States.Keys)
+            foreach(var k in condition.Values.Keys)
             {
-                if(!States.TryGetValue(k, out bool value) || !value)
+                if(!Values.TryGetValue(k, out bool value) || !value)
                 {
                     return false;
                 }
@@ -26,9 +26,14 @@ namespace AI
             return true;
         }
 
+        public void AddValue(string key, bool value)
+        {
+            Values.Add(key, value);
+        }
+
         public override int GetHashCode()
         {
-            return HashCode.Combine(States);
+            return HashCode.Combine(Values);
         }
     }
 }

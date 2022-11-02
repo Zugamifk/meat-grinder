@@ -6,7 +6,6 @@ namespace AI
 {
     public class ActionModel
     {
-        public Dictionary<string, bool> Effectes { get; } = new();
-        public float Weight { get; set; }
+        public string ActionName { get; set; }
     }
 }

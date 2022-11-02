@@ -8,6 +8,7 @@ namespace AI
     public class AIService
     {
         static Dictionary<Type, IAIBehaviour> _keyToBehaviour = new Dictionary<Type, IAIBehaviour>();
+        static ActionPlanner _actionplanner = new();
 
         static AIService()
         {
@@ -20,10 +21,14 @@ namespace AI
             if (!_keyToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
             {
                 throw new ArgumentException($"No bbehaviour for AIBEhaviourModel type {ai.Behaviour.GetType()}");
-                return;
             }
 
             behaviour.Update(model, ai);
+        }
+
+        public void Plan(GameModel model, AIModel ai, State currentState, State goal)
+        {
+            ai.Plan = _actionplanner.GetPlan(model, ai, currentState, goal);
         }
     }
 }
