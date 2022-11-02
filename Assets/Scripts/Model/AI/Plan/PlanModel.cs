@@ -7,11 +7,11 @@ namespace AI
 {
     public class PlanModel
     {
-        public Queue<ActionModel> ActionQueue { get; } = new();
+        public Queue<IAIBehaviourModel> ActionQueue { get; } = new();
 
         public override string ToString()
         {
-            return string.Join(" -> ", ActionQueue.Select(a => a.ActionName));
+            return string.Join(" -> ", ActionQueue.Select(a => a.Key));
         }
     }
 }

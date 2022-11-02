@@ -15,7 +15,10 @@ namespace Demo
             AddEffect("logsCollected", true);
         }
 
-        public override string Name => "Drop Off Logs";
+        public override IAIBehaviourModel GetBehaviourModel(GameModel game, AIModel ai)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override bool IsActionUsableForPlan(GameModel game, AIModel ai)
         {

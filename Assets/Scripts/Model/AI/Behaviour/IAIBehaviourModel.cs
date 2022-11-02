@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI
 {
-    public interface IAIBehaviourModel
+    public interface IAIBehaviourModel : IKeyHolder
     {
 
     }

@@ -14,7 +14,10 @@ namespace Demo.Goap
             AddEffect("hasLogs", true);
         }
 
-        public override string Name => "Chop Tree";
+        public override IAIBehaviourModel GetBehaviourModel(GameModel game, AIModel ai)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override bool IsActionUsableForPlan(GameModel game, AIModel ai)
         {

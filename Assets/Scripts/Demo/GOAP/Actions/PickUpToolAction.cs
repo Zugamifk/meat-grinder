@@ -7,11 +7,15 @@ namespace Demo.Goap
 {
     public class PickUpToolAction : PlannableAction
     {
-        public override string Name => "Pick Up Tool";
         public PickUpToolAction()
         {
             AddPrecondition("hasTool", false);
             AddEffect("hasTool", true);
+        }
+
+        public override IAIBehaviourModel GetBehaviourModel(GameModel game, AIModel ai)
+        {
+            throw new System.NotImplementedException();
         }
 
         public override bool IsActionUsableForPlan(GameModel game, AIModel ai)

@@ -63,8 +63,8 @@ namespace AI
             var n = cheapest;
             while(n!=null)
             {
-                var action = new ActionModel();
-                plan.ActionQueue.Enqueue(action);
+                var behaviour = n.Action.GetBehaviourModel(game, ai);
+                plan.ActionQueue.Enqueue(behaviour);
             }
 
             return plan;

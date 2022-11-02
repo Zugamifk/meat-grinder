@@ -8,5 +8,7 @@ namespace AI
     {
         public List<Vector3> Waypoints { get; } = new();
         public int CurrentWaypointIndex { get; set; } = 0;
+
+        public string Key => "Patrol";
     }
 }

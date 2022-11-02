@@ -7,5 +7,7 @@ namespace AI
     public class MoveToBehaviourModel : IAIBehaviourModel
     {
         public Vector3 Destination;
+
+        public string Key => "Move";
     }
 }
