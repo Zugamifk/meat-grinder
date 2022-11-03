@@ -9,14 +9,11 @@ namespace AI
 {
     internal class ActionPlanner
     {
-        HashSet<PlannableAction> _usableActions = new();
         HashSet<PlanNode> _leaves = new();
-        HashSet<PlannableAction> _actionSubset = new();
         static Dictionary<string, PlannableAction> _registeredActions = new();
 
         void Reset()
         {
-            _usableActions.Clear();
             _leaves.Clear();
         }
 
@@ -30,7 +27,7 @@ namespace AI
             Reset();
 
             var plan = new PlanModel();
-
+            var usableActions = new HashSet<PlannableAction>();
             foreach (var name in ai.AvailableActions)
             {
                 if(!_registeredActions.TryGetValue(name, out PlannableAction action))
@@ -40,7 +37,7 @@ namespace AI
 
                 if(action.IsActionUsableForPlan(game, ai))
                 {
-                    _usableActions.Add(action);
+                    usableActions.Add(action);
                 }
             }
 
@@ -49,7 +46,7 @@ namespace AI
                 State = currentState,
             };
 
-            var planExists = FindPlan(start, goal, _usableActions);
+            var planExists = FindPlan(start, goal, usableActions);
             if (!planExists)
             {
                 Debug.Log("No plan found!");
@@ -65,12 +62,13 @@ namespace AI
                 }
             }
 
-            var n = cheapest;
-            while(n!=null)
+            var actions = new List<IAIBehaviourModel>();
+            for (var n = cheapest; n != start; n = n.Parent)
             {
                 var behaviour = n.Action.GetBehaviourModel(game, ai);
-                plan.ActionQueue.Enqueue(behaviour);
+                actions.Insert(0, behaviour);
             }
+            plan.ActionQueue = new Queue<IAIBehaviourModel>(actions);
 
             return plan;
         }
@@ -83,14 +81,14 @@ namespace AI
                 if(action.Precondition.InState(start.State))
                 {
                     var node = GetNextState(start, action);
-                    if(node.State.InState(goal))
+                    if(goal.InState(node.State))
                     {
                         _leaves.Add(node);
                         planFound = true;
                     } else
                     {
-                        PopulateActionSubset(usableActions, action);
-                        planFound |= FindPlan(node, goal, _actionSubset);
+                        var actionSubset = PopulateActionSubset(usableActions, action);
+                        planFound |= FindPlan(node, goal, actionSubset);
                     }
                 }
             }
@@ -104,9 +102,9 @@ namespace AI
                 State = new(),
                 Parent = current,
                 Action = action,
-                Cost = current.Cost + action.Cost
+                Cost = current.Cost + action.Cost,
             };
-            
+
             foreach(var s in current.State.Values)
             {
                 node.State.Values.Add(s.Key, s.Value);
@@ -120,16 +118,17 @@ namespace AI
             return node;
         }
 
-        void PopulateActionSubset(HashSet<PlannableAction> actions, PlannableAction toIgnore)
+        HashSet<PlannableAction> PopulateActionSubset(HashSet<PlannableAction> actions, PlannableAction toIgnore)
         {
-            _actionSubset.Clear();
+            var actionSubset = new HashSet<PlannableAction>();
             foreach(var a in actions)
             {
                 if(a!=toIgnore)
                 {
-                    _actionSubset.Add(a);
+                    actionSubset.Add(a);
                 }
             }
+            return actionSubset;
         }
 
     }

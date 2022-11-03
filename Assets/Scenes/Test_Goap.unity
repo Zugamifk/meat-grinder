@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823709963}
   - component: {fileID: 1823709962}
+  - component: {fileID: 1823709964}
   m_Layer: 0
   m_Name: GOAP
   m_TagString: Untagged
@@ -167,3 +168,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1823709964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823709961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beccc8fe1ea0334597c23b354a7554a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameData: {fileID: 11400000, guid: 2d5d550cf4eb256418d8dd800f797712, type: 2}

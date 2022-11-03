@@ -21,7 +21,7 @@ namespace AI
         {
             if (!_behaviourModelTypeToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
             {
-                throw new ArgumentException($"No bbehaviour for AIBEhaviourModel type {ai.Behaviour.GetType()}");
+                throw new ArgumentException($"No behaviour for AIBehaviourModel type {ai.Behaviour.GetType()}");
             }
 
             behaviour.Update(model, ai);

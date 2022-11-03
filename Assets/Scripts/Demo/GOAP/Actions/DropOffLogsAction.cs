@@ -19,7 +19,7 @@ namespace Demo
 
         public override IAIBehaviourModel GetBehaviourModel(GameModel game, AIModel ai)
         {
-            throw new System.NotImplementedException();
+            return new GOAPTestBehaviourModel() { Key = Key };
         }
 
         public override bool IsActionUsableForPlan(GameModel game, AIModel ai)

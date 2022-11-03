@@ -9,6 +9,8 @@ namespace Demo.Goap
     {
         protected override void OnCreatedModel(GameModel game, GOAPTestModel model)
         {
+            model.IsToolAvailable = true;
+            model.IsTreeAvailable = true;
             model.AvailableActions.Add("Pick Up Tool");
             model.AvailableActions.Add("Chop Tree");
             model.AvailableActions.Add("Drop Off Logs");

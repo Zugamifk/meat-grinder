@@ -16,9 +16,9 @@ namespace AI
         /// <returns></returns>
         public bool InState(State condition)
         {
-            foreach(var k in condition.Values.Keys)
+            foreach(var kv in Values)
             {
-                if(!Values.TryGetValue(k, out bool value) || !value)
+                if(!condition.Values.TryGetValue(kv.Key, out bool value) || value != kv.Value)
                 {
                     return false;
                 }

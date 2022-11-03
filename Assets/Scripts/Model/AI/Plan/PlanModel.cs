@@ -7,7 +7,7 @@ namespace AI
 {
     public class PlanModel
     {
-        public Queue<IAIBehaviourModel> ActionQueue { get; } = new();
+        public Queue<IAIBehaviourModel> ActionQueue { get; set; } = new();
 
         public override string ToString()
         {
