@@ -7,18 +7,19 @@ namespace AI
 {
     public class AIService
     {
-        static Dictionary<Type, IAIBehaviour> _keyToBehaviour = new Dictionary<Type, IAIBehaviour>();
+        static Dictionary<Type, IAIBehaviour> _behaviourModelTypeToBehaviour = new Dictionary<Type, IAIBehaviour>();
         static ActionPlanner _actionplanner = new();
 
-        static AIService()
+        public static void RegisterAction<TModel>(IAIBehaviour behaviour, PlannableAction action)
+            where TModel : IAIBehaviourModel
         {
-            _keyToBehaviour[typeof(PatrolBehaviourModel)] = new PatrolBehaviour();
-            _keyToBehaviour[typeof(MoveToBehaviourModel)] = new MoveToBehaviour();
+            _behaviourModelTypeToBehaviour[typeof(TModel)] = behaviour;
+            _actionplanner.RegisterPlannableAction(action);
         }
 
         public void UpdateBehaviour(GameModel model, AIModel ai)
         {
-            if (!_keyToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
+            if (!_behaviourModelTypeToBehaviour.TryGetValue(ai.Behaviour.GetType(), out IAIBehaviour behaviour))
             {
                 throw new ArgumentException($"No bbehaviour for AIBEhaviourModel type {ai.Behaviour.GetType()}");
             }

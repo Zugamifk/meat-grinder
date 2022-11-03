@@ -1,3 +1,4 @@
+using AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,10 @@ namespace Demo.Goap
             model.AvailableActions.Add("Pick Up Tool");
             model.AvailableActions.Add("Chop Tree");
             model.AvailableActions.Add("Drop Off Logs");
+
+            AIService.RegisterAction<GOAPTestBehaviourModel>(null, new PickUpToolAction());
+            AIService.RegisterAction<GOAPTestBehaviourModel>(null, new ChopTreeAction());
+            AIService.RegisterAction<GOAPTestBehaviourModel>(null, new DropOffLogsAction());
         }
     }
 }

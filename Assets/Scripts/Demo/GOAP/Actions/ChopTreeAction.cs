@@ -7,6 +7,7 @@ namespace Demo.Goap
 {
     public class ChopTreeAction : PlannableAction
     {
+        public override string Key => "Chop Tree";
         public ChopTreeAction()
         {
             AddPrecondition("hasTool", true);

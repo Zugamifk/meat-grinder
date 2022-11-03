@@ -8,6 +8,8 @@ namespace Demo
 {
     public class DropOffLogsAction : PlannableAction
     {
+        public override string Key => "Drop Off Logs";
+
         public DropOffLogsAction()
         {
             AddPrecondition("hasLogs", true);

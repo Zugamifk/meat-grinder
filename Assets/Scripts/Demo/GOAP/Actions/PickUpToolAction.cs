@@ -7,6 +7,7 @@ namespace Demo.Goap
 {
     public class PickUpToolAction : PlannableAction
     {
+        public override string Key => "Pick Up Tool";
         public PickUpToolAction()
         {
             AddPrecondition("hasTool", false);

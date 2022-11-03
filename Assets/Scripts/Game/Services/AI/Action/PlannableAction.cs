@@ -10,6 +10,7 @@ namespace AI
         internal readonly State Precondition = new();
         internal readonly State Effect = new();
         protected internal float Cost { get; }
+        public abstract string Key { get; }
         public abstract bool IsActionUsableForPlan(GameModel game, AIModel ai);
         public abstract IAIBehaviourModel GetBehaviourModel(GameModel game, AIModel ai);
 

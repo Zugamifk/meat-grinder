@@ -20,6 +20,11 @@ namespace AI
             _leaves.Clear();
         }
 
+        internal void RegisterPlannableAction(PlannableAction action)
+        {
+            _registeredActions.Add(action.Key, action);
+        }
+
         public PlanModel GetPlan(GameModel game, AIModel ai, State currentState, State goal)
         {
             Reset();

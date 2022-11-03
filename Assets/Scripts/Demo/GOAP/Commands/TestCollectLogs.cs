@@ -25,6 +25,7 @@ namespace Demo.Goap
             var goal = new State();
             goal.AddValue("logsCollected", true);
             service.Plan(model, ai, start, goal);
+            Debug.Log(ai.Plan);
         }
     }
 }

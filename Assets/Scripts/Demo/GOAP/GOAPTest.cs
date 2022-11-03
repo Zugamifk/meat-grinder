@@ -9,6 +9,7 @@ namespace Demo.Goap
         private void Start()
         {
             Game.Do(new CreateTestModelCommand());
+            Game.Do(new TestCollectLogs());
         }
     }
 }
