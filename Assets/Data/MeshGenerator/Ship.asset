@@ -12,3 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c3c8ac55571b649ba4400df7e199c7, type: 3}
   m_Name: Ship
   m_EditorClassIdentifier: 
+  BalloonCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00052435
+      value: 0.00006067753
+      inSlope: 6.360232
+      outSlope: 6.360232
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.074357264
+    - serializedVersion: 3
+      time: 0.0011215229
+      value: 0.07326169
+      inSlope: 6.0554776
+      outSlope: 6.0554776
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2231912
+      value: 0.9412436
+      inSlope: 0.2749298
+      outSlope: 0.2749298
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7566844
+      outWeight: 0.30464494
+    - serializedVersion: 3
+      time: 0.51196116
+      value: 1.0016074
+      inSlope: -0.08606694
+      outSlope: -0.08606694
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7744631
+      value: 0.93771464
+      inSlope: -0.36295822
+      outSlope: -0.36295822
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.83376616
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0438474
+      value: 0.49431303
+      inSlope: -2.4970076
+      outSlope: -2.4970076
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2907788
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BalloonRadius: 1
+  BalloonLength: 10
+  SegmentLength: 0.2
+  NumRidges: 16

@@ -8,5 +8,7 @@ public class ShipMeshGeneratorData : ScriptableObject, IMeshGeneratorData
 {
     public AnimationCurve BalloonCurve;
     public float BalloonRadius;
-    public float BaloonLength;
+    public float BalloonLength;
+    public float SegmentLength;
+    public int NumRidges;
 }
