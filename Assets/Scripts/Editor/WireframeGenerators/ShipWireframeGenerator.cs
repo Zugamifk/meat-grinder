@@ -12,6 +12,9 @@ public class ShipWireframeGenerator : WireframeGenerator<ShipMeshGeneratorData>
     protected override void BuildWireframe(Wireframe wireframe, ShipMeshGeneratorData data)
     {
         CreateBalloon(wireframe, data);
+        CreateStabilizer(wireframe, data, Vector3.up);
+        CreateStabilizer(wireframe, data, Vector3.left);
+        CreateStabilizer(wireframe, data, Vector3.right);
     }
 
     void CreateBalloon(Wireframe wireframe, ShipMeshGeneratorData data)
@@ -26,15 +29,15 @@ public class ShipWireframeGenerator : WireframeGenerator<ShipMeshGeneratorData>
             var c1 = Vector3.forward * next * data.BalloonLength;
             var r0 = data.BalloonCurve.Evaluate(t) * data.BalloonRadius;
             var r1 = data.BalloonCurve.Evaluate(next) * data.BalloonRadius;
-            CreateSegment(wireframe, dir, c0, c1, r0, r1, data.NumRidges);
+            CreateBalloonSegment(wireframe, dir, c0, c1, r0, r1, data.NumRidges);
         }
         var start = Vector3.zero;
-        CreateSegment(wireframe, dir, start, start, data.BalloonCurve.Evaluate(0) * data.BalloonRadius, 0, data.NumRidges);
+        CreateBalloonSegment(wireframe, dir, start, start, data.BalloonCurve.Evaluate(0) * data.BalloonRadius, 0, data.NumRidges);
         var end = Vector3.forward * data.BalloonLength;
-        CreateSegment(wireframe, dir, end, end, data.BalloonCurve.Evaluate(1) * data.BalloonRadius, 0, data.NumRidges);
+        CreateBalloonSegment(wireframe, dir, end, end, data.BalloonCurve.Evaluate(1) * data.BalloonRadius, 0, data.NumRidges);
     }
 
-    void CreateSegment(Wireframe wireframe, Vector3 dir, Vector3 c0, Vector3 c1, float r0, float r1, int sides)
+    void CreateBalloonSegment(Wireframe wireframe, Vector3 dir, Vector3 c0, Vector3 c1, float r0, float r1, int sides)
     {
         var d = dir;
         var ang = 360 / (float)sides;
@@ -48,8 +51,33 @@ public class ShipWireframeGenerator : WireframeGenerator<ShipMeshGeneratorData>
         }
     }
 
-    void CreateDeck()
+    void CreateStabilizer(Wireframe wireframe, ShipMeshGeneratorData data, Vector3 dir)
     {
-
+        var x0 = data.StabilizerPosition.x;
+        var x1 = data.StabilizerPosition.y;
+        var l = data.StabilizerLength;
+        var w = data.StabilizerThickness;
+        var step = Mathf.Max(1/(float)data.StabilizerSegments, 0.05f);
+        var r = data.BalloonCurve.Evaluate(x0) * data.BalloonRadius;
+        for (float t=0;t<1;t+=step)
+        {
+            var t0 = Mathf.Lerp(x0, x1, t);
+            var t1 = Mathf.Lerp(x0, x1, t + step);
+            var c0 = Vector3.forward * t0 * data.BalloonLength;
+            var c1 = Vector3.forward * t1 * data.BalloonLength;
+            var l0 = r + data.StabilizerCurve.Evaluate(t) * l;
+            var l1 = r + data.StabilizerCurve.Evaluate(t+step) * l;
+            CreateStabilizerSegment(wireframe, c0, c1, dir, l0, l1, w / 2);
+        }
+        var c = Vector3.forward * x1 * data.BalloonLength;
+        CreateStabilizerSegment(wireframe, c, c, dir, r + data.StabilizerCurve.Evaluate(1) * l, data.BalloonCurve.Evaluate(x1)*data.BalloonRadius, w / 2);
+    }
+    void CreateStabilizerSegment(Wireframe wireframe, Vector3 c0, Vector3 c1, Vector3 dir, float l0, float l1, float w)
+    {
+        var offset = Vector3.Cross(Vector3.forward, dir).normalized * w;
+        var p0 = c0 + dir * l0;
+        var p1 = c1 + dir * l1;
+        wireframe.Connect(p0 + offset, p1 + offset);
+        wireframe.Connect(p0 - offset, p1 - offset);
     }
 }

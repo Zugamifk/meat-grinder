@@ -11,4 +11,11 @@ public class ShipMeshGeneratorData : ScriptableObject, IMeshGeneratorData
     public float BalloonLength;
     public float SegmentLength;
     public int NumRidges;
+
+    public AnimationCurve StabilizerCurve;
+    [MinMaxSlider]
+    public Vector2 StabilizerPosition;
+    public float StabilizerLength;
+    public float StabilizerThickness;
+    public int StabilizerSegments;
 }
