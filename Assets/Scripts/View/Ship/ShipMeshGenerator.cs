@@ -4,6 +4,7 @@ using UnityEngine;
 using MeshGenerator;
 using System;
 using MeshGenerator.Wireframes;
+using MeshGenerator.Surfaces;
 
 [MeshGenerator("Ship")]
 public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGeneratorData>
@@ -12,6 +13,9 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
     {
         //CreateDebugMesh(builder);
         CreateBalloon(builder);
+        CreateStabilizer(builder, Vector3.up);
+        CreateStabilizer(builder, Vector3.left);
+        CreateStabilizer(builder, Vector3.right);
     }
 
     void CreateDebugMesh(MeshBuilder builder)
@@ -68,7 +72,6 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
     {
         var x0 = Data.StabilizerPosition.x;
         var x1 = Data.StabilizerPosition.y;
-        var l = Data.StabilizerLength;
         var w = Data.StabilizerThickness;
         var step = Mathf.Max(1 / (float)Data.StabilizerSegments, 0.05f);
         var r = Data.BalloonCurve.Evaluate(x0) * Data.BalloonRadius;
@@ -78,21 +81,28 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
             var t1 = Mathf.Lerp(x0, x1, t + step);
             var c0 = Vector3.forward * t0 * Data.BalloonLength;
             var c1 = Vector3.forward * t1 * Data.BalloonLength;
-            var l0 = r + Data.StabilizerCurve.Evaluate(t) * l;
-            var l1 = r + Data.StabilizerCurve.Evaluate(t + step) * l;
-            CreateStabilizerSegment(builder, c0, c1, dir, l0, l1, w / 2);
+            
+            CreateStabilizerSegment(builder, c0, c1, dir, r, t, step, w / 2);
         }
         var c = Vector3.forward * x1 * Data.BalloonLength;
-        CreateStabilizerSegment(builder, c, c, dir, r + Data.StabilizerCurve.Evaluate(1) * l, Data.BalloonCurve.Evaluate(x1) * Data.BalloonRadius, w / 2);
+        //CreateStabilizerSegment(builder, c, c, dir, r + Data.StabilizerCurve.Evaluate(1) * l, Data.BalloonCurve.Evaluate(x1) * Data.BalloonRadius, w / 2);
     }
 
-    void CreateStabilizerSegment(MeshBuilder builder, Vector3 c0, Vector3 c1, Vector3 dir, float l0, float l1, float w)
+    void CreateStabilizerSegment(MeshBuilder builder, Vector3 c0, Vector3 c1, Vector3 dir, float r, float t, float step, float w)
     {
+        var l = Data.StabilizerLength;
         var offset = Vector3.Cross(Vector3.forward, dir).normalized * w;
-        var p0 = c0 + dir * l0;
-        var p1 = c1 + dir * l1;
-        wireframe.Connect(p0 + offset, p1 + offset);
-        wireframe.Connect(p0 - offset, p1 - offset);
+        var l0 = r + Data.StabilizerCurve.Evaluate(t) * l;
+        var l1 = r + Data.StabilizerCurve.Evaluate(t + step) * l;
+        var r0 = Data.BalloonCurve.Evaluate(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, t));
+        var r1 = Data.BalloonCurve.Evaluate(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, t+step));
+        var p0 = c0 + dir * r0;
+        var p1 = c1 + dir * r1;
+        var p2 = c0 + dir * l0;
+        var p3 = c1 + dir * l1;
+        builder.AddQuad(p1-offset, p0 - offset, p2 - offset, p3 - offset);
+        builder.AddQuad(p0 + offset, p1 + offset, p3 + offset, p2 + offset);
+        builder.AddQuad(p2 + offset, p3 + offset, p3 - offset, p2 - offset);
     }
 
     protected override ShipMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Ship;

@@ -19,6 +19,7 @@ namespace MeshGenerator
         {
             var result = new MeshGeneratorResult();
             result.Mesh = _builder.BuildMesh();
+            result.Mesh.RecalculateBounds();
             return result;
         }
 
