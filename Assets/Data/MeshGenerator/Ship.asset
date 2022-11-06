@@ -83,8 +83,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   BalloonRadius: 1
   BalloonLength: 10
-  SegmentLength: 0.2
-  NumRidges: 16
+  BalloonRingCount: 24
+  BalloonRingSides: 16
   StabilizerCurve:
     serializedVersion: 2
     m_Curve:
@@ -118,10 +118,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StabilizerPosition: {x: 0.75830734, y: 0.96023864}
-  StabilizerLength: 0.37
+  StabilizerPosition: {x: 0.7376782, y: 0.9396094}
+  StabilizerLength: 0.61
   StabilizerThickness: 0.04
-  StabilizerSegments: 10
+  StabilizerSegments: 15
   GondolaPosition: {x: 0, y: -1.28, z: 2.13}
   GondolaDimensions: {x: 0.42, y: 0.55, z: 5}
   GondolaWidthCurve:

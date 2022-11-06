@@ -30,9 +30,9 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
 
     void CreateBalloon(MeshBuilder builder)
     {
-        var segmentLength = Data.SegmentLength;
+        var segmentLength = Data.BalloonRingCount;
         var balloonLength = Data.BalloonLength;
-        var numSegments = Data.NumRidges;
+        var numSegments = Data.BalloonRingSides;
         var balloonRadius = Data.BalloonRadius;
         var balloonCurve = Data.BalloonCurve;
         var step = Mathf.Max(0.05f, segmentLength) / balloonLength;
