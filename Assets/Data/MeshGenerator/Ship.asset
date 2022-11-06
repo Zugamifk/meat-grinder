@@ -122,3 +122,90 @@ MonoBehaviour:
   StabilizerLength: 0.37
   StabilizerThickness: 0.04
   StabilizerSegments: 10
+  GondolaPosition: {x: 0, y: -1.28, z: 2.13}
+  GondolaDimensions: {x: 0.42, y: 0.55, z: 5}
+  GondolaWidthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 14.974687
+      outSlope: 14.974687
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13547865
+    - serializedVersion: 3
+      time: 0.16929443
+      value: 0.7506044
+      inSlope: 1.3219615
+      outSlope: 1.3219615
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GongolaKeelCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0033874512
+      value: -0.0001335144
+      inSlope: 0.15820195
+      outSlope: 0.15820195
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0217907
+      value: 0.16097987
+      inSlope: 0.4355738
+      outSlope: 0.4355738
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13718359
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GondolaVolumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.94871205
+      outSlope: -0.94871205
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9815674
+      value: 0.06877518
+      inSlope: -1.8162087
+      outSlope: -1.8162087
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15943284
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  KeelBeamThickness: 0
+  DeckBeamThickness: 0
+  GondolaSegments: 24
+  GondolaLayers: 10
