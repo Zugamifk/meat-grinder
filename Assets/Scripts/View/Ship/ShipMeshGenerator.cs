@@ -16,6 +16,7 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
         CreateStabilizer(builder, Vector3.up);
         CreateStabilizer(builder, Vector3.left);
         CreateStabilizer(builder, Vector3.right);
+        CreateGondola(builder);
     }
 
     void CreateDebugMesh(MeshBuilder builder)
@@ -30,79 +31,61 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
 
     void CreateBalloon(MeshBuilder builder)
     {
-        var segmentLength = Data.BalloonRingCount;
-        var balloonLength = Data.BalloonLength;
-        var numSegments = Data.BalloonRingSides;
-        var balloonRadius = Data.BalloonRadius;
-        var balloonCurve = Data.BalloonCurve;
-        var step = Mathf.Max(0.05f, segmentLength) / balloonLength;
-        var dir = Vector3.up;
-        for (float t = 0; t < 1; t += step)
+        for (int i = 0; i < Data.BalloonRingCount; i++)
         {
-            var next = Mathf.Min(t + step, 1);
-            var c0 = Vector3.forward * t * balloonLength;
-            var c1 = Vector3.forward * next * balloonLength;
-            var r0 = balloonCurve.Evaluate(t) * balloonRadius;
-            var r1 = balloonCurve.Evaluate(next) * balloonRadius;
-            CreateBalloonSegment(builder, dir, c0, c1, r0, r1, numSegments);
-        }
-        var start = Vector3.zero;
-        CreateBalloonSegment(builder, dir, start, start, balloonCurve.Evaluate(0) * balloonRadius, 0, numSegments);
-        var end = Vector3.forward * balloonLength;
-        CreateBalloonSegment(builder, dir, end, end, balloonCurve.Evaluate(1) * balloonRadius, 0, numSegments);
-    }
-
-    void CreateBalloonSegment(MeshBuilder builder, Vector3 dir, Vector3 c0, Vector3 c1, float r0, float r1, int sides)
-    {
-        var d = dir;
-        var ang = 360 / (float)sides;
-        var rot = Quaternion.AngleAxis(ang, Vector3.forward);
-        for (int i = 0; i < sides; i++)
-        {
-            var p0 = c0 + rot * d * r0;
-            var p1 = c1 + rot * d * r1;
-            var p2 = c1 + d * r1;
-            var p3 = c0 + d * r0;
-            builder.AddQuad(p0, p1, p2, p3);
-            d = rot * d;
+            for (int j = 0; j < Data.BalloonRingSides; j++)
+            {
+                var u0 = (float)i / Data.BalloonRingCount;
+                var u1 = (float)(i + 1) / Data.BalloonRingCount;
+                var v0 = (float)j / Data.BalloonRingSides;
+                var v1 = (float)(j + 1) / Data.BalloonRingSides;
+                var p0 = Data.GetBalloonPoint(u0, 360 * v0);
+                var p1 = Data.GetBalloonPoint(u0, 360 * v1);
+                var p2 = Data.GetBalloonPoint(u1, 360 * v1);
+                var p3 = Data.GetBalloonPoint(u1, 360 * v0);
+                builder.AddQuad(p0, p1, p2, p3);
+            }
         }
     }
 
     void CreateStabilizer(MeshBuilder builder, Vector3 dir)
     {
-        var x0 = Data.StabilizerPosition.x;
-        var x1 = Data.StabilizerPosition.y;
-        var w = Data.StabilizerThickness;
-        var step = Mathf.Max(1 / (float)Data.StabilizerSegments, 0.05f);
-        var r = Data.BalloonCurve.Evaluate(x0) * Data.BalloonRadius;
-        for (float t = 0; t < 1; t += step)
+        var offset = Vector3.Cross(dir, Vector3.forward).normalized * Data.StabilizerThickness / 2;
+        for (int i = 0; i < Data.StabilizerSegments; i++)
         {
-            var t0 = Mathf.Lerp(x0, x1, t);
-            var t1 = Mathf.Lerp(x0, x1, t + step);
-            var c0 = Vector3.forward * t0 * Data.BalloonLength;
-            var c1 = Vector3.forward * t1 * Data.BalloonLength;
-            
-            CreateStabilizerSegment(builder, c0, c1, dir, r, t, step, w / 2);
+            var u0 = (float)i / Data.StabilizerSegments;
+            var e0 = Data.GetStabilizerEdgePoint(u0, dir);
+            var b0 = Data.GetBalloonPoint(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, u0), dir);
+            var u1 = (float)(i + 1) / Data.StabilizerSegments;
+            var e1 = Data.GetStabilizerEdgePoint(u1, dir);
+            var b1 = Data.GetBalloonPoint(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, u1), dir);
+            builder.AddQuad(b0 + offset, e0 + offset, e1 + offset, b1 + offset);
+            builder.AddQuad(b0 - offset, b1 - offset, e1 - offset, e0 - offset);
+            builder.AddQuad(e0 + offset, e0 - offset, e1 - offset, e1 + offset);
         }
-        var c = Vector3.forward * x1 * Data.BalloonLength;
-        //CreateStabilizerSegment(builder, c, c, dir, r + Data.StabilizerCurve.Evaluate(1) * l, Data.BalloonCurve.Evaluate(x1) * Data.BalloonRadius, w / 2);
     }
 
-    void CreateStabilizerSegment(MeshBuilder builder, Vector3 c0, Vector3 c1, Vector3 dir, float r, float t, float step, float w)
+    void CreateGondola(MeshBuilder builder)
     {
-        var l = Data.StabilizerLength;
-        var offset = Vector3.Cross(Vector3.forward, dir).normalized * w;
-        var l0 = r + Data.StabilizerCurve.Evaluate(t) * l;
-        var l1 = r + Data.StabilizerCurve.Evaluate(t + step) * l;
-        var r0 = Data.BalloonCurve.Evaluate(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, t));
-        var r1 = Data.BalloonCurve.Evaluate(Mathf.Lerp(Data.StabilizerPosition.x, Data.StabilizerPosition.y, t+step));
-        var p0 = c0 + dir * r0;
-        var p1 = c1 + dir * r1;
-        var p2 = c0 + dir * l0;
-        var p3 = c1 + dir * l1;
-        builder.AddQuad(p1-offset, p0 - offset, p2 - offset, p3 - offset);
-        builder.AddQuad(p0 + offset, p1 + offset, p3 + offset, p2 + offset);
-        builder.AddQuad(p2 + offset, p3 + offset, p3 - offset, p2 - offset);
+        var mtx = Matrix4x4.Translate(Data.GondolaPosition);
+        builder.PushMatrix(mtx);
+        var zStep = Mathf.Max(0.05f, 1 / (float)Data.GondolaSegments);
+        var yStep = Mathf.Max(0.05f, 1 / (float)Data.GondolaLayers);
+        for (float t = 0; t < 1; t += zStep)
+        {
+            for (float y = 0; y < 1; y += yStep)
+            {
+                Vector3 l0, l1, l2, l3;
+                var r0 = Data.GetGondolaPoint(t, y, out l0);
+                var r1 = Data.GetGondolaPoint(t + zStep, y, out l1);
+                var r2 = Data.GetGondolaPoint(t + zStep, y + yStep, out l2);
+                var r3 = Data.GetGondolaPoint(t, y + yStep, out l3);
+
+                builder.AddQuad(r2, r1, r0, r3);
+                builder.AddQuad(l0, l1, l2, l3);
+            }
+        }
+        builder.PopMatrix();
     }
 
     protected override ShipMeshGeneratorData LoadData() => DataService.GetData<MeshGeneratorDataCollection>().Ship;
