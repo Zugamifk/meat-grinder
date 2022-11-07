@@ -15,7 +15,7 @@ public class MeshGeneratorWindow : EditorWindow
 {
     const string DATA_SCRIPT_PATH = "Assets/Scripts/Data/MeshGenerator";
     const string DATA_ASSET_PATH = "Assets/Data/MeshGenerator";
-    const string GENERATOR_SCRIPT_PATH = "Assets/Scripts/Game/Services/MeshGenerators";
+    const string GENERATOR_SCRIPT_PATH = "Assets/Scripts/View/MeshGenerators";
     const string WIREFRAME_GENERATOR_SCRIPT_PATH = "Assets/Scripts/Editor/WireframeGenerators";
     const string GENERATOR_EDITOR_SCRIPT_PATH = "Assets/Scripts/Editor/MeshGenerators";
     const string GENERATOR_DATA_COLLECTION_PATH = "Assets/Scripts/Data/MeshGenerator/MeshGeneratorDataCollection.cs";
@@ -82,9 +82,10 @@ public class MeshGeneratorWindow : EditorWindow
         CreateScript($@"using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MeshGenerator;
 
 [CreateAssetMenu(menuName=""Data/Mesh Generators/{_meshGeneratorName}"")]
-public class {name} : ScriptableObject
+public class {name} : ScriptableObject, IMeshGeneratorData
 {{
 
 }}",
@@ -113,7 +114,7 @@ using System;
 [MeshGenerator(""{_meshGeneratorName}"")]
 public class {name} : MeshGeneratorWithData<{_meshGeneratorName}MeshGeneratorData>
 {{
-    protected override void BuildMesh()
+    protected override void BuildMesh(MeshBuilder builder)
     {{
     }}
 
@@ -134,9 +135,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class {name} : WireframeGenerator<{_meshGeneratorName}GeneratorData>
+public class {name} : WireframeGenerator<{_meshGeneratorName}MeshGeneratorData>
 {{
-    protected override void BuildWireframe(Wireframe wireframe, {_meshGeneratorName}GeneratorData data)
+    protected override void BuildWireframe(Wireframe wireframe, {_meshGeneratorName}MeshGeneratorData data)
     {{
 
     }}
@@ -156,7 +157,7 @@ using MeshGenerator.Editor;
 using MeshGenerator;
 
 [MeshGeneratorEditor(typeof({_meshGeneratorName}MeshGenerator))]
-public class {name} : MeshGeneratorEditorWithWireFrame<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}MeshGeneratorData>
+public class {name} : MeshGeneratorEditorWithWireFrame<{_meshGeneratorName}MeshGenerator, {_meshGeneratorName}WireframeGenerator, {_meshGeneratorName}MeshGeneratorData>
 {{
 
 }}
@@ -178,9 +179,10 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 
         foreach(var type in AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a=>a.GetTypes())
-            .Where(t => !t.IsAbstract && t.Name.Contains("MeshGenerator"))
-            .Select(t => t.Name.Substring(0, t.Name.IndexOf("MeshGenerator")))
-            .Where(t=>!string.IsNullOrEmpty(t)))
+            .Where(t => typeof(IMeshGeneratorData).IsAssignableFrom(t) && !t.IsAbstract)
+            .Select(t => t.Name.Substring(0, t.Name.IndexOf("MeshGeneratorData")))
+            .Where(t=>!string.IsNullOrEmpty(t))
+            .Distinct())
             {
             _stringBuilder.AppendLine($"    public {type}MeshGeneratorData {type};");
         }
@@ -191,6 +193,7 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 
         File.Delete(GENERATOR_DATA_COLLECTION_PATH);
         File.WriteAllText(GENERATOR_DATA_COLLECTION_PATH, _stringBuilder.ToString());
+        Debug.Log("Regenerated MeshGeneratorDataCollection");
     }
 
 
@@ -201,6 +204,7 @@ public class MeshGeneratorDataCollection : ScriptableObject, IRegisteredData
 
         var path = Path.Combine(filePath, $"{name}.cs");
         File.WriteAllText(path, _stringBuilder.ToString());
+        Debug.Log($"Created {name} at {path}");
     } 
 
 }
