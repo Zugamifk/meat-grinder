@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 using AI;
+using Weapons;
 
 public partial class GameModel : IGameModel
 {
