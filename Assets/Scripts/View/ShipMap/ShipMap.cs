@@ -13,7 +13,8 @@ public class ShipMap : MonoBehaviour
     Guid _mapGuid;
 
     Dictionary<Vector2Int, ShipMapTile> _positionToTile = new();
-
+    delegate void OnSpawnedTileDelegate(ShipMapTile tile);
+    Dictionary<Vector2Int, OnSpawnedTileDelegate> _positionToOnSpawnedTile = new();
     public ShipMapTile GetTile(Vector2Int position) => _positionToTile[position];
 
     private void Awake()
@@ -34,7 +35,7 @@ public class ShipMap : MonoBehaviour
     private void Update()
     {
         var map = Game.Model.ShipMap;
-        if (_mapGuid != map.Id)
+        if (map!=null && _mapGuid != map.Id)
         {
             UpdateMap(map);
         } 
@@ -51,8 +52,15 @@ public class ShipMap : MonoBehaviour
                 tile.transform.parent = transform;
                 tile.transform.position = new Vector3(x, 0, y);
 
-                tile.SetTile(map.GetTile(new Vector2Int(x, y)));
-                _positionToTile[new Vector2Int(x, y)] = tile;
+                var position = new Vector2Int(x, y);
+                tile.SetTile(map.GetTile(position));
+                _positionToTile[position] = tile;
+
+                if(_positionToOnSpawnedTile.TryGetValue(position, out OnSpawnedTileDelegate onSpawnedTile))
+                {
+                    onSpawnedTile.Invoke(tile);
+                    _positionToOnSpawnedTile.Remove(position);
+                }
             }
         }
 
@@ -61,7 +69,13 @@ public class ShipMap : MonoBehaviour
 
     void OnSpawnedBuilding(IBuildingModel model, BuildingView view)
     {
-        var tile = _positionToTile[model.TilePosition];
-        tile.AddBuilding(view);
+        if(_positionToTile.TryGetValue(model.TilePosition, out ShipMapTile tile))
+        {
+            tile.AddBuilding(view);
+        } else
+        {
+            _positionToOnSpawnedTile[model.TilePosition] = t => t.AddBuilding(view);
+        }
     }
+
 }

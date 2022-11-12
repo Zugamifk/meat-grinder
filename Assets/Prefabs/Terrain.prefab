@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 668355860619086507}
   - component: {fileID: 668355860619086508}
   m_Layer: 0
-  m_Name: WorldMap
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
