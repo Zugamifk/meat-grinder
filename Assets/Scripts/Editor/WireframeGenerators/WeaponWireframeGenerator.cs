@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Weapons;
 
-public class WeaponWireframeGenerator : WireframeGenerator<WeaponMeshGeneratorData>
+public class WeaponWireframeGenerator : ModelWireframeGenerator<WeaponModel, WeaponMeshGeneratorData>
 {
     protected override void BuildWireframe(Wireframe wireframe, WeaponMeshGeneratorData data)
     {

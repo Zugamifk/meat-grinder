@@ -5,7 +5,7 @@ using MeshGenerator;
 using System;
 
 [MeshGenerator("Weapon")]
-public class WeaponMeshGenerator : MeshGeneratorWithData<WeaponMeshGeneratorData>
+public class WeaponMeshGenerator : ModelMeshGenerator<IWeaponModel, WeaponMeshGeneratorData>
 {
     protected override void BuildMesh(MeshBuilder builder)
     {
