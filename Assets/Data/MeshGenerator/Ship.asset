@@ -118,7 +118,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StabilizerPosition: {x: 0.7376782, y: 0.9396094}
+  StabilizerPosition: {x: 0.7733727, y: 0.97530395}
   StabilizerLength: 0.61
   StabilizerThickness: 0.04
   StabilizerSegments: 15

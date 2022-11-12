@@ -13,6 +13,9 @@ public class ShipWireframeGenerator : WireframeGenerator<ShipMeshGeneratorData>
 
     protected override void BuildWireframe(Wireframe wireframe, ShipMeshGeneratorData data)
     {
+        var pos = new Vector3(0, 0, data.BalloonLength / 2);
+        var rot = Quaternion.Euler(0, 180, 0);
+        wireframe.PushMatrix(Matrix4x4.TRS(pos, rot, Vector3.one));
         CreateBalloon(wireframe, data);
         CreateStabilizer(wireframe, data, Vector3.up);
         CreateStabilizer(wireframe, data, Vector3.left);

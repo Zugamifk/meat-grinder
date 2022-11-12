@@ -12,6 +12,9 @@ public class ShipMeshGenerator : ModelMeshGenerator<IShipModel, ShipMeshGenerato
     protected override void BuildMesh(MeshBuilder builder)
     {
         //CreateDebugMesh(builder);
+        var pos = new Vector3(0, 0, Data.BalloonLength / 2);
+        var rot = Quaternion.Euler(0, 180, 0);
+        builder.PushMatrix(Matrix4x4.TRS(pos, rot, Vector3.one));
         CreateBalloon(builder);
         CreateStabilizer(builder, Vector3.up);
         CreateStabilizer(builder, Vector3.left);
