@@ -34,6 +34,10 @@ public class InputController : MonoBehaviour
         {
             move.x = 1;
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Game.Do(new ToggleNavigationOrInteriorControlMode());
+        }
 
         if (move != Vector2.zero)
         {

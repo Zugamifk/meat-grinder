@@ -20,6 +20,8 @@ public partial class GameModel : IGameModel
 
     public Guid PlayerShipId { get; set; } = Guid.NewGuid();
 
+    public GameStateModel GameState { get; } = new();
+
     public InputModel Input { get; } = new(); 
 
     public WaveModel CurrentWave { get; set; }

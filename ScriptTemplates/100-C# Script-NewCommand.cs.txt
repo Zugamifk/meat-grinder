@@ -1,0 +1,20 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+    #ROOTNAMESPACEBEGIN#
+public struct #SCRIPTNAME# : ICommand
+{ 
+	Guid _id;
+	
+	public #SCRIPTNAME#(Guid id) {
+		_id = id;
+	}
+	
+    public void Execute(GameModel model)
+    {
+        #NOTRIM#
+    }
+}
+#ROOTNAMESPACEEND#

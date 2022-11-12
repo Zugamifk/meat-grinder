@@ -8,8 +8,7 @@ namespace Demo
     {
         private void Start()
         {
-            Scenes.LoadShipInterior();
-            Scenes.LoadNavigation();
+            Game.Do(new BootGame());
         }
     }
 }
