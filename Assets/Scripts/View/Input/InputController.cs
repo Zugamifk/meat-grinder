@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
@@ -47,6 +48,12 @@ public class InputController : MonoBehaviour
 
     void HandleMouseInput()
     {
+        if(EventSystem.current.IsPointerOverGameObject())
+        {
+            // UI handles itself
+            return;
+        }
+
         if(HandleWorldInput())
         {
             return;
