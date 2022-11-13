@@ -19,8 +19,8 @@ namespace Demo
             var generator = new ShipInteriorGenerator(_shipData);
             generator.GenerateMap(model);
             generator.GeneratePath(model,
-                new Vector2Int(10, 0),
-                new Vector2Int(7, 0),
+                new Vector2Int(10, 4),
+                new Vector2Int(7, 4),
                 new Vector2Int(7, 5),
                 new Vector2Int(3, 5),
                 new Vector2Int(3, -8),
