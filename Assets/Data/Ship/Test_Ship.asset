@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Test_Ship
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4616532609948054242, guid: c182f23b34d07db4883ff9782c3a083b, type: 3}
+  Dimensions: {x: 20, y: 20}
+  PathColor: {r: 1, g: 0.43867922, b: 0.43867922, a: 1}
+  RoadWidth: 0.4

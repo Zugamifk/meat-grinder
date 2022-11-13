@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: DataReferences
   m_EditorClassIdentifier: 
   _references:
-  - {fileID: 11400000, guid: c79ff2ff096a72d49b1335e62d9ec4bd, type: 2}
   - {fileID: 11400000, guid: 0d420a91d5230ec4fb22268fa6637e8b, type: 2}
   - {fileID: 11400000, guid: 6ee1b42b520aed34aa8f8f59d0e34aab, type: 2}
   - {fileID: 11400000, guid: 490193a34d180744ebdd5ab580f58964, type: 2}

@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnedRoot: {fileID: 969406149}
   _map: {fileID: 2115505941}
+  _shipData: {fileID: 11400000, guid: 1b27e77de56d60943bd715df87c50854, type: 2}
 --- !u!1 &276528208
 GameObject:
   m_ObjectHideFlags: 0

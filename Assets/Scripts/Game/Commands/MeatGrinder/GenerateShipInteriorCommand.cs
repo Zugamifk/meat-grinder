@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateMapCommand : ICommand
+public class GenerateShipInteriorCommand : ICommand
 {
+    ShipData _shipData;
+
+    public GenerateShipInteriorCommand(ShipData shipData)
+    {
+        _shipData = shipData;
+    }
+
     public void Execute(GameModel model)
     {
         model.ShipMap = new();
 
-        var generator = new MapGenerator();
+        var generator = new ShipInteriorGenerator(_shipData);
         generator.GenerateMap(model);
 
         var start = model.ShipMap.Paths.StartNode.Position;

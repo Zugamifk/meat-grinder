@@ -24,8 +24,7 @@ public class ShipMapTile : MeshGeneratorUser
 
     void UpdateTileGeometry(ITileModel tile)
     {
-        var data = DataService.GetData<GameData>();
-        var y = tile.Height * data.TileStepHeight;
+        var y = tile.Height;
         if(tile.Type == ETileType.Wall)
         {
             y += 1;

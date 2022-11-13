@@ -9,6 +9,8 @@ public class ShipMapTest : MonoBehaviour
     Transform _spawnedRoot;
     [SerializeField]
     ShipMap _map;
+    [SerializeField]
+    ShipData _shipData;
 
     public ShipMap Map => _map;
     public Transform SpawnRoot => _spawnedRoot;
@@ -22,7 +24,7 @@ public class ShipMapTest : MonoBehaviour
 
     private void Start()
     {
-        Game.Do(new Demo.CreateDemoTurretDefenseMap());
+        Game.Do(new CreateDemoTurretDefenseMap(_shipData));
         Game.Do(new SpawnBuildingCommand("GunTurret", new Vector2Int(0,0)));
         Game.Do(new StartWaveCommand());
     }

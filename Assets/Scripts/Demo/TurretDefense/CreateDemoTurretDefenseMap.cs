@@ -6,11 +6,17 @@ namespace Demo
 {
     public class CreateDemoTurretDefenseMap : ICommand
     {
+        ShipData _shipData;
+        public CreateDemoTurretDefenseMap(ShipData shipData)
+        {
+            _shipData = shipData;
+        }   
+
         public void Execute(GameModel model)
         {
             model.ShipMap = new();
 
-            var generator = new MapGenerator();
+            var generator = new ShipInteriorGenerator(_shipData);
             generator.GenerateMap(model);
             generator.GeneratePath(model,
                 new Vector2Int(10, 0),

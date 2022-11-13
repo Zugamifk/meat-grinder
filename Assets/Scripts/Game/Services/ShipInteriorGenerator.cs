@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator
+public class ShipInteriorGenerator
 {
+    ShipData _data;
+    public ShipInteriorGenerator(ShipData data)
+    {
+        _data = data;
+    }
+
     public void GenerateMap(GameModel model)
     {
         FillEmptyMap(model.ShipMap);
@@ -11,9 +17,8 @@ public class MapGenerator
 
     void FillEmptyMap(ShipMapModel model)
     {
-        var data = DataService.GetData<GameData>();
-        var w = data.Dimensions.x;
-        var h = data.Dimensions.y;
+        var w = _data.Dimensions.x;
+        var h = _data.Dimensions.y;
         model.Bounds = new BoundsInt(-w / 2, -h / 2, 0, w, h, 1);
 
         for (int x = -w / 2; x <= w / 2; x++)
