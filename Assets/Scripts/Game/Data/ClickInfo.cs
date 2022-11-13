@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ClickInfo
+public class ClickInfo
 {
     public Guid TargetId;
     public string InputHandlerKey;

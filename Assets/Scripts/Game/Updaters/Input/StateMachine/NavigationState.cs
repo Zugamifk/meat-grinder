@@ -1,19 +1,24 @@
+using StateMachines;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputController : MonoBehaviour
+public class NavigationState : InputState
 {
-    [SerializeField]
-    Camera _raycastCamera;
-
     Vector2 _lastMousePosition;
 
-    private void Update()
+    public override void EnterState()
+    {
+        _lastMousePosition = Input.mousePosition;
+    }
+
+    public override IState UpdateState()
     {
         HandleKeyboardInput();
         HandleMouseInput();
+        return this;
     }
 
     void HandleKeyboardInput()
@@ -48,13 +53,13 @@ public class InputController : MonoBehaviour
 
     void HandleMouseInput()
     {
-        if(EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
             // UI handles itself
             return;
         }
 
-        if(HandleWorldInput())
+        if (HandleWorldInput())
         {
             return;
         }
@@ -69,27 +74,14 @@ public class InputController : MonoBehaviour
             return false;
         }
 
-        Ray ray = _raycastCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (!Physics.Raycast(ray, out RaycastHit hit))
+        var input = Game.Model.Input;
+        if (!Context.IdToHandler.ContainsKey(input.CurrentMouseOverObject))
         {
-            return false;
+            throw new ArgumentException($"No input handler for id {input.CurrentMouseOverObject}");
         }
 
-        var handler = hit.collider.GetComponent<InputHandler>();
-        if (handler == null)
-        {
-            return false;
-        }
-
-        var info = new ClickInfo()
-        {
-            InputHandlerKey = handler.HandlerKey,
-            TargetId = handler.Id,
-            ClickPosition = hit.point
-        };
-
-        Game.Do(new ClickedWorldObjectCommand(info));
+        var handler = Context.IdToHandler[input.CurrentMouseOverObject];
+        handler.HandleClick(input.ClickPosition);
 
         return true;
     }

@@ -40,11 +40,17 @@ public class Game : MonoBehaviour
         _toRemove.Push(id);
     }
 
-    Game()
+    void Awake()
     {
+        if(_game!=null)
+        {
+            throw new InvalidOperationException($"Second Game instance detected!");
+        }
+
         _game = this;
 
         InitializeTimeModel();
+        InitializeInput();
     }
 
     private void Update()
@@ -79,5 +85,10 @@ public class Game : MonoBehaviour
         timeModel.RealTime = TimeSpan.FromSeconds(time.TimeOfDay.TotalSeconds / TimeModel.TIME_MULTIPLIER);
 
         AddUpdater(new TimeModelUpdater());
+    }
+
+    void InitializeInput()
+    {
+        AddUpdater(new InputUpdater());
     }
 }

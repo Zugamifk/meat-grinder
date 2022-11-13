@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorldMapInput : MonoBehaviour
 {
     [SerializeField]
-    InputHandler _handler;
+    MouseListener _handler;
 
     private void Start()
     {

@@ -8,7 +8,7 @@ public class Ship : MeshGeneratorUser, IModelView<IShipModel>
     [SerializeField]
     MeshFilter _meshFilter;
     [SerializeField]
-    InputHandler _inputHandler;
+    MouseListener _inputHandler;
 
     Identifiable _identifiable;
 

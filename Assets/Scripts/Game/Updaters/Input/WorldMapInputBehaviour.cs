@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class WorldMapInputBehaviour : IInputHandler
 {
-    public void HandleClick(ClickInfo clickInfo)
+    public void HandleClick(Vector3 position)
     {
-        Game.Do(new SetShipDestinationCommand(Game.Model.PlayerShipId, clickInfo.ClickPosition));
+        Game.Do(new SetShipDestinationCommand(Game.Model.PlayerShipId, position));
     }
 }
