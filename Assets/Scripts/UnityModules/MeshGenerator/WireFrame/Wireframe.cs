@@ -130,14 +130,17 @@ namespace MeshGenerator.Wireframes
 
         public void Cuboid(float width, float height, float depth)
         {
-            var p0 = new Vector3(-width, -height, -depth);
-            var p1 = new Vector3(-width, -height, depth);
-            var p2 = new Vector3(width, -height, depth);
-            var p3 = new Vector3(width, -height, -depth);
-            var p4 = new Vector3(-width, height, -depth);
-            var p5 = new Vector3(-width, height, depth);
-            var p6 = new Vector3(width, height, depth);
-            var p7 = new Vector3(width, height, -depth);
+            var w = width / 2;
+            var h = height / 2;
+            var d = depth / 2;
+            var p0 = new Vector3(-w, -h, -d);
+            var p1 = new Vector3(-w, -h, d);
+            var p2 = new Vector3(w, -h, d);
+            var p3 = new Vector3(w, -h, -d);
+            var p4 = new Vector3(-w, h, -d);
+            var p5 = new Vector3(-w, h, d);
+            var p6 = new Vector3(w, h, d);
+            var p7 = new Vector3(w, h, -d);
 
             Connect(p0, p1);
             Connect(p1, p2);

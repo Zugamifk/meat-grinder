@@ -26,13 +26,13 @@ public class GunTurretWireframeGenerator : WireframeGenerator<GunTurretMeshGener
         wireframe.Connect(b3, mp);
 
         var gunMatrix = Matrix4x4.TRS(
-            data.MountPosition + new Vector3(0, h + data.GunBounds.y),
+            data.MountPosition + new Vector3(0, h + data.GunBounds.y/2),
             Quaternion.AngleAxis(data.MountedAngle, Vector3.up),
             Vector3.one);
         wireframe.PushMatrix(gunMatrix);
         wireframe.Cuboid(data.GunBounds.x, data.GunBounds.y, data.GunBounds.z);
 
-        wireframe.Cylinder(new Vector3(0, 0, data.GunBounds.z),
+        wireframe.Cylinder(new Vector3(0, 0, data.GunBounds.z/2),
             data.BarrelDimensions.x,
             data.BarrelDimensions.y,
             Vector3.forward);

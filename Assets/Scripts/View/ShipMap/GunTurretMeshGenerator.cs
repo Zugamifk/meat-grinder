@@ -13,7 +13,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
         var result = new MeshGeneratorResult();
 
         float w = Data.BaseDimensions.x / 2;
-        float h = Data.BaseDimensions.y / 2;
+        float h = Data.BaseDimensions.y;
 
         var b0 = new Vector3(-w, 0, -w);
         var b1 = new Vector3(-w, 0, w);
@@ -37,7 +37,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
         // barrel
         builder.SetBone(2);
         builder.AddPrism(
-            new Vector3(0,0,Data.GunBounds.z),
+            new Vector3(0,0,Data.GunBounds.z/2),
             Data.BarrelDimensions.x,
             12,
             Vector3.forward,
@@ -56,7 +56,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
     Matrix4x4 GunTransform()
     {
         return Matrix4x4.TRS(
-            Data.MountPosition + new Vector3(0, Data.BaseDimensions.y / 2 + Data.GunBounds.y),
+            Data.MountPosition + new Vector3(0, Data.BaseDimensions.y + Data.GunBounds.y/2),
             Quaternion.AngleAxis(Data.MountedAngle, Vector3.up),
             Vector3.one);
     }

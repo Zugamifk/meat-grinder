@@ -5147,6 +5147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8283955734128118238}
   _barrelEnd: {fileID: 7431238115098939496}
+  _mountedGunRoot: {fileID: 8283955734841484887}
   _shootParticles: {fileID: 6085687814327326183}
 --- !u!114 &8283955734449719268
 MonoBehaviour:

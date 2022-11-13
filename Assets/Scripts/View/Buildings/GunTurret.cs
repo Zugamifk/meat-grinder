@@ -11,6 +11,7 @@ public class GunTurret : MeshGeneratorUser
 {
     [SerializeField] GeneratedSkinnedMeshRenderer _renderer;
     [SerializeField] Transform _barrelEnd;
+    [SerializeField] Transform _mountedGunRoot;
     [SerializeField] ParticleSystem _shootParticles;
 
     ScriptedAnimation _animator;
@@ -59,7 +60,7 @@ public class GunTurret : MeshGeneratorUser
         var target = ViewLookup.Get(targetId);
         if (target != null)
         {
-            transform.LookAt(target.transform);
+            _mountedGunRoot.LookAt(target.transform);
         }
     }
 

@@ -80,7 +80,7 @@ namespace MeshGenerator
                 mat = _skeleton.Root.transform.localToWorldMatrix;
             }
 
-            bone.transform.position = mat.MultiplyPoint3x4(matrix.GetPosition());
+            bone.transform.position = matrix.GetPosition();
             bone.transform.rotation = matrix.rotation;
         }
 

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f06e70d3b0914994f8076fc86721ded3, type: 3}
   m_Name: GunTurret
   m_EditorClassIdentifier: 
-  BaseDimensions: {x: 0.3, y: 0.5}
-  GunBounds: {x: 0.11, y: 0.14, z: 0.19}
+  BaseDimensions: {x: 0.3, y: 0.19}
+  GunBounds: {x: 0.33, y: 0.12, z: 0.34}
   MountPosition: {x: 0, y: 0, z: 0}
-  BarrelDimensions: {x: 0.06, y: 0.28}
-  MountedAngle: -2.25
+  BarrelDimensions: {x: 0.02, y: 0.48}
+  MountedAngle: 0
   ShootBarrelRecoilCurve:
     Curve:
       serializedVersion: 2
