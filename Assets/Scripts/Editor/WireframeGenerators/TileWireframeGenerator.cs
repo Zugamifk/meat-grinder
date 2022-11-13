@@ -16,7 +16,7 @@ namespace MeshGenerator.Editor
 
         protected override void BuildWireframe(Wireframe wireframe, TileMeshGeneratorData data)
         {
-            var h = _tile.Height * data.TileStepHeight;
+            var h = data.TileStepHeight;
 
             var p0 = new Vector3(-.5f, h, -.5f);
             var p1 = new Vector3(-.5f, h, .5f);
@@ -35,7 +35,7 @@ namespace MeshGenerator.Editor
         void GeneratePaths(Wireframe wireframe, TileMeshGeneratorData data)
         {
             var r = data.PathWidth * .5f;
-            var h = _tile.Height * data.TileStepHeight;
+            var h = data.TileStepHeight;
             var r0 = new Vector3(-r, h, -r);
             var r1 = new Vector3(-r, h, r);
             var r2 = new Vector3(r, h, r);

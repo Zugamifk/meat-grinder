@@ -7,7 +7,7 @@ namespace MeshGenerator
 {
     public class MeshGeneratorResult
     {
-        public Dictionary<string, Vector3> SpecialBones = new();
+        public Dictionary<string, Matrix4x4> SpecialBones = new();
         public Mesh Mesh;
     }
 }

@@ -34,7 +34,6 @@ public class ShipInteriorGenerator
     {
         var tile = new TileModel()
         {
-            Height = 1,
             Type = ETileType.Empty
         };
 

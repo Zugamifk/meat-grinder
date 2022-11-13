@@ -48,7 +48,7 @@ public class GunTurretMeshGenerator : MeshGeneratorWithData<GunTurretMeshGenerat
     {
         var result =  base.BuildResult();
         var mountedMatrix = GunTransform();
-        var barrelEnd = mountedMatrix.MultiplyPoint3x4(new Vector3(0,0, Data.GunBounds.z + Data.BarrelDimensions.y));
+        var barrelEnd = mountedMatrix*Matrix4x4.Translate(new Vector3(0,0, Data.GunBounds.z + Data.BarrelDimensions.y));
         result.SpecialBones["BarrelEnd"] = barrelEnd;
         return result;
     }

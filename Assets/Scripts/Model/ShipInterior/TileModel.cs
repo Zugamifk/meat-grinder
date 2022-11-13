@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TileModel : ITileModel
 {
-    public int Height { get; set; }
     public ETileType Type { get; set; }
     public EdgeModel NorthEdge { get; set; }
     public EdgeModel SouthEdge { get; set; }

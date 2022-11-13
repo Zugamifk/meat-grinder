@@ -16,7 +16,6 @@ public class TileMeshGeneratorEditor : MeshGeneratorEditorWithWireFrame<TileMesh
     {
         _tile = new TileModel()
         {
-            Height = 1,
             Type = ETileType.Empty,
         };
         _tile.NorthEdge = new() { Tile = _tile, Type = ETileType.Empty };

@@ -58,7 +58,7 @@ namespace MeshGenerator
             foreach (var kv in result.SpecialBones)
             {
                 var bone = _skeleton.GetBone(kv.Key);
-                SetBonePosition(bone, kv.Value);
+                SetBoneMatrix(bone, kv.Value);
             }
         }
 
@@ -72,14 +72,16 @@ namespace MeshGenerator
             mesh.bindposes = bindPoses;
         }
 
-        void SetBonePosition(MeshBone bone, Vector3 position)
+        void SetBoneMatrix(MeshBone bone, Matrix4x4 matrix)
         {
             var mat = Matrix4x4.identity;
             if (!bone.IsRoot)
             {
                 mat = _skeleton.Root.transform.localToWorldMatrix;
             }
-            bone.transform.position = mat.MultiplyPoint3x4(position);
+
+            bone.transform.position = mat.MultiplyPoint3x4(matrix.GetPosition());
+            bone.transform.rotation = matrix.rotation;
         }
 
         public void Clear()

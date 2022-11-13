@@ -20,7 +20,9 @@ public class TileMeshGenerator : MeshGeneratorWithData<TileMeshGeneratorData>
         builder.SetColor(grassColor);
 
         var w = .5f;
-        var h = _tile.Height * Data.TileStepHeight;
+        var h = Data.TileStepHeight;
+
+        builder.PushMatrix(Matrix4x4.Translate(new Vector3(0, -h, 0)));
         if (_tile.Type == ETileType.Wall)
         {
             h += 1;
