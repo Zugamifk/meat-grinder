@@ -233,10 +233,10 @@ RectTransform:
   m_Father: {fileID: 361560949}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 285.65, y: -23.5}
+  m_SizeDelta: {x: 471.3, y: 47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &208503153
 MonoBehaviour:
@@ -291,10 +291,10 @@ RectTransform:
   m_Father: {fileID: 1904904494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 260.65, y: -23.5}
+  m_SizeDelta: {x: 521.3, y: 47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307070488
 MonoBehaviour:
@@ -434,10 +434,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 360596331}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1904904496}
+        m_TargetAssemblyTypeName: TabContainer, View
+        m_MethodName: CloseTab_OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &361560948
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,10 +548,10 @@ RectTransform:
   m_Father: {fileID: 361560949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -23.5}
+  m_SizeDelta: {x: 50, y: 47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &396477125
 MonoBehaviour:
@@ -908,6 +920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 629607160}
   - component: {fileID: 629607161}
+  - component: {fileID: 629607162}
   m_Layer: 5
   m_Name: BuildTab
   m_TagString: Untagged
@@ -932,10 +945,10 @@ RectTransform:
   m_Father: {fileID: 1904904494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 260.65, y: -323.5}
+  m_SizeDelta: {x: 521.3, y: 553}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &629607161
 MonoBehaviour:
@@ -957,6 +970,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &629607162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629607159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cd81ae19f120f4a939979236e93ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: Build
 --- !u!1 &679527585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,6 +1179,7 @@ GameObject:
   - component: {fileID: 987541216}
   - component: {fileID: 987541215}
   - component: {fileID: 987541214}
+  - component: {fileID: 987541218}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1244,6 +1271,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &987541218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987541213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10239e9eb4d7434e93b6c20ab5ae21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tabContainer: {fileID: 1904904496}
+  _tabs:
+  - {fileID: 629607162}
 --- !u!1 &1020599464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,10 +1619,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1279939372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 987541218}
+        m_TargetAssemblyTypeName: UIController, View
+        m_MethodName: ShowTab_OnClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1448615610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,7 +1716,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 987541218}
+        m_TargetAssemblyTypeName: UIController, View
+        m_MethodName: ToggleControlModes_OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1792829955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,13 +1916,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1904904494}
   - component: {fileID: 1904904495}
+  - component: {fileID: 1904904496}
   m_Layer: 5
   m_Name: Tabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1904904494
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1905,6 +1972,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1904904496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904904493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb189c680cb21043b8484bec4f2e7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleText: {fileID: 1209658352}
 --- !u!1 &2004849572
 GameObject:
   m_ObjectHideFlags: 0

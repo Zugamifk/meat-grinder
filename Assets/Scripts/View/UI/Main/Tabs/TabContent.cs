@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabController : MonoBehaviour
+public abstract class TabContent : MonoBehaviour
 {
     [SerializeField]
     string _title;
 
     public string Title => _title;
 
-    public void ShowTab()
-    {
-
-    }
+    public abstract void OnShowTab();
 }

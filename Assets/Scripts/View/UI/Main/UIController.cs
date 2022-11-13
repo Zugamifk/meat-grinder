@@ -5,23 +5,18 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField]
-    TMPro.TextMeshProUGUI _tabTitleText;
-
-    Dictionary<string, TabController> _tabKeyToTab = new();
+    TabContainer _tabContainer;
+    [SerializeField]
+    List<TabContent> _tabs = new();
 
     public void ToggleControlModes_OnClick()
     {
-
+        Game.Do(new ToggleNavigationOrInteriorControlMode());
     }
 
-    public void ShowTab_OnClick(string key)
+    public void ShowTab_OnClick(int index)
     {
-        if(!_tabKeyToTab.TryGetValue(key, out TabController tab))
-        {
-            throw new System.ArgumentException($"No tab with key {key}!");
-        }
-
-        _tabTitleText.text = key;
-        tab.ShowTab();
+        var tab = _tabs[index];
+        _tabContainer.ShowTab(tab);
     }
 }
