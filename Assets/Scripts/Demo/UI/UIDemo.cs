@@ -9,6 +9,7 @@ namespace Demo
         private void Start()
         {
             Game.Do(new BootGame());
+            Game.Do(new PopulateInventory());
         }
     }
 }

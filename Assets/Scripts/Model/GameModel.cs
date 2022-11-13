@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using AI;
 using Weapons;
+using Inventory;
 
 public partial class GameModel : IGameModel
 {
@@ -17,7 +18,7 @@ public partial class GameModel : IGameModel
     public IdentifiableCollection<ShipModel> Ships = new();
     public IdentifiableCollection<AIModel> AI = new();
     public IdentifiableCollection<VisionModel> Vision = new();
-
+    public InventoryModel Inventory = new();
     public Guid PlayerShipId { get; set; } = Guid.NewGuid();
 
     public GameStateModel GameState { get; } = new();
@@ -75,6 +76,7 @@ public partial class GameModel : IGameModel
     IIdentifiableLookup<IProjectileModel> IGameModel.Projectiles => Projectiles;
     IIdentifiableLookup<IShipModel> IGameModel.Ships => Ships;
     IIdentifiableLookup<IVisionModel> IGameModel.Vision => Vision;
+    IInventoryModel IGameModel.Inventory => Inventory;  
     IInputModel IGameModel.Input => Input; 
     ICameraModel IGameModel.Camera => Camera;
     #endregion

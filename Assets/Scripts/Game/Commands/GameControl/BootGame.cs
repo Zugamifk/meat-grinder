@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BootGame : ICommand
+public struct BootGame : ICommand
 {
     public void Execute(GameModel model)
     {
