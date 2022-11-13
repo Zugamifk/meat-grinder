@@ -11,10 +11,6 @@ public class ShipMapTile : MeshGeneratorUser
     [SerializeField]
     Transform _containedObjectsRoot;
 
-    BuildingView _currentBuildingView;
-
-    public float SurfaceY { get; private set; }
-
     public void SetTile(ITileModel tile)
     {
         UpdateTileGeometry(tile);
@@ -22,7 +18,6 @@ public class ShipMapTile : MeshGeneratorUser
 
     public void AddBuilding(BuildingView building)
     {
-        _currentBuildingView = building;
         building.transform.parent = _containedObjectsRoot;
         building.transform.localPosition = Vector3.zero;
     }
@@ -30,16 +25,17 @@ public class ShipMapTile : MeshGeneratorUser
     void UpdateTileGeometry(ITileModel tile)
     {
         var data = DataService.GetData<GameData>();
-        SurfaceY = tile.Height * data.TileStepHeight;
+        var y = tile.Height * data.TileStepHeight;
         if(tile.Type == ETileType.Wall)
         {
-            SurfaceY += 1;
+            y += 1;
         }
 
         AssignMesh<TileMeshGenerator>(_meshFilter, gen => gen.SetTile(tile));
 
-        _collider.center = new Vector3(0, SurfaceY / 2f, 0);
-        _collider.size = new Vector3(1, SurfaceY, 1);
-        _containedObjectsRoot.localPosition = new Vector3(0, SurfaceY, 0);
+        _meshFilter.transform.localPosition = new Vector3(0, -y, 0);
+
+        _collider.center = new Vector3(0, -y/2, 0);
+        _collider.size = new Vector3(1, y, 1);
     }
 }

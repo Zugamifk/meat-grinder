@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Demo;
 
 public class ShipMapTest : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ShipMapTest : MonoBehaviour
 
     private void Start()
     {
-        Game.Do(new GenerateMapCommand());
+        Game.Do(new Demo.CreateDemoTurretDefenseMap());
         Game.Do(new SpawnBuildingCommand("GunTurret", new Vector2Int(0,0)));
         Game.Do(new StartWaveCommand());
     }

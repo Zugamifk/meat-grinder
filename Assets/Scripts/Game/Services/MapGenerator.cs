@@ -7,17 +7,6 @@ public class MapGenerator
     public void GenerateMap(GameModel model)
     {
         FillEmptyMap(model.ShipMap);
-        GeneratePath(model,
-            new Vector2Int(10, 0),
-            new Vector2Int(7, 0),
-            new Vector2Int(7, 5),
-            new Vector2Int(3, 5),
-            new Vector2Int(3, -8),
-            new Vector2Int(-3, -8),
-            new Vector2Int(-3, 5),
-            new Vector2Int(-7, 5),
-            new Vector2Int(-7, 0),
-            new Vector2Int(-10, 0));
     }
 
     void FillEmptyMap(ShipMapModel model)
@@ -119,7 +108,7 @@ public class MapGenerator
         }
     }
 
-    void GeneratePath(GameModel model, params Vector2Int[] waypoints)
+    public void GeneratePath(GameModel model, params Vector2Int[] waypoints)
     {
         var map = model.ShipMap;
         PathNodeModel last = null;

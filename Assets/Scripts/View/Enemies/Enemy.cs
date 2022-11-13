@@ -47,12 +47,12 @@ public class Enemy : MeshGeneratorUser, IModelView<IEnemyModel>
         }
 
         var position = enemy.Position;
-        var height = ShipMapTest.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
-        position.y = height;
+        //var height = ShipMapTest.Instance.Map.GetTile(new Vector2Int((int)(position.x + .5f), (int)(position.z + .5f))).SurfaceY;
+        //position.y = height;
         transform.position = position;
 
         var targetOffset = _targetOffset.localPosition;
-        targetOffset.y += height;
+        //targetOffset.y += height;
         TargetOffset = targetOffset;
     }
 
